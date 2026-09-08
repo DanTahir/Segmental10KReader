@@ -1,0 +1,136 @@
+{
+  "company_id": "block",
+  "company_name": "Block, Inc.",
+  "pdf_file": "Reports10K/BlockInc10k2025.pdf",
+  "cik": "0001512673",
+  "fiscal_year": 2025,
+  "fiscal_year_end": "2025-12-31",
+  "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+  "source": {
+    "accession": "0001628280-26-012254",
+    "filing_date": "2026-02-26",
+    "edgar_entity_name": "Block, Inc.",
+    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1512673/000162828026012254/",
+    "local_text": "build/text/BlockInc10k2025.txt"
+  },
+  "reporting_unit_warning": "Block reports segment and tax figures in THOUSANDS, unlike most peers in this set which report in millions. Mis-scaling by 1000x is the single most likely extraction error for this filing.",
+  "metrics": {
+    "legal_contingencies": {
+      "accrued_amount": {
+        "value": null,
+        "note": "No single aggregate legal accrual figure captured in this pass."
+      },
+      "reasonably_possible_loss_in_excess_of_accrual": {
+        "disclosed": true,
+        "quantified": false,
+        "aggregate_amount": null,
+        "matter": "Federal securities and derivative matters",
+        "note": "Block explicitly states a reasonably possible loss that could be material, but that it cannot estimate the amount or range."
+      },
+      "verbatim_quote": "It is reasonably possible that the Company will incur a loss in connection with these federal securities and derivative matters, and the loss could be material; however, the Company cannot estimate the amount of loss or range of loss at this time.",
+      "verbatim_source_line": 2300,
+      "individual_matters": {
+        "extracted": false,
+        "note": "A separate state-attorneys-general matter was noted during review as carrying a probable loss, but its verbatim language and amount were not captured in this pass and are therefore NOT asserted as ground truth."
+      },
+      "why_hard": "This is one of the few filings in the set with an explicit, unambiguous 'reasonably possible ... could be material ... cannot estimate' construction tied to a named matter category — the correct answer is 'disclosed but not quantifiable', not a number."
+    },
+    "segment_reporting": {
+      "unit": "USD thousands",
+      "reportable_segments": ["Cash App", "Square"],
+      "segment_count": 2,
+      "profit_measure": "Segment gross profit",
+      "profit_measure_note": "Block's segment profitability measure is GROSS PROFIT, not operating income. There is no segment operating income disclosure.",
+      "revenue": {
+        "Cash App": 15425043,
+        "Square": 8451911,
+        "Corporate and Other": 316729,
+        "Total": 24193683,
+        "row_label_as_printed": "Segment revenue",
+        "source_lines": "2313-2320"
+      },
+      "revenue_disaggregation_fy2025": {
+        "Commerce enablement revenue": {"Cash App": 3912171, "Square": 7425962, "Corporate and Other": 176029, "Total": 11514162},
+        "Financial solutions revenue": {"Cash App": 3165594, "Square": 1011140, "Corporate and Other": 0, "Total": 4176734},
+        "Bitcoin ecosystem revenue": {"Cash App": 8347278, "Square": 14809, "Corporate and Other": 140700, "Total": 8502787}
+      },
+      "cost_of_revenue": {
+        "Cash App": 9089500,
+        "Square": 4516870,
+        "Corporate and Other": 227384,
+        "Total": 13833754
+      },
+      "segment_gross_profit": {
+        "Cash App": 6335543,
+        "Square": 3935041,
+        "Corporate and Other": 89345,
+        "Total": 10359929,
+        "source_line": 2322
+      },
+      "reconciling_items": [
+        {
+          "label": "Corporate and Other",
+          "revenue": 316729,
+          "gross_profit": 89345,
+          "note": "Not a reportable segment — a residual/reconciling column presented alongside the two reportable segments."
+        }
+      ],
+      "reconciliation_checks": {
+        "revenue_sums": "15,425,043 + 8,451,911 + 316,729 = 24,193,683 \u2713",
+        "gross_profit_sums": "6,335,543 + 3,935,041 + 89,345 = 10,359,929 \u2713",
+        "gross_profit_derivation": "24,193,683 - 13,833,754 = 10,359,929 \u2713"
+      },
+      "traps": [
+        "Figures are in THOUSANDS, not millions.",
+        "Segment profit measure is gross profit, not operating income — an extractor looking for 'segment operating income' will find nothing and may wrongly report 'not disclosed'.",
+        "'Corporate and Other' is a reconciling column, not a third reportable segment.",
+        "Bitcoin ecosystem revenue ($8.5B of $24.2B total) is gross bitcoin sales with a near-equal cost of revenue, so revenue-based segment weighting is highly misleading vs gross profit.",
+        "A goodwill-by-segment table (lines 1763-1770) uses the same Cash App / Square / Corporate and Other column headers and can be mistaken for the segment results table."
+      ]
+    },
+    "income_taxes": {
+      "unit": "USD thousands",
+      "provision_for_income_taxes": 385701,
+      "effective_tax_rate_percent": 22.8,
+      "statutory_federal_rate_percent": 21.0,
+      "statutory_rate_as_printed_in_table": 21.2,
+      "statutory_rate_print_note": "The FY2025 reconciliation table literally prints '21.2 %' on the 'Tax at federal statutory rate' line. The true US federal statutory rate is 21.0%; the 21.2% is the filing's own computed percentage on that row. Ground truth records BOTH: statutory_federal_rate_percent = 21.0, as-printed = 21.2.",
+      "income_before_income_taxes_implied": 1691671,
+      "income_before_income_taxes_note": "Implied as 385,701 / 0.228; the reconciliation table does not print pretax income. Consistent with 357,813 / 1,691,671 = 21.15% \u2248 the printed 21.2%.",
+      "reconciliation_presentation": "dollars and percent, FY2025 column only in this block",
+      "rate_reconciliation_fy2025": [
+        {"line": "Tax at federal statutory rate", "amount": 357813, "percent": 21.2},
+        {"line": "State and local taxes, net of federal benefit", "amount": 72230, "percent": 4.3},
+        {"line": "Foreign tax effects \u2014 Ireland: Change in valuation allowance", "amount": -55904, "percent": -3.3},
+        {"line": "Foreign tax effects \u2014 Ireland: Other", "amount": 4958, "percent": 0.3},
+        {"line": "Foreign tax effects \u2014 Other foreign jurisdictions", "amount": 27402, "percent": 1.6},
+        {"line": "Effect of cross border tax laws: Subpart F inclusion", "amount": 21872, "percent": 1.3},
+        {"line": "Effect of cross border tax laws: Other", "amount": 3819, "percent": 0.2},
+        {"line": "Tax credits: Research and development credits", "amount": -55885, "percent": -3.3},
+        {"line": "Tax credits: Changes in valuation allowance", "amount": -2160, "percent": -0.1},
+        {"line": "Non-taxable or non-deductible items: Share-based compensation", "amount": 13371, "percent": 0.8},
+        {"line": "Non-taxable or non-deductible items: Other", "amount": 18975, "percent": 1.1},
+        {"line": "Changes in unrecognized tax benefits", "amount": -13605, "percent": -0.8},
+        {"line": "Other", "amount": -7185, "percent": -0.5},
+        {"line": "Total", "amount": 385701, "percent": 22.8}
+      ],
+      "rate_reconciliation_source_lines": "2024-2044",
+      "reconciliation_check": "Line items sum exactly to 385,701 \u2713",
+      "unrecognized_tax_benefits": {
+        "unit": "USD millions",
+        "unit_note": "This particular sentence is stated in millions even though the tables are in thousands.",
+        "gross_utb": 626.8,
+        "would_impact_effective_tax_rate_if_recognized": 69.1,
+        "as_of": "2025-12-31",
+        "remainder_treatment": "The remainder would result in a corresponding adjustment to the valuation allowance.",
+        "verbatim_quote": "As of December 31, 2025, the Company had unrecognized tax benefits of $626.8 million, of which $69.1 million would impact the annual effective tax rate if recognized and the remainder of which would result in a corresponding adjustment to the valuation allowance.",
+        "source_line": 2114
+      },
+      "traps": [
+        "The printed 21.2% statutory rate contradicts the 21.0% US federal rate — an extractor that 'corrects' it loses the as-filed value, one that copies it may wrongly report the statutory rate as 21.2%.",
+        "Only $69.1M of the $626.8M UTB would affect the ETR (11%) because most is offset by valuation allowance — reporting $626.8M as the ETR-affecting figure is a 9x error.",
+        "Tax tables are in thousands but the UTB narrative is in millions, within the same note."
+      ]
+    }
+  }
+}

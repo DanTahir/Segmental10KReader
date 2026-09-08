@@ -1,0 +1,134 @@
+{
+  "company_id": "schwab",
+  "company_name": "The Charles Schwab Corporation",
+  "pdf_file": "Reports10K/Schwab10k2025.pdf",
+  "cik": "0000316709",
+  "fiscal_year": 2025,
+  "fiscal_year_end": "2025-12-31",
+  "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+  "source": {
+    "accession": "0000316709-26-000009",
+    "filing_date": "2026-02-25",
+    "edgar_entity_name": "SCHWAB CHARLES CORP",
+    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/316709/000031670926000009/",
+    "local_text": "build/text/Schwab10k2025.txt"
+  },
+  "reporting_unit_warning": "Schwab reports in USD millions. As a financial institution its segment revenue line is 'Total net revenues' (net of interest expense) and its segment profit measure is PRETAX income, not operating income — structurally different from the non-financial filers in this set.",
+  "metrics": {
+    "legal_contingencies": {
+      "accrued_amount": {
+        "value": null,
+        "note": "No aggregate legal accrual figure located in this pass."
+      },
+      "reasonably_possible_loss_in_excess_of_accrual": {
+        "disclosed": true,
+        "quantified": false,
+        "aggregate_amount": null,
+        "structure": "TWO-TIER disclosure",
+        "note": "Schwab uses a two-tier construction: (1) matters WITH a reasonable possibility of material loss are individually described, but Schwab states it is 'unable to provide a reasonable estimate of any potential liability given the stage of proceedings'; (2) for ALL OTHER pending matters it affirmatively concludes it does NOT appear reasonably possible that the outcome would be material. No aggregate dollar figure is given for either tier."
+      },
+      "verbatim_quote": "Schwab believes it has strong defenses in all significant matters currently pending and is contesting liability and any damages claimed. Nevertheless, some of these matters may result in adverse judgments or awards, including penalties, injunctions or other relief, and the Company may also determine to settle a matter because of the uncertainty and risks of litigation. Described below are any matters in which there is a reasonable possibility that a material loss could be incurred or where the matter may otherwise be of significant interest to stockholders. Unless otherwise noted, the Company is unable to provide a reasonable estimate of any potential liability given the stage of proceedings in the matter. With respect to all other pending matters, based on current information and consultation with counsel, it does not appear reasonably possible that the outcome of any such matter would be material to the financial condition, operating results, or cash flows of the Company.",
+      "verbatim_source_line": 2352,
+      "individual_matters": {
+        "extracted": false,
+        "named_matters_present": ["Corrente Antitrust Litigation — CSC sued June 6, 2022 in the U.S. District Court for the Eastern District of Texas on behalf of a putative class of customers who purchased or sold securities through CS&Co or TD Ameritrade, Inc. from October 26, 2020 to the present, alleging the Ameritrade acquisition violated Section 7 of the Clayton Act (line 2353)"],
+        "note": "Matter existence and caption confirmed from source. No loss amount is asserted — Schwab explicitly states it cannot reasonably estimate potential liability."
+      },
+      "why_hard": "This is the most nuanced legal disclosure in the set: BOTH 'a reasonable possibility that a material loss could be incurred' (affirmative, for described matters) AND 'it does not appear reasonably possible' (negative, for all others) appear in the SAME sentence block. Extracting only one half inverts the meaning. The correct answer is 'reasonably possible material loss disclosed for described matters, not estimable; all other matters concluded not reasonably possible/not material'."
+    },
+    "segment_reporting": {
+      "unit": "USD millions",
+      "reportable_segments": ["Investor Services", "Advisor Services"],
+      "segment_count": 2,
+      "profit_measure": "Income before taxes on income (PRETAX income)",
+      "profit_measure_note": "Schwab's segment profit measure is PRETAX INCOME, not operating income. There is no segment 'operating income' line.",
+      "revenue": {
+        "Investor Services": 18999,
+        "Advisor Services": 4922,
+        "Total": 23921,
+        "row_label_as_printed": "Total net revenues",
+        "source_line": 867
+      },
+      "revenue_components_fy2025": {
+        "Net interest revenue": {"Investor Services": 9328, "Advisor Services": 2422, "Total": 11750},
+        "Asset management and administration fees": {"Investor Services": 4756, "Advisor Services": 1750, "Total": 6506},
+        "Trading revenue": {"Investor Services": 3525, "Advisor Services": 396, "Total": 3921},
+        "Bank deposit account fees": {"Investor Services": 766, "Advisor Services": 211, "Total": 977},
+        "Other": {"Investor Services": 624, "Advisor Services": 143, "Total": 767},
+        "source_lines": "862-866"
+      },
+      "expenses_excluding_interest": {
+        "Investor Services": 9678,
+        "Advisor Services": 2784,
+        "Total": 12462,
+        "source_line": 878
+      },
+      "segment_pretax_income": {
+        "Investor Services": 9321,
+        "Advisor Services": 2138,
+        "Total": 11459,
+        "row_label_as_printed": "Income before taxes on income",
+        "source_line": 879
+      },
+      "reconciling_items": [],
+      "reconciliation_checks": {
+        "revenue_sums": "18,999 + 4,922 = 23,921 ✓",
+        "expense_sums": "9,678 + 2,784 = 12,462 ✓",
+        "pretax_sums": "9,321 + 2,138 = 11,459 ✓ (no unallocated/corporate reconciling item)",
+        "investor_services_derivation": "18,999 - 9,678 = 9,321 ✓",
+        "advisor_services_derivation": "4,922 - 2,784 = 2,138 ✓",
+        "revenue_component_columns": "IS: 9,328 + 4,756 + 3,525 + 766 + 624 = 18,999 ✓; AS: 2,422 + 1,750 + 396 + 211 + 143 = 4,922 ✓"
+      },
+      "prior_year_comparatives": {
+        "fy2024": {"Investor Services": {"revenue": 15558, "pretax": 6320}, "Advisor Services": {"revenue": 4048, "pretax": 1372}, "total_revenue": 19606, "total_pretax": 7692},
+        "fy2023": {"Investor Services": {"revenue": 14650, "pretax": 5211}, "Advisor Services": {"revenue": 4187, "pretax": 1167}, "total_revenue": 18837}
+      },
+      "traps": [
+        "Segment profit is PRETAX INCOME, not operating income — an extractor looking for 'segment operating income' will find nothing and may wrongly report 'not disclosed'. (An earlier automated pass on this project did exactly that, marking Schwab's segment data 'not found'.)",
+        "Revenue is 'Total NET revenues' (net of interest expense) — not comparable to gross revenue of non-financial filers.",
+        "The segment table's column layout is unusual and high-risk: each segment panel leads with a 'Percent Change 2025-2024' column BEFORE the 2025/2024/2023 amount columns, so the first number on each row is a PERCENTAGE, not a dollar amount.",
+        "Segments sum exactly to totals with no unallocated corporate item."
+      ]
+    },
+    "income_taxes": {
+      "unit": "USD millions",
+      "income_before_income_taxes": 11459,
+      "provision_for_income_taxes": 2607,
+      "effective_tax_rate_percent": 22.8,
+      "statutory_federal_rate_percent": 21.0,
+      "income_before_income_taxes_cross_check": "Statutory line 2,406 / 0.21 = 11,457 ≈ 11,459 pretax from the segment table (filing rounding) ✓; 2,607 / 11,459 = 22.75% ≈ printed 22.8% ✓",
+      "reconciliation_presentation": "dollars AND percent, three years (2025, 2024, 2023)",
+      "rate_reconciliation_fy2025": [
+        {"line": "Federal statutory income tax rate", "amount": 2406, "percent": 21.0},
+        {"line": "State income taxes, net of federal tax benefit", "amount": 305, "percent": 2.7},
+        {"line": "Tax credits: Research and development credits", "amount": -30, "percent": -0.3},
+        {"line": "Tax credits: Other", "amount": -86, "percent": -0.8},
+        {"line": "Nontaxable or nondeductible items", "amount": 9, "percent": 0.1},
+        {"line": "Changes in unrecognized tax benefits", "amount": 7, "percent": 0.1},
+        {"line": "Other adjustments", "amount": -4, "percent": 0.0},
+        {"line": "Effective income tax rate", "amount": 2607, "percent": 22.8}
+      ],
+      "rate_reconciliation_source_lines": "2845-2856",
+      "reconciliation_check": "2,406 + 305 - 30 - 86 + 9 + 7 - 4 = 2,607 ✓ (sums exactly)",
+      "prior_year_comparatives": {
+        "fy2024": {"provision": 1750, "effective_tax_rate_percent": 22.8, "statutory_amount": 1615},
+        "fy2023": {"provision": 1311, "effective_tax_rate_percent": 20.6, "statutory_amount": 1339}
+      },
+      "unrecognized_tax_benefits": {
+        "unit": "USD millions",
+        "gross_utb": 458,
+        "would_affect_annual_effective_tax_rate_if_recognized": 386,
+        "as_of": "2025-12-31",
+        "prior_year": {"gross_utb": 373, "would_affect_etr": 314, "as_of": "2024-12-31"},
+        "verbatim_quote": "Unrecognized tax benefits totaled $458 million and $373 million as of December 31, 2025 and 2024, respectively, $386 million and $314 million of which if recognized, would affect the annual effective tax rate.",
+        "source_line": 2870
+      },
+      "traps": [
+        "FY2025 and FY2024 ETRs are BOTH 22.8% — column misalignment produces a coincidentally 'correct-looking' answer, so a right number does not prove the right column was read.",
+        "Schwab's ETR is ABOVE statutory (22.8% vs 21.0%), driven by state income taxes.",
+        "The UTB sentence packs four figures in one line (458 / 373 gross, 386 / 314 if-recognized) — easy to pair the wrong year with the wrong measure.",
+        "'Other adjustments' prints an em-dash for FY2025 percent (rendered here as 0.0) while carrying a -4 dollar amount."
+      ]
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "company_id": "coinbase",
+  "company_name": "Coinbase Global, Inc.",
+  "pdf_file": "Reports10K/Coinbase10k2025.pdf",
+  "cik": "0001679788",
+  "fiscal_year": 2024,
+  "fiscal_year_end": "2024-12-31",
+  "fiscal_year_note": "FILENAME MISMATCH — CRITICAL: the PDF is named 'Coinbase10k2025.pdf' but the filing covers FISCAL YEAR 2024 (ended December 31, 2024), filed February 2025. All ground-truth values here are FY2024. Grading an extractor against FY2025 figures for this document would be incorrect.",
+  "source": {
+    "accession": "0001679788-25-000022",
+    "filing_date": "2025-02-13",
+    "edgar_entity_name": "Coinbase Global, Inc.",
+    "period_of_report": "2024-12-31",
+    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/",
+    "local_text": "build/text/Coinbase10k2025.txt"
+  },
+  "reporting_unit_warning": "Coinbase reports in THOUSANDS.",
+  "metrics": {
+    "legal_contingencies": {
+      "accrued_amount": {
+        "value": null,
+        "note": "No aggregate legal accrual figure disclosed."
+      },
+      "reasonably_possible_loss_in_excess_of_accrual": {
+        "disclosed": true,
+        "quantified": false,
+        "aggregate_amount": null,
+        "note": "Coinbase states its accounting policy (accrue when probable and estimable; disclose when reasonably possible and estimable) and then gives a qualitative 'except as otherwise disclosed ... not have a material adverse effect' conclusion with an 'however, it is possible' caveat. No aggregate reasonably-possible-loss dollar figure is provided."
+      },
+      "verbatim_quote_policy": "In accordance with such guidance, the Company establishes accruals for such matters when potential losses become probable and can be reasonably estimated. If the Company determines that a loss is reasonably possible and the loss or range of loss can be estimated, the Company discloses the possible loss in the Consolidated Financial Statements.",
+      "verbatim_quote_conclusion": "Except as otherwise disclosed, the Company believes the ultimate resolution of existing legal and regulatory investigation matters will not have a material adverse effect on the financial condition, results of operations, or cash flows of the Company. However, in light of the uncertainties inherent in these matters, it is possible that the ultimate resolution of one or more of these matters may have a material adverse effect on the Company's results.",
+      "verbatim_source_lines": "3096 (policy), 3115 (conclusion)",
+      "individual_matters": {
+        "extracted": false,
+        "named_matters_present": ["Securities class actions filed July/August 2021 in N.D. Cal. alleging Securities Act Sections 11, 12(a)(2) and 15 claims tied to the direct-listing registration statement (line 3097)"],
+        "note": "Matter existence confirmed from source; no per-matter loss amounts asserted."
+      },
+      "why_hard": "The policy paragraph recites the words 'probable', 'reasonably estimated' and 'reasonably possible' without attaching any figure. An extractor that treats boilerplate policy language as a substantive contingency disclosure will report a false positive."
+    },
+    "segment_reporting": {
+      "unit": "USD thousands",
+      "reportable_segments": ["Single reportable segment (consolidated / company as a whole)"],
+      "segment_count": 1,
+      "segment_disclosure_status": "RESOLVED. Coinbase never ASSERTS its own segment status using the conventional phrasings: it does not say 'we operate as one operating segment' or 'we have a single reportable segment'. Instead its segment note states the CODM 'review[s] and assess[es] the performance of the Company as a whole'. The literal string 'single reportable segments' DOES appear once, but only inside the ASU 2023-07 boilerplate describing the standard's scope ('extends the full disclosure requirements of ASC 280 to companies with single reportable segments') — it is a description of the accounting pronouncement, not Coinbase's own assertion. An earlier pass on this project searched only for the conventional self-assertions and wrongly concluded no segment statement existed; a broader search on 'CODM|chief operating decision' located it (HTML text line 1947; PDF text lines 6013-6015).",
+      "segment_statement_verbatim": "The Company reports its segment information to reflect the manner in which the CODM reviews and assesses performance. The Company's Chief Executive Officer and President and Chief Operating Officer have joint responsibility as the CODM and review and assess the performance of the Company as a whole.",
+      "segment_statement_source_line": 1947,
+      "codm_measures_verbatim": "The primary financial measures used by the CODM to evaluate performance and allocate resources are net income (loss) and operating income (loss).",
+      "codm_measures_source_line": 1948,
+      "segment_assets_note": "The CODM does not evaluate performance or allocate resources based on segment assets, and therefore such information is not presented in the notes to the financial statements (line 1954).",
+      "why_hard": "PHRASING TRAP: Coinbase conveys single-segment status through 'reviews and assesses the performance of the Company as a whole' rather than a conventional self-assertion like Netflix's plain 'We operate as one operating segment'. Worse, the one place the literal phrase 'single reportable segments' DOES occur is the ASU 2023-07 pronouncement description — so a keyword-matching extractor either finds nothing usable, or matches the ASU text and cites the wrong sentence as the company's segment assertion. Additional hazard: in PDF-extracted text the real sentence WRAPS across lines ('...the performance of' / 'the Company as a whole.'), so a single-line regex misses it entirely — this actually happened during verification of this record.",
+      "profit_measure": "Operating income (loss) — consolidated only",
+      "revenue_disaggregation_fy2024": {
+        "transaction_revenue": {
+          "Consumer, net": 3430322,
+          "Institutional, net": 345598,
+          "Other transaction revenue, net": 210193,
+          "Total transaction revenue": 3986113
+        },
+        "subscription_and_services_revenue": {
+          "Stablecoin revenue": 910464,
+          "Blockchain rewards": 705757,
+          "Interest and finance fee income": 265799,
+          "Custodial fee revenue": 141706,
+          "Other subscription and services revenue": 283407,
+          "Total subscription and services revenue": 2307133
+        },
+        "Total net revenue": 6293246,
+        "other_revenue": {
+          "Corporate interest and other income": 270782,
+          "Total other revenue": 270782
+        },
+        "Total revenue": 6564028,
+        "source_lines": "2183-2203"
+      },
+      "consolidated_results_fy2024": {
+        "Total revenue": 6564028,
+        "Total operating expenses": 4256868,
+        "Operating income": 2307160,
+        "source_lines": "1755-1760"
+      },
+      "reconciliation_checks": {
+        "transaction_revenue_sums": "3,430,322 + 345,598 + 210,193 = 3,986,113 ✓",
+        "subscription_revenue_sums": "910,464 + 705,757 + 265,799 + 141,706 + 283,407 = 2,307,133 ✓",
+        "net_revenue_sums": "3,986,113 + 2,307,133 = 6,293,246 ✓",
+        "total_revenue_sums": "6,293,246 + 270,782 = 6,564,028 ✓",
+        "operating_income_derivation": "6,564,028 - 4,256,868 = 2,307,160 ✓"
+      },
+      "traps": [
+        "'Total net revenue' (6,293,246) and 'Total revenue' (6,564,028) are DIFFERENT figures; the $270,782K of corporate interest/other income sits between them. Reporting one for the other is a common error.",
+        "Figures are in THOUSANDS.",
+        "A near-identical MD&A transaction-revenue table (lines 1156-1162) prints the same Consumer/Institutional/Other rows but with $ and % CHANGE columns — mis-parsing yields change amounts instead of balances.",
+        "Revenue categories are NOT segments; there is no per-segment operating income to extract.",
+        "FY2024 filing despite the '2025' filename."
+      ]
+    },
+    "income_taxes": {
+      "unit": "USD thousands",
+      "provision_for_income_taxes": 363578,
+      "effective_tax_rate_percent": 12.36,
+      "statutory_federal_rate_percent": 21.0,
+      "statutory_rate_as_printed": "21.00 %",
+      "income_before_income_taxes_implied": 2942643,
+      "income_before_income_taxes_note": "Implied from the statutory line (617,955 / 0.21 = 2,942,643). Cross-check: 363,578 / 2,942,643 = 12.36% ✓ matches the printed ETR exactly.",
+      "reconciliation_presentation": "dollars and percent, FY2024 column (percent to two decimals)",
+      "rate_reconciliation_fy2024": [
+        {"line": "Provision for income taxes at U.S. federal statutory rate", "amount": 617955, "percent": 21.00},
+        {"line": "State and local income taxes, net of federal benefit", "amount": 66325, "percent": 2.25},
+        {"line": "Foreign tax effects", "amount": 18705, "percent": 0.64},
+        {"line": "Effect of changes in tax laws or rates enacted in the current period", "amount": 0, "percent": 0.0},
+        {"line": "Effect of cross-border tax laws: Foreign Derived Intangible Income (FDII)", "amount": -11592, "percent": -0.39},
+        {"line": "Effect of cross-border tax laws: Other", "amount": -1472, "percent": -0.05},
+        {"line": "Tax credits: Research and development (R&D) credits", "amount": -69603, "percent": -2.37},
+        {"line": "Tax credits: Valuation allowance", "amount": -7493, "percent": -0.25},
+        {"line": "Non-taxable or non-deductible items: Equity compensation", "amount": -276645, "percent": -9.40},
+        {"line": "Non-taxable or non-deductible items: Non-deductible compensation", "amount": 24114, "percent": 0.82},
+        {"line": "Non-taxable or non-deductible items: Uncertain tax positions", "amount": 3244, "percent": 0.11},
+        {"line": "Adjustment to prior period provision", "amount": -1110, "percent": -0.04},
+        {"line": "Other adjustments", "amount": 1150, "percent": 0.04},
+        {"line": "Total tax provision and effective tax rate", "amount": 363578, "percent": 12.36}
+      ],
+      "rate_reconciliation_source_lines": "2870-2889",
+      "reconciliation_check": "Line items sum exactly to 363,578 ✓",
+      "largest_single_driver": "Equity compensation, -$276,645K (-9.40 pts) — the dominant reason the ETR is far below statutory.",
+      "unrecognized_tax_benefits": {
+        "unit": "USD millions",
+        "unit_note": "Stated in millions although the tax tables are in thousands.",
+        "gross_utb": 136.8,
+        "would_impact_effective_tax_rate_if_recognized": 136.8,
+        "etr_affecting_note": "The full $136.8 million is described as amounts 'which would reduce income tax expense and affect the effective tax rate, if recognized' — unlike Block/Dropbox, there is no valuation-allowance carve-out on this figure.",
+        "as_of": "2024-12-31",
+        "prior_year": {"gross_utb": 126.8, "as_of": "2023-12-31"},
+        "verbatim_quote": "As of December 31, 2024 and 2023, the Company had unrecognized tax benefits of $136.8 million and $126.8 million, respectively, which would reduce income tax expense and affect the effective tax rate, if recognized.",
+        "source_line": 2980
+      },
+      "traps": [
+        "Percentages are printed to TWO decimals (21.00%, 12.36%), unlike peers' one-decimal presentation — rounding to 12.4% loses fidelity.",
+        "Tax note tables are in thousands while the UTB sentence is in millions.",
+        "A second reconciliation block (lines 2899+) covers FY2023/FY2022 in PERCENT ONLY; picking that block yields the wrong year and no dollar amounts.",
+        "This is FY2024 data — do not grade against FY2025."
+      ]
+    }
+  }
+}

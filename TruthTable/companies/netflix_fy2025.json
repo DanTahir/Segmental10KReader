@@ -1,0 +1,121 @@
+{
+  "company_id": "netflix",
+  "company_name": "Netflix, Inc.",
+  "pdf_file": "Reports10K/Netflix10k2025.pdf",
+  "cik": "0001065280",
+  "fiscal_year": 2025,
+  "fiscal_year_end": "2025-12-31",
+  "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+  "source": {
+    "accession": "0001065280-26-000034",
+    "filing_date": "2026-01-23",
+    "edgar_entity_name": "NETFLIX INC",
+    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000034/",
+    "local_text": "build/text/Netflix10k2025.txt"
+  },
+  "reporting_unit_warning": "Netflix reports in THOUSANDS (e.g. total revenue 45,183,036 = $45.18 billion).",
+  "metrics": {
+    "legal_contingencies": {
+      "accrued_amount": {
+        "value": null,
+        "note": "No legal accrual figure disclosed."
+      },
+      "reasonably_possible_loss_in_excess_of_accrual": {
+        "disclosed": false,
+        "quantified": false,
+        "aggregate_amount": null,
+        "phrase_absent": true,
+        "note": "The phrase 'reasonably possible' does NOT appear anywhere in Netflix's 10-K (whole-document case-insensitive grep returned zero hits). Netflix instead makes a materiality statement. Ground truth for Netflix's legal item is this immateriality assertion, NOT a 'reasonably possible' disclosure."
+      },
+      "materiality_assertion": "The Company is involved in litigation matters not listed herein but does not consider the matters to be material either individually or in the aggregate at this time.",
+      "verbatim_quote": "From time to time, in the normal course of its operations, the Company is subject to litigation matters and claims, including claims relating to employee relations, business practices and patent infringement. Litigation can be expensive and disruptive to normal business operations. Moreover, the results of complex legal proceedings are difficult to predict.",
+      "verbatim_source_lines": "1318 (general), 1319 (materiality assertion)",
+      "individual_matters": {
+        "extracted": false,
+        "note": "No individually quantified legal matters. Note: a December 4, 2025 definitive merger agreement with WBD (amended January 19, 2026) is described immediately above the Legal Proceedings heading at line 1316 — it is an M&A disclosure, NOT a loss contingency."
+      },
+      "why_hard": "INVERSE TRAP: an extractor searching for 'reasonably possible' finds nothing and may report 'not disclosed' or hallucinate boilerplate. The correct answer requires recognizing the affirmative immateriality statement as the disclosure. The adjacent WBD merger text is also a distractor for anything scanning for large nearby dollar figures."
+    },
+    "segment_reporting": {
+      "unit": "USD thousands",
+      "reportable_segments": ["Single operating segment (consolidated)"],
+      "segment_count": 1,
+      "segment_basis": "One operating segment; revenue disaggregated by geographic region",
+      "segment_statement_verbatim": "The Company operates as one operating segment. The Company's chief operating decision maker (“CODM”) is its co-chief executive officers, who review financial information presented on a consolidated basis. The CODM uses consolidated operating margin and net income to assess financial performance.",
+      "segment_statement_source_lines": "103 (Item 1), 1617-1618 (Note 13, Segment and Geographic Information)",
+      "profit_measure": "Consolidated operating margin and net income (CODM measures); no per-region profit measure is disclosed",
+      "revenue_by_region_fy2025": {
+        "United States and Canada (UCAN)": 19957152,
+        "Europe, Middle East, and Africa (EMEA)": 14514646,
+        "Latin America (LATAM)": 5357521,
+        "Asia-Pacific (APAC)": 5353717,
+        "Total Streaming Revenues": 45183036,
+        "source_lines": "387-395 (MD&A), 948-957 (Note 13)"
+      },
+      "prior_year_comparatives": {
+        "fy2024": {"UCAN": 17359369, "EMEA": 12387035, "LATAM": 4839816, "APAC": 4414746, "total": 39000966},
+        "fy2023": {"UCAN": 14873783, "EMEA": 10556487, "LATAM": 4446461, "APAC": 3763727, "total": 33640458}
+      },
+      "reconciling_items": [],
+      "reconciliation_checks": {
+        "revenue_sums": "19,957,152 + 14,514,646 + 5,357,521 + 5,353,717 = 45,183,036 ✓"
+      },
+      "traps": [
+        "Netflix is a SINGLE-segment filer — the four regions (UCAN/EMEA/LATAM/APAC) are a geographic revenue disaggregation, NOT reportable segments, and carry no operating income.",
+        "There is no per-region operating income to extract; an extractor must not fabricate one.",
+        "Figures are in THOUSANDS — 45,183,036 is $45.18 billion, not $45.18 trillion or $45.2 million.",
+        "APAC (5,353,717) and LATAM (5,357,521) are within 0.1% of each other — easy to transpose.",
+        "The same regional table appears twice (MD&A lines 387-395 with $/% change columns, and Note 13 lines 948-957 without) — the MD&A version risks change-column mis-parsing."
+      ]
+    },
+    "income_taxes": {
+      "unit": "USD thousands",
+      "provision_for_income_taxes": 1741351,
+      "effective_tax_rate_percent": 13.7,
+      "statutory_federal_rate_percent": 21.0,
+      "income_before_income_taxes_implied": 12722543,
+      "income_before_income_taxes_note": "Implied from the statutory line (2,671,734 / 0.21 = 12,722,543). Cross-check: 1,741,351 / 12,722,543 = 13.69% ≈ printed 13.7% ✓.",
+      "reconciliation_presentation": "dollars (thousands) and percent, FY2025 column",
+      "rate_reconciliation_fy2025": [
+        {"line": "Tax at U.S. Statutory Rate", "amount": 2671734, "percent": 21.0},
+        {"line": "State and Local Income Taxes", "amount": 191271, "percent": 1.5},
+        {"line": "Foreign Tax Effects — Brazil: Withholding tax on services", "amount": 238233, "percent": 1.9},
+        {"line": "Foreign Tax Effects — Brazil: Others", "amount": -77189, "percent": -0.6},
+        {"line": "Foreign Tax Effects — Other foreign jurisdictions", "amount": 23290, "percent": 0.2},
+        {"line": "Effect of Cross-Border Tax Laws: Foreign-derived intangible income", "amount": -656828, "percent": -5.2},
+        {"line": "Effect of Cross-Border Tax Laws: Foreign tax credit for withholding taxes", "amount": -292148, "percent": -2.3},
+        {"line": "Effect of Cross-Border Tax Laws: Other", "amount": 32815, "percent": 0.3},
+        {"line": "Tax Credits: Research and development tax credits", "amount": -184709, "percent": -1.5},
+        {"line": "Tax Credits: Other", "amount": -9748, "percent": -0.1},
+        {"line": "Changes in Valuation Allowances", "amount": -8615, "percent": -0.1},
+        {"line": "Nontaxable and Nondeductible items: Share-based payment awards", "amount": -393156, "percent": -3.1},
+        {"line": "Nontaxable and Nondeductible items: Others", "amount": 80904, "percent": 0.6},
+        {"line": "Changes in Unrecognized Tax Benefits", "amount": 130400, "percent": 1.0},
+        {"line": "Other Adjustments", "amount": -4903, "percent": 0.1},
+        {"line": "Effective Tax Rate", "amount": 1741351, "percent": 13.7}
+      ],
+      "rate_reconciliation_source_lines": "1486-1510",
+      "reconciliation_check": "Line items sum exactly to 1,741,351 ✓",
+      "largest_single_driver": "Foreign-derived intangible income deduction, -$656,828K (-5.2 pts).",
+      "unrecognized_tax_benefits": {
+        "unit": "USD millions",
+        "unit_note": "The narrative sentence rounds to millions; the rollforward table is in thousands.",
+        "gross_utb": 566,
+        "gross_utb_exact_thousands": 566363,
+        "would_favorably_impact_effective_tax_rate_if_recognized": 336,
+        "as_of": "2025-12-31",
+        "prior_year": {"gross_utb": 432, "gross_utb_exact_thousands": 432280, "would_impact_etr": 251, "as_of": "2024-12-31"},
+        "fy2023_ending_balance_thousands": 327105,
+        "classified_in_other_non_current_liabilities": {"value": 409, "unit": "USD millions", "source_line": 527},
+        "verbatim_quote": "As of December 31, 2025 and 2024, the total amount of gross unrecognized tax benefits was $566 million and $432 million, respectively, of which $336 million and $251 million, respectively, if recognized, would favorably impact the Company's effective tax rate.",
+        "source_lines": "1572 (narrative), 1583 (rollforward ending balances)"
+      },
+      "traps": [
+        "The rate reconciliation is in THOUSANDS while the UTB narrative is in MILLIONS, within the same note.",
+        "'Other Adjustments' prints -4,903 (a negative dollar amount) against a POSITIVE 0.1% — an internal sign inconsistency in the filing's own table; the dollars are what tie to the total.",
+        "$566M gross UTB vs $336M ETR-affecting vs $409M classified in other non-current liabilities — three different figures for the same UTB balance.",
+        "'Changes in Unrecognized Tax Benefits' (+130,400) is a rate-reconciliation line, not a UTB balance."
+      ]
+    }
+  }
+}

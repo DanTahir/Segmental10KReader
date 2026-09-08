@@ -1,0 +1,818 @@
+{
+  "runId": "run-002-20260908212039",
+  "startedAt": "2026-09-08T21:20:20.089Z",
+  "finishedAt": "2026-09-08T21:20:39.160Z",
+  "durationMs": 19071,
+  "extractorVersion": "2.0.0",
+  "total": 30,
+  "matched": 30,
+  "mismatched": 0,
+  "missing": 0,
+  "accuracy": 1,
+  "byField": {
+    "utb_gross_ending_balance": {
+      "matched": 10,
+      "total": 10
+    },
+    "dta_valuation_allowance": {
+      "matched": 10,
+      "total": 10
+    },
+    "unrecognized_rsu_comp_cost": {
+      "matched": 10,
+      "total": 10
+    }
+  },
+  "results": [
+    {
+      "companyId": "alphabet",
+      "companyName": "Alphabet Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Alphabet10K2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 11512,
+        "unit": "USD millions",
+        "valueUsd": 11512000000,
+        "page": 87,
+        "line": 8011,
+        "snippet": "Ending gross unrecognized tax benefits  $  9,438  $  12,619  $  11,512",
+        "method": "rollforward row, year-header column 3/3"
+      },
+      "expected": {
+        "value": 11512,
+        "unit": "USD millions",
+        "value_usd": 11512000000,
+        "as_printed": "Ending gross unrecognized tax benefits | $ | 9,438 | $ | 12,619 | $ | 11,512 |",
+        "row_label": "Ending gross unrecognized tax benefits",
+        "truth_source_line": 2244
+      },
+      "delta": null
+    },
+    {
+      "companyId": "alphabet",
+      "companyName": "Alphabet Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Alphabet10K2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -13942,
+        "unit": "USD millions",
+        "valueUsd": -13942000000,
+        "page": 86,
+        "line": 7917,
+        "snippet": "Valuation allowance  (11,493)  (13,942)",
+        "method": "deferred tax asset table, year-header column 2/2"
+      },
+      "expected": {
+        "value": -13942,
+        "unit": "USD millions",
+        "value_usd": -13942000000,
+        "as_printed": "Valuation allowance | (11,493) | (13,942) |",
+        "row_label": "Valuation allowance",
+        "truth_source_line": 2204
+      },
+      "delta": null
+    },
+    {
+      "companyId": "alphabet",
+      "companyName": "Alphabet Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Alphabet10K2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 42.9,
+        "unit": "USD billions",
+        "valueUsd": 42900000000,
+        "page": 84,
+        "line": 7757,
+        "snippet": "As of December 31, 2025, there was $42.9 billion of unrecognized compensation cost related to unvested RSUs.",
+        "method": "RSU-only disclosure, single disclosed amount"
+      },
+      "expected": {
+        "value": 42.9,
+        "unit": "USD billions",
+        "value_usd": 42900000000,
+        "as_printed": "As of December 31, 2025, there was $42.9 billion of unrecognized compensation cost related to unvested RSUs. This amount is expected to be recognized over a weighted-average period of 2.6 years.",
+        "scope": "RSU-only",
+        "rsu_only_separable": true,
+        "truth_source_line": 2128
+      },
+      "delta": null
+    },
+    {
+      "companyId": "amazon",
+      "companyName": "Amazon.com, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Amazon10K2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 6.6,
+        "unit": "USD billions",
+        "valueUsd": 6600000000,
+        "page": 59,
+        "line": 4493,
+        "snippet": "Excludes approximately $6.6 billion of income tax contingencies for which we cannot make a reasonably reliable estimate of the amount and period of payment, if any.",
+        "method": "prose disclosure (no rollforward table present)"
+      },
+      "expected": {
+        "value": 6.6,
+        "unit": "USD billions",
+        "value_usd": 6600000000,
+        "as_printed": "(1)As of December 31, 2025, we had approximately $6.6 billion of income tax contingencies of which $5.0 billion, if fully recognized, would decrease our effective tax rate.",
+        "row_label": null,
+        "truth_source_line": 1531
+      },
+      "delta": null
+    },
+    {
+      "companyId": "amazon",
+      "companyName": "Amazon.com, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Amazon10K2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -5560,
+        "unit": "USD millions",
+        "valueUsd": -5560000000,
+        "page": 66,
+        "line": 5035,
+        "snippet": "Less valuation allowances (2)  (4,893)  (5,560)",
+        "method": "deferred tax asset table, year-header column 2/2"
+      },
+      "expected": {
+        "value": -5560,
+        "unit": "USD millions",
+        "value_usd": -5560000000,
+        "as_printed": "Less valuation allowances (2) | (4,893) | (5,560) |",
+        "row_label": "Less valuation allowances (2)",
+        "truth_source_line": 1501
+      },
+      "delta": null
+    },
+    {
+      "companyId": "amazon",
+      "companyName": "Amazon.com, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Amazon10K2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 16.9,
+        "unit": "USD billions",
+        "valueUsd": 16899999999.999998,
+        "page": 63,
+        "line": 4797,
+        "snippet": "As of December 31, 2025, there was $16.9 billion of net unrecognized compensation cost related to unvested stock-based compensation arrangements.",
+        "method": "umbrella stock-based compensation total, single disclosed amount"
+      },
+      "expected": {
+        "value": 16.9,
+        "unit": "USD billions",
+        "value_usd": 16900000000,
+        "as_printed": "As of December 31, 2025, there was $16.9 billion of net unrecognized compensation cost related to unvested stock-based compensation arrangements.",
+        "scope": "all stock-based compensation arrangements (NOT RSU-specific)",
+        "rsu_only_separable": false,
+        "truth_source_line": 1387
+      },
+      "delta": null
+    },
+    {
+      "companyId": "apple",
+      "companyName": "Apple Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Apple10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 23242,
+        "unit": "USD millions",
+        "valueUsd": 23242000000,
+        "page": 45,
+        "line": 3177,
+        "snippet": "Ending balances  $  23,242  $  22,038  $  19,454",
+        "method": "rollforward row, year-header column 1/3"
+      },
+      "expected": {
+        "value": 23242,
+        "unit": "USD millions",
+        "value_usd": 23242000000,
+        "as_printed": "Ending balances | $ | 23,242 | $ | 22,038 | $ | 19,454 |",
+        "row_label": "Ending balances",
+        "truth_source_line": 938
+      },
+      "delta": null
+    },
+    {
+      "companyId": "apple",
+      "companyName": "Apple Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Apple10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -10966,
+        "unit": "USD millions",
+        "valueUsd": -10966000000,
+        "page": 44,
+        "line": 3125,
+        "snippet": "Less: Valuation allowance  (10,966)  (8,866)",
+        "method": "deferred tax asset table, year-header column 1/2"
+      },
+      "expected": {
+        "value": -10966,
+        "unit": "USD millions",
+        "value_usd": -10966000000,
+        "as_printed": "Less: Valuation allowance | (10,966) | (8,866) |",
+        "row_label": "Less: Valuation allowance",
+        "truth_source_line": 915
+      },
+      "delta": null
+    },
+    {
+      "companyId": "apple",
+      "companyName": "Apple Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Apple10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 21.8,
+        "unit": "USD billions",
+        "valueUsd": 21800000000,
+        "page": 48,
+        "line": 3449,
+        "snippet": "As of September 27, 2025, the total unrecognized compensation cost related to outstanding RSUs was $21.8 billion, which the Company expects to recognize over a weighted-average period of 2.5 years.",
+        "method": "RSU-only disclosure, single disclosed amount"
+      },
+      "expected": {
+        "value": 21.8,
+        "unit": "USD billions",
+        "value_usd": 21800000000,
+        "as_printed": "As of September 27, 2025, the total unrecognized compensation cost related to outstanding RSUs was $21.8 billion, which the Company expects to recognize over a weighted-average period of 2.5 years.",
+        "scope": "RSU-only",
+        "rsu_only_separable": true,
+        "truth_source_line": 1053
+      },
+      "delta": null
+    },
+    {
+      "companyId": "block",
+      "companyName": "Block, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "BlockInc10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 626755,
+        "unit": "USD thousands",
+        "valueUsd": 626755000,
+        "page": 137,
+        "line": 9127,
+        "snippet": "Unrecognized tax benefit, end of the period  $  626,755  $  633,589  $  465,103",
+        "method": "rollforward row, year-header column 1/3"
+      },
+      "expected": {
+        "value": 626755,
+        "unit": "USD thousands",
+        "value_usd": 626755000,
+        "as_printed": "Unrecognized tax benefit, end of the period | $ | 626,755 | $ | 633,589 | $ | 465,103 |",
+        "row_label": "Unrecognized tax benefit, end of the period",
+        "truth_source_line": 2123
+      },
+      "delta": null
+    },
+    {
+      "companyId": "block",
+      "companyName": "Block, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "BlockInc10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -557063,
+        "unit": "USD thousands",
+        "valueUsd": -557063000,
+        "page": 136,
+        "line": 9029,
+        "snippet": "Valuation allowance  (557,063)  (646,223)",
+        "method": "deferred tax asset table, year-header column 1/2"
+      },
+      "expected": {
+        "value": -557063,
+        "unit": "USD thousands",
+        "value_usd": -557063000,
+        "as_printed": "Valuation allowance | (557,063) | (646,223) |",
+        "row_label": "Valuation allowance",
+        "truth_source_line": 2095
+      },
+      "delta": null
+    },
+    {
+      "companyId": "block",
+      "companyName": "Block, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "BlockInc10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 2.1,
+        "unit": "USD billions",
+        "valueUsd": 2100000000,
+        "page": 140,
+        "line": 9349,
+        "snippet": "As of December 31, 2025, there was $2.1 billion of total unrecognized compensation cost related to outstanding stock options and restricted stock awards that are expected to be recognized over a weighted-average period of 2 years.",
+        "method": "restricted stock disclosure, single disclosed amount"
+      },
+      "expected": {
+        "value": 2.1,
+        "unit": "USD billions",
+        "value_usd": 2100000000,
+        "as_printed": "As of December 31, 2025, there was $2.1 billion of total unrecognized compensation cost related to outstanding stock options and restricted stock awards that are expected to be recognized over a weighted-average period of 2 years.",
+        "scope": "stock options AND restricted stock awards, combined",
+        "rsu_only_separable": false,
+        "truth_source_line": 2193
+      },
+      "delta": null
+    },
+    {
+      "companyId": "coinbase",
+      "companyName": "Coinbase Global, Inc.",
+      "fiscalYear": 2024,
+      "pdfFile": "Coinbase10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 190944,
+        "unit": "USD thousands",
+        "valueUsd": 190944000,
+        "page": 168,
+        "line": 12347,
+        "snippet": "Balance, end of period  $  190,944  $  171,693  $  124,106",
+        "method": "rollforward row, year-header column 1/3"
+      },
+      "expected": {
+        "value": 190944,
+        "unit": "USD thousands",
+        "value_usd": 190944000,
+        "as_printed": "Balance, end of period | $ | 190,944 | $ | 171,693 | $ | 124,106 |",
+        "row_label": "Balance, end of period",
+        "truth_source_line": 2978
+      },
+      "delta": null
+    },
+    {
+      "companyId": "coinbase",
+      "companyName": "Coinbase Global, Inc.",
+      "fiscalYear": 2024,
+      "pdfFile": "Coinbase10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -124202,
+        "unit": "USD thousands",
+        "valueUsd": -124202000,
+        "page": 167,
+        "line": 12259,
+        "snippet": "Less: valuation allowance  (124,202)  (102,250)",
+        "method": "deferred tax asset table, year-header column 1/2"
+      },
+      "expected": {
+        "value": -124202,
+        "unit": "USD thousands",
+        "value_usd": -124202000,
+        "as_printed": "Less: valuation allowance | (124,202) | (102,250) |",
+        "row_label": "Less: valuation allowance",
+        "truth_source_line": 2940
+      },
+      "delta": null
+    },
+    {
+      "companyId": "coinbase",
+      "companyName": "Coinbase Global, Inc.",
+      "fiscalYear": 2024,
+      "pdfFile": "Coinbase10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 307.2,
+        "unit": "USD millions",
+        "valueUsd": 307200000,
+        "page": 162,
+        "line": 11875,
+        "snippet": "As of December 31, 2024, there was total unrecognized compensation cost of $307.2 million related to unvested RSUs, which cost is expected to be recognized over a weighted-average period of 1.4 years.",
+        "method": "RSU-only disclosure, single disclosed amount"
+      },
+      "expected": {
+        "value": 307.2,
+        "unit": "USD millions",
+        "value_usd": 307200000,
+        "as_printed": "As of December 31, 2024, there was total unrecognized compensation cost of $307.2 million related to unvested RSUs, which cost is expected to be recognized over a weighted-average period of 1.4 years.",
+        "scope": "RSU-only",
+        "rsu_only_separable": true,
+        "truth_source_line": 2775
+      },
+      "delta": null
+    },
+    {
+      "companyId": "disney",
+      "companyName": "The Walt Disney Company",
+      "fiscalYear": 2025,
+      "pdfFile": "Disney10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 1133,
+        "unit": "USD millions",
+        "valueUsd": 1133000000,
+        "page": 102,
+        "line": 8479,
+        "snippet": "Balance at the end of the year  $  1,133  $  1,952  $  2,517",
+        "method": "rollforward row, year-header column 1/3"
+      },
+      "expected": {
+        "value": 1133,
+        "unit": "USD millions",
+        "value_usd": 1133000000,
+        "as_printed": "Balance at the end of the year | $ | 1,133 | $ | 1,952 | $ | 2,517 |",
+        "row_label": "Balance at the end of the year",
+        "truth_source_line": 2766
+      },
+      "delta": null
+    },
+    {
+      "companyId": "disney",
+      "companyName": "The Walt Disney Company",
+      "fiscalYear": 2025,
+      "pdfFile": "Disney10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": 2931,
+        "unit": "USD millions",
+        "valueUsd": 2931000000,
+        "page": 101,
+        "line": 8385,
+        "snippet": "Valuation allowance  2,931  2,991",
+        "method": "deferred tax asset table, leftmost column 1/2"
+      },
+      "expected": {
+        "value": 2931,
+        "unit": "USD millions",
+        "value_usd": 2931000000,
+        "as_printed": "Valuation allowance | 2,931 | 2,991 |",
+        "row_label": "Valuation allowance",
+        "truth_source_line": 2715
+      },
+      "delta": null
+    },
+    {
+      "companyId": "disney",
+      "companyName": "The Walt Disney Company",
+      "fiscalYear": 2025,
+      "pdfFile": "Disney10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 1845,
+        "unit": "USD millions",
+        "valueUsd": 1845000000,
+        "page": 112,
+        "line": 9357,
+        "snippet": "As of September 27, 2025, unrecognized compensation cost related to unvested stock options and RSUs was $79 million and $1,845 million, respectively.",
+        "method": "RSUs combined with other award types, \"respectively\" pair 2/2 bound to RSUs"
+      },
+      "expected": {
+        "value": 1845,
+        "unit": "USD millions",
+        "value_usd": 1845000000,
+        "as_printed": "As of September 27, 2025, unrecognized compensation cost related to unvested stock options and RSUs was $79 million and $1,845 million, respectively. That cost is expected to be recognized over a weighted-average period of 1.1 years for stock options and 1.1 years for RSUs.",
+        "scope": "RSU-only",
+        "rsu_only_separable": true,
+        "truth_source_line": 3120
+      },
+      "delta": null
+    },
+    {
+      "companyId": "dropbox",
+      "companyName": "Dropbox, Inc.",
+      "fiscalYear": 2024,
+      "pdfFile": "Dropbox10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 162.7,
+        "unit": "USD millions",
+        "valueUsd": 162700000,
+        "page": 110,
+        "line": 8388,
+        "snippet": "Balance of gross unrecognized tax benefits at the end of the fiscal year  $  162.7  $  149.8  $  127.2",
+        "method": "rollforward row, year-header column 1/3"
+      },
+      "expected": {
+        "value": 162.7,
+        "unit": "USD millions",
+        "value_usd": 162700000,
+        "as_printed": "Balance of gross unrecognized tax benefits at the end of the fiscal year | $ | 162.7 | $ | 149.8 | $ | 127.2 |",
+        "row_label": "Balance of gross unrecognized tax benefits at the end of the fiscal year",
+        "truth_source_line": 2234
+      },
+      "delta": null
+    },
+    {
+      "companyId": "dropbox",
+      "companyName": "Dropbox, Inc.",
+      "fiscalYear": 2024,
+      "pdfFile": "Dropbox10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -122.8,
+        "unit": "USD millions",
+        "valueUsd": -122800000,
+        "page": 109,
+        "line": 8302,
+        "snippet": "Valuation allowance  (122.8)  (116.3)",
+        "method": "deferred tax asset table, year-header column 1/2"
+      },
+      "expected": {
+        "value": -122.8,
+        "unit": "USD millions",
+        "value_usd": -122800000,
+        "as_printed": "Valuation allowance | (122.8) | (116.3) |",
+        "row_label": "Valuation allowance",
+        "truth_source_line": 2204
+      },
+      "delta": null
+    },
+    {
+      "companyId": "dropbox",
+      "companyName": "Dropbox, Inc.",
+      "fiscalYear": 2024,
+      "pdfFile": "Dropbox10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 589.5,
+        "unit": "USD millions",
+        "valueUsd": 589500000,
+        "page": 105,
+        "line": 7993,
+        "snippet": "As of December 31, 2024, unamortized stock-based compensation related to unvested stock options, restricted stock awards (excluding the Co-Founder Grant), and RSUs was $589.5 million.",
+        "method": "RSUs combined with other award types, single disclosed amount"
+      },
+      "expected": {
+        "value": 589.5,
+        "unit": "USD millions",
+        "value_usd": 589500000,
+        "as_printed": "As of December 31, 2024, unamortized stock-based compensation related to unvested stock options, restricted stock awards (excluding the Co-Founder Grant), and RSUs was $589.5 million.",
+        "scope": "stock options + restricted stock awards + RSUs, combined; EXCLUDES the Co-Founder Grant",
+        "rsu_only_separable": false,
+        "truth_source_line": 2085
+      },
+      "delta": null
+    },
+    {
+      "companyId": "meta",
+      "companyName": "Meta Platforms, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Meta10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 16450,
+        "unit": "USD millions",
+        "valueUsd": 16450000000,
+        "page": 125,
+        "line": 8859,
+        "snippet": "Gross unrecognized tax benefits ‑ end of period  $  16,450  $  15,131  $  11,666",
+        "method": "rollforward row, year-header column 1/3"
+      },
+      "expected": {
+        "value": 16450,
+        "unit": "USD millions",
+        "value_usd": 16450000000,
+        "as_printed": "Gross unrecognized tax benefits - end of period | $ | 16,450 | $ | 15,131 | $ | 11,666 |",
+        "row_label": "Gross unrecognized tax benefits ‑ end of period",
+        "truth_source_line": 2017
+      },
+      "delta": null
+    },
+    {
+      "companyId": "meta",
+      "companyName": "Meta Platforms, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Meta10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -15895,
+        "unit": "USD millions",
+        "valueUsd": -15895000000,
+        "page": 124,
+        "line": 8793,
+        "snippet": "Less: valuation allowance  (15,895)  (3,506)",
+        "method": "deferred tax asset table, year-header column 1/2"
+      },
+      "expected": {
+        "value": -15895,
+        "unit": "USD millions",
+        "value_usd": -15895000000,
+        "as_printed": "Less: valuation allowance | (15,895) | (3,506) |",
+        "row_label": "Less: valuation allowance",
+        "truth_source_line": 1991
+      },
+      "delta": null
+    },
+    {
+      "companyId": "meta",
+      "companyName": "Meta Platforms, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Meta10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 54.81,
+        "unit": "USD billions",
+        "valueUsd": 54810000000,
+        "page": 121,
+        "line": 8581,
+        "snippet": "As of December 31, 2025, unrecognized share-based compensation expense related to RSU awards was $54.81 billion, which is expected to be recognized over a weighted-average period of approximately three years based on vesting under the award",
+        "method": "RSU-only disclosure, single disclosed amount"
+      },
+      "expected": {
+        "value": 54.81,
+        "unit": "USD billions",
+        "value_usd": 54810000000,
+        "as_printed": "As of December 31, 2025, unrecognized share-based compensation expense related to RSU awards was $54.81 billion, which is expected to be recognized over a weighted-average period of approximately three years based on vesting under the award service conditions.",
+        "scope": "RSU-only",
+        "rsu_only_separable": true,
+        "truth_source_line": 1887
+      },
+      "delta": null
+    },
+    {
+      "companyId": "netflix",
+      "companyName": "Netflix, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Netflix10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 566363,
+        "unit": "USD thousands",
+        "valueUsd": 566363000,
+        "page": 70,
+        "line": 5315,
+        "snippet": "Balance at the end of the year  $  566,363  $  432,280  $  327,105",
+        "method": "rollforward row, year-header column 1/3"
+      },
+      "expected": {
+        "value": 566363,
+        "unit": "USD thousands",
+        "value_usd": 566363000,
+        "as_printed": "Balance at the end of the year | $ | 566,363 | $ | 432,280 | $ | 327,105 |",
+        "row_label": "Balance at the end of the year",
+        "truth_source_line": 1583
+      },
+      "delta": null
+    },
+    {
+      "companyId": "netflix",
+      "companyName": "Netflix, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Netflix10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -617575,
+        "unit": "USD thousands",
+        "valueUsd": -617575000,
+        "page": 69,
+        "line": 5229,
+        "snippet": "Valuation allowance  (617,575)  (540,272)",
+        "method": "deferred tax asset table, year-header column 1/2"
+      },
+      "expected": {
+        "value": -617575,
+        "unit": "USD thousands",
+        "value_usd": -617575000,
+        "as_printed": "Valuation allowance | (617,575) | (540,272) |",
+        "row_label": "Valuation allowance",
+        "truth_source_line": 1546
+      },
+      "delta": null
+    },
+    {
+      "companyId": "netflix",
+      "companyName": "Netflix, Inc.",
+      "fiscalYear": 2025,
+      "pdfFile": "Netflix10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 47,
+        "unit": "USD millions",
+        "valueUsd": 47000000,
+        "page": 65,
+        "line": 4901,
+        "snippet": "As of December 31, 2025, $47 million of total unrecognized compensation cost related to unvested RSUs and PSUs is expected to be recognized over a weighted-average period of 1.53 years.",
+        "method": "RSUs combined with other award types, single disclosed amount"
+      },
+      "expected": {
+        "value": 47,
+        "unit": "USD millions",
+        "value_usd": 47000000,
+        "as_printed": "As of December 31, 2025, $47 million of total unrecognized compensation cost related to unvested RSUs and PSUs is expected to be recognized over a weighted-average period of 1.53 years.",
+        "scope": "RSUs and PSUs, combined",
+        "rsu_only_separable": false,
+        "truth_source_line": 1399
+      },
+      "delta": null
+    },
+    {
+      "companyId": "schwab",
+      "companyName": "The Charles Schwab Corporation",
+      "fiscalYear": 2025,
+      "pdfFile": "Schwab10k2025.pdf",
+      "fieldId": "utb_gross_ending_balance",
+      "verdict": "match",
+      "extracted": {
+        "value": 458,
+        "unit": "USD millions",
+        "valueUsd": 458000000,
+        "page": 111,
+        "line": 10441,
+        "snippet": "Balance at end of year  $  458  $  373",
+        "method": "rollforward row, year-header column 1/2"
+      },
+      "expected": {
+        "value": 458,
+        "unit": "USD millions",
+        "value_usd": 458000000,
+        "as_printed": "Balance at end of year | $ | 458 | $ | 373 |",
+        "row_label": "Balance at end of year",
+        "truth_source_line": 2868
+      },
+      "delta": null
+    },
+    {
+      "companyId": "schwab",
+      "companyName": "The Charles Schwab Corporation",
+      "fiscalYear": 2025,
+      "pdfFile": "Schwab10k2025.pdf",
+      "fieldId": "dta_valuation_allowance",
+      "verdict": "match",
+      "extracted": {
+        "value": -27,
+        "unit": "USD millions",
+        "valueUsd": -27000000,
+        "page": 110,
+        "line": 10369,
+        "snippet": "Valuation allowance  (27)  (20)",
+        "method": "deferred tax asset table, year-header column 1/2"
+      },
+      "expected": {
+        "value": -27,
+        "unit": "USD millions",
+        "value_usd": -27000000,
+        "as_printed": "Valuation allowance | (27) | (20) |",
+        "row_label": "Valuation allowance",
+        "truth_source_line": 2828
+      },
+      "delta": null
+    },
+    {
+      "companyId": "schwab",
+      "companyName": "The Charles Schwab Corporation",
+      "fiscalYear": 2025,
+      "pdfFile": "Schwab10k2025.pdf",
+      "fieldId": "unrecognized_rsu_comp_cost",
+      "verdict": "match",
+      "extracted": {
+        "value": 328,
+        "unit": "USD millions",
+        "valueUsd": 328000000,
+        "page": 108,
+        "line": 10121,
+        "snippet": "As of December 31, 2025, there was $328 million of total unrecognized compensation cost related to outstanding stock options and restricted stock units, which is expected to be recognized through 2029 with a remaining weighted-average servi",
+        "method": "RSUs combined with other award types, single disclosed amount"
+      },
+      "expected": {
+        "value": 328,
+        "unit": "USD millions",
+        "value_usd": 328000000,
+        "as_printed": "As of December 31, 2025, there was $328 million of total unrecognized compensation cost related to outstanding stock options and restricted stock units, which is expected to be recognized through 2029 with a remaining weighted-average service period of 0.6 years for stock options, 1.6 years for restricted stock units without performance conditions, and 0.4 years for performance-based restricted stock units.",
+        "scope": "stock options AND restricted stock units, combined",
+        "rsu_only_separable": false,
+        "truth_source_line": 2734
+      },
+      "delta": null
+    }
+  ]
+}

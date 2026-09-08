@@ -59,11 +59,53 @@ Each field needs a different approach:
   print no rollforward table at all, so a prose fallback handles them.
 - **Field B (valuation allowance)** is a deferred-tax-asset table row. An
   identically-named line appears in the effective-tax-rate reconciliation, so
-  the row is only accepted inside a deferred tax asset table.
+  the row is only accepted inside a deferred tax asset table. The column comes
+  from the table's **own year header**, never from position — filers print
+  these headers in both directions. The header is read *relative to the
+  document*: a FY2024 filer's header reads `2024 2023` and its current column
+  is the 2024 one, so "newest column" can never mean a hardcoded year. The
+  sign is taken **exactly as printed** (parentheses mean negative, anything
+  else is positive), because a filer presenting the table as "(assets) and
+  liabilities" prints its allowance positive and means it.
 - **Field C (RSU cost)** is disclosed in prose, so the equity note is scanned
   for the disclosure sentence. Wording varies three ways: `unrecognized
   compensation cost`, `unrecognized share-based compensation expense`, and
   `unamortized stock-based compensation` with no cost/expense noun at all.
+  Amounts are then **bound to award types** rather than taken positionally —
+  see below.
+
+### Binding amounts to award types (field C)
+
+Filers disclose award types in every possible combination, so the amount that
+answers "unrecognized RSU cost" is not reliably the first one in the sentence.
+The award phrase after `related to` is isolated and scored by how specifically
+it describes RSUs:
+
+| Award scope in the filing | Score | Example wording |
+|---|---|---|
+| RSUs alone | 100 | `unvested RSUs` |
+| RSUs plus other award types | 60 | `unvested stock options and RSUs` |
+| Restricted stock, no RSU wording | 40 | `stock options and restricted stock awards` |
+| Umbrella equity-comp total | 30 | `unvested stock-based compensation arrangements` |
+| Options / PRSUs only | rejected | `unvested stock options` |
+
+The highest-scoring disclosure in the document wins. A filer that breaks RSUs
+out on their own is the best evidence; one that blends RSUs into a combined
+figure is the next best, because **that combined figure is the disclosed
+number** — there is nothing finer to be had. A sentence about options or PRSUs
+only is not evidence at all.
+
+When a sentence pairs several amounts to several award types with
+`respectively`, the award list and the amount list are zipped positionally and
+the RSU-bound amount is selected, so `... related to unvested stock options and
+RSUs was $X million and $Y million, respectively` correctly yields `$Y`.
+
+One subtlety worth naming: the RSU pattern is `\bRSUs?\b`, and the word
+boundary is load-bearing. **`PRSUs` (performance RSUs) must not count as an
+RSU**, and it doesn't, because there is no word boundary between the `P` and
+the `R`. One filer discloses options, RSUs, PRSUs and restricted stock in four
+separate sentences; without that boundary the PRSU figure competes with the
+real answer.
 
 ## Comparison
 
@@ -82,38 +124,45 @@ comparable. Click any run in the sidebar to reload its full results.
 
 ---
 
-## Current accuracy: 25/30 (83.3%)
+## Current accuracy: 30/30 (100%)
 
-Field A is 10/10; field B is 7/10; field C is 8/10. The five failures come from
-just **two** root causes, both flagged with `SIMPLIFICATION:` comments in
-`src/lib/extract.ts`:
+Extractor `2.0.0` reads all 30 values correctly — field A 10/10, field B 10/10,
+field C 10/10 — verified on a **cold run** (`data/cache/` emptied first, so all
+ten PDFs were re-converted from source in 19.1s).
 
-| Company | Field | Got | Expected | Cause |
-|---|---|---|---|---|
-| Alphabet | Valuation allowance | (11,493) | (13,942) | reads the first numeric column |
-| Amazon | Valuation allowance | (4,893) | (5,560) | same |
-| Disney | Valuation allowance | (2,931) | 2,931 | contra-asset sign normalization |
-| Coinbase | RSU comp cost | $25.6M | $307.2M | first matching sentence is stock *options* |
-| Disney | RSU comp cost | $79M | $1,845M | "respectively" amounts unbound to award type |
+v1.0.0 scored 25/30. The five failures traced to two root causes, both now
+fixed by better general logic rather than special-casing:
 
-**Cause 1 — column order.** Field B takes the *first* numeric column, assuming
-the current fiscal year is printed leftmost. Most filers do that; Alphabet and
-Amazon print their deferred tax table in **ascending** year order, so the first
-column is the *prior* year. Disney compounds it by presenting the table as
-"(assets) and liabilities" with the allowance printed **positive**, which the
-contra-asset normalization then flips.
+| Root cause (v1.0.0) | Fields fixed | Fix in v2.0.0 |
+|---|---|---|
+| Field B assumed the current year was the leftmost numeric column | 2 | Column chosen from the table's own year header, resolved relative to the document |
+| Field B forced the allowance negative as a contra-asset | 1 | Sign read exactly as printed |
+| Field C took the first amount in the first matching sentence | 2 | Amounts bound to award types; scope-scored; `respectively` pairs zipped |
 
-**Cause 2 — positional amount matching.** Field C takes the first dollar amount
-in the first matching sentence. Coinbase discloses stock options, RSUs, and
-PRSUs in three separate sentences and the options one comes first. Disney puts
-both in one sentence — "unrecognized compensation cost related to unvested stock
-options and RSUs was $79 million and $1,845 million, **respectively**" — where
-correctness requires binding each amount to its award type rather than taking
-the leftmost.
+### Why this isn't the answer key in disguise
 
-Fixing cause 1 requires parsing the deferred tax table's year header (field A
-already does this) and reading the sign as printed. Fixing cause 2 requires
-award-type-aware amount binding, including `respectively` handling.
+A perfect score is exactly when an extractor deserves the most suspicion, so
+the constraint held throughout the rewrite was: **every decision must be
+derivable from the filing's own structure** — its year headers, its printed
+signs, its award wording. A heuristic that needs to know *which* filing it is
+looking at is not a heuristic, it is the answer copied in.
+
+That is mechanically checkable, and it checks out:
+
+- `src/lib/extract.ts` contains **no company name or ticker**, and no expected
+  value. Every numeric literal in it is a regex fragment, a score, or a scan
+  limit.
+- The extractor imports only `./types` and `./pdftext`. `answer_key.json` is
+  read solely by `src/lib/truth.ts`, which the extractor never touches — it
+  cannot see the answers even accidentally.
+- The answer key itself is sanitized (see below), so the trap analysis that
+  would make the fields easy is absent from the app entirely.
+
+The UI's "how it was found" column is the practical audit trail: it names the
+rule that fired for each value (`year-header column 2/2`,
+`"respectively" pair 2/2 bound to RSUs`, `umbrella stock-based compensation
+total`), so a wrong answer and a *right answer found for the wrong reason* look
+different on screen.
 
 ## Data & sanitization
 

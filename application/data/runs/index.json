@@ -1,5 +1,31 @@
 [
   {
+    "runId": "run-002-20260908212039",
+    "startedAt": "2026-09-08T21:20:20.089Z",
+    "finishedAt": "2026-09-08T21:20:39.160Z",
+    "durationMs": 19071,
+    "extractorVersion": "2.0.0",
+    "total": 30,
+    "matched": 30,
+    "mismatched": 0,
+    "missing": 0,
+    "accuracy": 1,
+    "byField": {
+      "utb_gross_ending_balance": {
+        "matched": 10,
+        "total": 10
+      },
+      "dta_valuation_allowance": {
+        "matched": 10,
+        "total": 10
+      },
+      "unrecognized_rsu_comp_cost": {
+        "matched": 10,
+        "total": 10
+      }
+    }
+  },
+  {
     "runId": "run-001-20260908205913",
     "startedAt": "2026-09-08T20:58:55.475Z",
     "finishedAt": "2026-09-08T20:59:13.548Z",

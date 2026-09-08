@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------- dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# ------------------------------------------------------------------- next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# ---------------------------------------------------------------------- data
+# data/ is committed in full and deliberately NOT ignored -- the PDFs, the
+# sanitized answer key, the pdftotext cache and the run history all travel with
+# the repo, so a fresh clone can grade a run without regenerating anything.
+
+# ------------------------------------------------------------------- env files
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ----------------------------------------------------------------------- misc
+/coverage
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+*.pem
+.vercel
+.idea/
+.vscode/*
+!.vscode/extensions.json

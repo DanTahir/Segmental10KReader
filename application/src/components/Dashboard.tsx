@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { formatValue } from "@/lib/compare";
+import ValueChart from "./ValueChart";
 import {
   FIELD_IDS,
   FIELD_LABELS,
@@ -220,55 +221,62 @@ export default function Dashboard() {
             </section>
           </aside>
 
-          <main className="panel">
-            <div className="panel-head">
-              <h2>
-                Extraction vs ground truth
-                {run && <span className="cite"> &nbsp;{run.runId}</span>}
-              </h2>
-              <div style={{ display: "flex", gap: 8 }}>
-                <button
-                  className={`btn ghost ${filter === "all" ? "on" : ""}`}
-                  onClick={() => setFilter("all")}
-                >
-                  All {run ? run.total : 0}
-                </button>
-                <button
-                  className={`btn ghost ${filter === "problems" ? "on" : ""}`}
-                  onClick={() => setFilter("problems")}
-                >
-                  Problems {problems}
-                </button>
-              </div>
-            </div>
+          <main className="stack">
+            {/* Charts always show the full run, independent of the table's
+                filter below, so the per-field picture stays stable while the
+                table is narrowed to problems. */}
+            {run && <ValueChart results={run.results} />}
 
-            {!run ? (
-              <div className="empty">
-                No run loaded yet. Press <b>Run extraction</b> to scan the 10 PDFs.
+            <section className="panel">
+              <div className="panel-head">
+                <h2>
+                  Extraction vs ground truth
+                  {run && <span className="cite"> &nbsp;{run.runId}</span>}
+                </h2>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <button
+                    className={`btn ghost ${filter === "all" ? "on" : ""}`}
+                    onClick={() => setFilter("all")}
+                  >
+                    All {run ? run.total : 0}
+                  </button>
+                  <button
+                    className={`btn ghost ${filter === "problems" ? "on" : ""}`}
+                    onClick={() => setFilter("problems")}
+                  >
+                    Problems {problems}
+                  </button>
+                </div>
               </div>
-            ) : groups.length === 0 ? (
-              <div className="empty">Nothing to show for this filter.</div>
-            ) : (
-              <div style={{ overflowX: "auto" }}>
-                <table className="results">
-                  <thead>
-                    <tr>
-                      <th>Field</th>
-                      <th>Extracted</th>
-                      <th>Expected</th>
-                      <th>Verdict</th>
-                      <th>PDF citation</th>
-                      <th>How it was found</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {groups.map((g) => (
-                      <FieldRows key={g.key} rows={g.rows} />
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+
+              {!run ? (
+                <div className="empty">
+                  No run loaded yet. Press <b>Run extraction</b> to scan the 10 PDFs.
+                </div>
+              ) : groups.length === 0 ? (
+                <div className="empty">Nothing to show for this filter.</div>
+              ) : (
+                <div style={{ overflowX: "auto" }}>
+                  <table className="results">
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Extracted</th>
+                        <th>Expected</th>
+                        <th>Verdict</th>
+                        <th>PDF citation</th>
+                        <th>How it was found</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {groups.map((g) => (
+                        <FieldRows key={g.key} rows={g.rows} />
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </section>
           </main>
         </div>
       </div>

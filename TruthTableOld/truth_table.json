@@ -1,0 +1,2273 @@
+{
+  "dataset": "Segmental10KReader ground-truth table",
+  "description": "Manually verified ground truth for three hard-to-extract 10-K disclosures (legal loss contingencies; segment revenue & profit with reconciliation; income tax rate reconciliation & unrecognized tax benefit rollforward) across 10 companies. Built to grade an AI extraction pipeline.",
+  "metrics_covered": [
+    "legal_contingencies",
+    "segment_reporting",
+    "income_taxes"
+  ],
+  "source_of_record": "Company 10-K filings retrieved from SEC EDGAR as HTML and converted to text (build/text/*.txt). Every figure was read from those texts and arithmetically cross-checked; see per-company reconciliation_checks.",
+  "company_count": 10,
+  "index": [
+    {
+      "company_id": "alphabet",
+      "company_name": "Alphabet Inc.",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "reporting_unit": "USD millions",
+      "segment_count": 3,
+      "segment_profit_measure": "Operating income (loss)",
+      "effective_tax_rate_percent": 16.8,
+      "rp_loss_disclosed": false,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "amazon",
+      "company_name": "Amazon.com, Inc.",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "reporting_unit": "USD millions",
+      "segment_count": 3,
+      "segment_profit_measure": "Operating income (loss)",
+      "effective_tax_rate_percent": 19.6,
+      "rp_loss_disclosed": true,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "apple",
+      "company_name": "Apple Inc.",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-09-27",
+      "reporting_unit": "USD millions",
+      "segment_count": 5,
+      "segment_profit_measure": "Operating income/(loss)",
+      "effective_tax_rate_percent": 15.6,
+      "rp_loss_disclosed": true,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "block",
+      "company_name": "Block, Inc.",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "reporting_unit": "USD thousands",
+      "segment_count": 2,
+      "segment_profit_measure": "Segment gross profit",
+      "effective_tax_rate_percent": 22.8,
+      "rp_loss_disclosed": true,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "coinbase",
+      "company_name": "Coinbase Global, Inc.",
+      "fiscal_year": 2024,
+      "fiscal_year_end": "2024-12-31",
+      "reporting_unit": "USD thousands",
+      "segment_count": 1,
+      "segment_profit_measure": "Operating income (loss) — consolidated only",
+      "effective_tax_rate_percent": 12.36,
+      "rp_loss_disclosed": true,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "disney",
+      "company_name": "The Walt Disney Company",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-09-27",
+      "reporting_unit": "USD millions",
+      "segment_count": 3,
+      "segment_profit_measure": "Segment operating income (loss)",
+      "effective_tax_rate_percent": -11.9,
+      "rp_loss_disclosed": false,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "dropbox",
+      "company_name": "Dropbox, Inc.",
+      "fiscal_year": 2024,
+      "fiscal_year_end": "2024-12-31",
+      "reporting_unit": "USD millions",
+      "segment_count": 1,
+      "segment_profit_measure": "Consolidated net income (CODM uses consolidated measures); no per-segment profit measure exists",
+      "effective_tax_rate_percent": 11.3,
+      "rp_loss_disclosed": false,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "meta",
+      "company_name": "Meta Platforms, Inc.",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "reporting_unit": "USD millions",
+      "segment_count": 2,
+      "segment_profit_measure": "Income (loss) from operations",
+      "effective_tax_rate_percent": 29.6,
+      "rp_loss_disclosed": true,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "netflix",
+      "company_name": "Netflix, Inc.",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "reporting_unit": "USD thousands",
+      "segment_count": 1,
+      "segment_profit_measure": "Consolidated operating margin and net income (CODM measures); no per-region profit measure is disclosed",
+      "effective_tax_rate_percent": 13.7,
+      "rp_loss_disclosed": false,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    },
+    {
+      "company_id": "schwab",
+      "company_name": "The Charles Schwab Corporation",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "reporting_unit": "USD millions",
+      "segment_count": 2,
+      "segment_profit_measure": "Income before taxes on income (PRETAX income)",
+      "effective_tax_rate_percent": 22.8,
+      "rp_loss_disclosed": true,
+      "rp_loss_quantified": false,
+      "rp_loss_aggregate_amount": null
+    }
+  ],
+  "companies": [
+    {
+      "company_id": "alphabet",
+      "company_name": "Alphabet Inc.",
+      "pdf_file": "Reports10K/Alphabet10K2025.pdf",
+      "cik": "0001652044",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+      "source": {
+        "accession": "0001652044-26-000018",
+        "filing_date": "2026-02-05",
+        "edgar_entity_name": "Alphabet Inc.",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/",
+        "local_text": "build/text/Alphabet10K2025.txt"
+      },
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": 15.6,
+            "unit": "USD billions",
+            "as_printed": "$15.6 billion",
+            "label_as_printed": "short-term accrued legal and regulatory fines and settlements",
+            "as_of": "2025-12-31",
+            "source_line": 884
+          },
+          "composition_note": "Primarily European Commission (EC) fines, in addition to accruals related to other legal matters and regulatory fines and settlements.",
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": false,
+            "quantified": false,
+            "aggregate_amount": null,
+            "note": "No aggregate reasonably-possible-loss-in-excess-of-accrual dollar figure located for Alphabet. The accrued $15.6B is a recorded liability, NOT a reasonably possible loss estimate."
+          },
+          "verbatim_quote": "As of December 31, 2025, we had short-term accrued legal and regulatory fines and settlements of $15.6 billion. This amount primarily included EC fines, in addition to accruals related to other legal matters and regulatory fines and settlements.",
+          "individual_matters": {
+            "extracted": false,
+            "note": "Per-matter amounts (individual EC fine amounts, specific settlements) were not extracted in this pass; only the aggregate accrual is asserted as ground truth."
+          }
+        },
+        "segment_reporting": {
+          "unit": "USD millions",
+          "reportable_segments": [
+            "Google Services",
+            "Google Cloud",
+            "Other Bets"
+          ],
+          "segment_count": 3,
+          "profit_measure": "Operating income (loss)",
+          "revenue": {
+            "Google Services": 342721,
+            "Google Cloud": 58705,
+            "Other Bets": 1537,
+            "Hedging gains (losses)": -127,
+            "Total revenues": 402836,
+            "source_lines": "664-676"
+          },
+          "revenue_disaggregation_within_google_services": {
+            "Google Search & other": 224532,
+            "YouTube ads": 40367,
+            "Google Network": 29792,
+            "Google advertising (subtotal)": 294691,
+            "Google subscriptions, platforms, and devices": 48030
+          },
+          "operating_income": {
+            "Google Services": 139404,
+            "Google Cloud": 13910,
+            "Other Bets": -7515,
+            "Alphabet-level activities": -16760,
+            "Total income from operations": 129039,
+            "source_lines": "771-779"
+          },
+          "reconciling_items": [
+            {
+              "label": "Alphabet-level activities",
+              "amount": -16760,
+              "note": "Unallocated corporate costs; includes AI-focused shared R&D, corporate initiatives, charges/fines. Presented as a separate line, not a reportable segment."
+            },
+            {
+              "label": "Hedging gains (losses)",
+              "amount": -127,
+              "note": "Appears in the revenue build only, not the operating income build."
+            }
+          ],
+          "reconciliation_checks": {
+            "revenue_sums": "342721 + 58705 + 1537 + (-127) = 402836 ✓",
+            "operating_income_sums": "139404 + 13910 + (-7515) + (-16760) = 129039 ✓"
+          },
+          "traps": [
+            "Hedging gains/losses is a revenue-build line with no operating-income counterpart — easy to double count or mis-map.",
+            "Alphabet-level activities is a negative reconciling item, not a segment; including it in 'segments' inflates segment_count to 4.",
+            "Google Services total (342,721) is a subtotal above finer revenue categories in the same table; grabbing both double counts revenue."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD millions",
+          "income_before_income_taxes": 158826,
+          "provision_for_income_taxes": 26656,
+          "effective_tax_rate_percent": 16.8,
+          "statutory_federal_rate_percent": 21.0,
+          "reconciliation_presentation": "dollars and percent, three years (2023, 2024, 2025)",
+          "rate_reconciliation_fy2025": [
+            {
+              "line": "US federal statutory rate",
+              "amount": 33353,
+              "percent": 21.0
+            },
+            {
+              "line": "State and local income taxes, net of federal income tax effect",
+              "amount": 1606,
+              "percent": 1.0
+            },
+            {
+              "line": "Foreign tax effects — Brazil: Withholding taxes",
+              "amount": 1384,
+              "percent": 0.9
+            },
+            {
+              "line": "Foreign tax effects — Brazil: Other",
+              "amount": 23,
+              "percent": 0.0
+            },
+            {
+              "line": "Foreign tax effects — Other foreign jurisdictions",
+              "amount": 396,
+              "percent": 0.2
+            },
+            {
+              "line": "Effect of change in tax laws or rates enacted in the current period",
+              "amount": 0,
+              "percent": 0.0
+            },
+            {
+              "line": "Effect of cross-border tax laws: Foreign-derived intangible income deduction",
+              "amount": -3931,
+              "percent": -2.5
+            },
+            {
+              "line": "Effect of cross-border tax laws: Other",
+              "amount": 295,
+              "percent": 0.2
+            },
+            {
+              "line": "Tax credits: Federal research credit",
+              "amount": -2088,
+              "percent": -1.3
+            },
+            {
+              "line": "Tax credits: Foreign tax credits",
+              "amount": -1684,
+              "percent": -1.1
+            },
+            {
+              "line": "Tax credits: Other",
+              "amount": -98,
+              "percent": -0.1
+            },
+            {
+              "line": "Changes in valuation allowances",
+              "amount": 1170,
+              "percent": 0.7
+            },
+            {
+              "line": "Nontaxable or nondeductible items: Stock-based compensation expense",
+              "amount": -2601,
+              "percent": -1.6
+            },
+            {
+              "line": "Other",
+              "amount": 955,
+              "percent": 0.6
+            },
+            {
+              "line": "Changes in unrecognized tax benefits",
+              "amount": -1123,
+              "percent": -0.7
+            },
+            {
+              "line": "Other adjustments",
+              "amount": -1002,
+              "percent": -0.6
+            },
+            {
+              "line": "Total",
+              "amount": 26656,
+              "percent": 16.8
+            }
+          ],
+          "rate_reconciliation_source_lines": "2157-2181",
+          "reconciliation_check": "Line items sum to 26,655 vs printed total 26,656 (1 unit rounding difference in the filing's own table).",
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "gross_rollforward": {
+              "beginning_balance_fy2025": 12619,
+              "ending_balance_fy2025": 11512,
+              "prior_year_ending_balances": {
+                "fy2023": 9438,
+                "fy2024": 12619
+              },
+              "source_lines": "2239-2244"
+            },
+            "gross_utb_by_year_as_printed": "$9.4 billion, $12.6 billion, and $11.5 billion as of December 31, 2023, 2024, and 2025",
+            "long_term_income_taxes_payable": {
+              "value": 9.5,
+              "unit": "USD billions",
+              "as_printed": "$9.5 billion",
+              "note": "Primarily related to unrecognized tax benefits; timing/amount of payment cannot be estimated. This is NOT the 'would affect ETR' figure.",
+              "source_line": 890
+            }
+          },
+          "traps": [
+            "Long-term income taxes payable of $9.5B (line 890) is a balance-sheet classification figure and is frequently mistaken for the 'UTB that would affect the effective tax rate'.",
+            "Reconciliation is presented in BOTH dollars and percent across three year-columns; column mis-alignment silently yields FY2023/FY2024 values.",
+            "'Changes in unrecognized tax benefits' is a rate-reconciliation line and is distinct from the UTB rollforward table."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "amazon",
+      "company_name": "Amazon.com, Inc.",
+      "pdf_file": "Reports10K/Amazon10K2025.pdf",
+      "cik": "0001018724",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+      "source": {
+        "accession": "0001018724-26-000004",
+        "filing_date": "2026-02-06",
+        "edgar_entity_name": "AMAZON COM INC",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
+        "local_text": "build/text/Amazon10K2025.txt"
+      },
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "Amazon does not disclose a single aggregate legal accrual figure in this filing's contingencies discussion."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": true,
+            "quantified": false,
+            "aggregate_amount": null,
+            "note": "Amazon states it discloses reasonably possible losses and that for matters without an estimate it cannot determine an amount or range; no aggregate dollar figure is given."
+          },
+          "verbatim_quote": "The outcomes of our legal proceedings and other contingencies are inherently unpredictable, subject to significant uncertainties, and could be material to our operating results and cash flows for a particular period. We evaluate, on a regular basis, developments in our legal proceedings and other contingencies that could affect the amount of liability, including amounts in excess of any previous accruals and reasonably possible losses disclosed, and make adjustments and changes to our accruals and disclosures as appropriate.",
+          "verbatim_source_line": 1335,
+          "individual_matters": {
+            "extracted": false,
+            "note": "Per-matter amounts were not extracted in this pass; only the qualitative disclosure posture is asserted as ground truth."
+          }
+        },
+        "segment_reporting": {
+          "unit": "USD millions",
+          "reportable_segments": [
+            "North America",
+            "International",
+            "AWS"
+          ],
+          "segment_count": 3,
+          "profit_measure": "Operating income (loss)",
+          "revenue": {
+            "North America": 426305,
+            "International": 161894,
+            "AWS": 128725,
+            "Consolidated": 716924,
+            "revenue_label_as_printed": "Net sales",
+            "source_lines": "1549-1572"
+          },
+          "operating_income": {
+            "North America": 29619,
+            "International": 4750,
+            "AWS": 45606,
+            "Consolidated": 79975,
+            "source_lines": "1549-1572"
+          },
+          "reconciling_items": [
+            {
+              "label": "Total non-operating income",
+              "amount": 17336
+            },
+            {
+              "label": "Provision for income taxes",
+              "amount": -19087
+            },
+            {
+              "label": "Equity-method investment activity, net of tax",
+              "amount": -554
+            },
+            {
+              "label": "Net income",
+              "amount": 77670
+            }
+          ],
+          "reconciliation_checks": {
+            "revenue_sums": "426305 + 161894 + 128725 = 716924 ✓",
+            "operating_income_sums": "29619 + 4750 + 45606 = 79975 ✓ (no unallocated corporate line)",
+            "to_net_income": "79975 + 17336 - 19087 - 554 = 77670 ✓"
+          },
+          "traps": [
+            "Amazon's segments sum exactly to consolidated operating income with NO unallocated/corporate reconciling item — an extractor expecting one may invent a zero or mis-assign.",
+            "A separate FX table (lines 609-615) also prints 'Net sales 716,924' and 'Operating income 79,975' with exchange-rate-effect columns; grabbing the 'At Prior Year Rates' column yields 712,515 / 79,617 instead.",
+            "Product/service split (296,266 / 420,658) is a revenue disaggregation, not segment revenue."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD millions",
+          "provision_for_income_taxes": 19087,
+          "effective_tax_rate_percent": 19.6,
+          "statutory_federal_rate_percent": 21.0,
+          "income_before_income_taxes": 97311,
+          "income_before_income_taxes_source_line": 769,
+          "income_before_income_taxes_note": "PRINTED DIRECTLY on the consolidated income statement (line 769) as 97,311. The rate reconciliation table itself does not print pretax income, so an earlier pass derived it from the statutory line (20,435 / 0.21 = 97,309) — 2 units low. The printed figure is authoritative. Cross-check: 19,087 / 97,311 = 19.61%, consistent with the recorded 19.6% ETR.",
+          "column_order_warning": "Amazon's income statement is ASCENDING (2023 | 2024 | 2025): 'Income before income taxes | 37,557 | 68,614 | 97,311'. FY2025 is the LAST column. Confirmed independently by MD&A line 588: 'provision for income taxes of $9.3 billion and $19.1 billion in 2024 and 2025'. Taking the first column yields FY2023.",
+          "reconciliation_presentation": "dollars and percent, three years (2023, 2024, 2025)",
+          "rate_reconciliation_fy2025": [
+            {
+              "line": "Income taxes computed at the federal statutory rate",
+              "amount": 20435,
+              "percent": 21.0
+            },
+            {
+              "line": "Federal tax credits: Research and development tax credits",
+              "amount": -2403,
+              "percent": -2.5
+            },
+            {
+              "line": "Federal tax credits: Foreign tax credits",
+              "amount": -642,
+              "percent": -0.7
+            },
+            {
+              "line": "Federal tax credits: Other credits",
+              "amount": -139,
+              "percent": -0.1
+            },
+            {
+              "line": "Effect of cross-border tax laws: Foreign income deduction",
+              "amount": -522,
+              "percent": -0.5
+            },
+            {
+              "line": "Effect of cross-border tax laws: Other",
+              "amount": -271,
+              "percent": -0.3
+            },
+            {
+              "line": "Nontaxable and nondeductible items: Stock-based compensation",
+              "amount": -2029,
+              "percent": -2.1
+            },
+            {
+              "line": "Nontaxable and nondeductible items: Other",
+              "amount": 372,
+              "percent": 0.4
+            },
+            {
+              "line": "Other",
+              "amount": 486,
+              "percent": 0.5
+            },
+            {
+              "line": "State and local income taxes, net of federal effect",
+              "amount": 2455,
+              "percent": 2.5
+            },
+            {
+              "line": "Foreign tax effects",
+              "amount": 1517,
+              "percent": 1.6
+            },
+            {
+              "line": "Worldwide changes in prior period unrecognized tax benefits",
+              "amount": -172,
+              "percent": -0.2
+            },
+            {
+              "line": "Total",
+              "amount": 19087,
+              "percent": 19.6
+            }
+          ],
+          "rate_reconciliation_source_lines": "1456-1475",
+          "reconciliation_check": "Line items sum exactly to 19,087 ✓",
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "terminology_note": "Amazon labels these 'income tax contingencies' rather than 'unrecognized tax benefits'.",
+            "gross_rollforward_fy2025": {
+              "beginning_balance": 6485,
+              "gross_increases_to_tax_positions_in_prior_periods": 310,
+              "gross_decreases_to_tax_positions_in_prior_periods": -1180,
+              "gross_increases_to_current_period_tax_positions": 1292,
+              "settlements_with_tax_authorities": -312,
+              "lapse_of_statute_of_limitations": -29,
+              "ending_balance": 6566,
+              "prior_year_ending_balances": {
+                "fy2023": 5228,
+                "fy2024": 6485
+              },
+              "source_lines": "1519-1527",
+              "rollforward_check": "6485 + 310 - 1180 + 1292 - 312 - 29 = 6566 ✓"
+            },
+            "contractual_obligations_exclusion": {
+              "value": 6.6,
+              "unit": "USD billions",
+              "as_printed": "approximately $6.6 billion of income tax contingencies for which we cannot make a reasonably reliable estimate of the period of settlement",
+              "source_line": 1313
+            }
+          },
+          "traps": [
+            "Amazon's 'income tax contingencies' wording defeats keyword search for 'unrecognized tax benefits'.",
+            "The rollforward ending balance is 6,566 while the narrative rounds to '$6.6 billion' — both are correct but at different precision.",
+            "'Worldwide changes in prior period unrecognized tax benefits' (-172) is a rate-reconciliation line, not a rollforward line."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "apple",
+      "company_name": "Apple Inc.",
+      "pdf_file": "Reports10K/Apple10k2025.pdf",
+      "cik": "0000320193",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-09-27",
+      "fiscal_year_note": "NON-CALENDAR fiscal year: 52/53-week year ended September 27, 2025. Prior year ended September 28, 2024. Comparisons against calendar-year peers are not period-aligned.",
+      "source": {
+        "accession": "0000320193-25-000079",
+        "filing_date": "2025-10-31",
+        "edgar_entity_name": "Apple Inc.",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/",
+        "local_text": "build/text/Apple10k2025.txt"
+      },
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "Apple does not quantify its legal accrual in the contingencies note."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": true,
+            "quantified": false,
+            "aggregate_amount": null,
+            "direction": "NEGATIVE assertion",
+            "note": "Apple affirmatively states there was NOT at least a reasonable possibility of a material loss, or a material loss greater than a recorded accrual. The correct extracted answer is 'no reasonably possible material loss asserted' — not a dollar amount and not 'not disclosed'."
+          },
+          "verbatim_quote": "The Company is subject to various legal proceedings and claims that have arisen in the ordinary course of business and that have not been fully resolved. The outcome of litigation is inherently uncertain. In the opinion of management, there was not at least a reasonable possibility the Company may have incurred a material loss, or a material loss greater than a recorded accrual, concerning loss contingencies for asserted legal and other claims.",
+          "verbatim_source_line": 1068,
+          "individual_matters": {
+            "extracted": false,
+            "note": "The EU State Aid Decision is discussed in the TAX note (see income_taxes), not as a legal loss contingency."
+          },
+          "why_hard": "CONFLATION TRAP: the only occurrences of 'reasonably possible' with a dollar figure in Apple's filing are in the INCOME TAX note ($6 billion possible UTB decrease, line 940), not the legal contingencies note. An extractor keying on 'reasonably possible' + nearest dollar amount will wrongly report $6 billion as a legal loss contingency."
+        },
+        "segment_reporting": {
+          "unit": "USD millions",
+          "reportable_segments": [
+            "Americas",
+            "Europe",
+            "Greater China",
+            "Japan",
+            "Rest of Asia Pacific"
+          ],
+          "segment_count": 5,
+          "segment_basis": "Geographic",
+          "profit_measure": "Operating income/(loss)",
+          "revenue": {
+            "Americas": 178353,
+            "Europe": 111032,
+            "Greater China": 64377,
+            "Japan": 28703,
+            "Rest of Asia Pacific": 33696,
+            "Corporate": 0,
+            "Total net sales": 416161,
+            "source_lines": "1079-1087"
+          },
+          "operating_income": {
+            "Americas": 72480,
+            "Europe": 47739,
+            "Greater China": 26917,
+            "Japan": 13955,
+            "Rest of Asia Pacific": 14586,
+            "Corporate": -42627,
+            "Total": 133050,
+            "source_line": 1087
+          },
+          "segment_expense_detail_fy2025": {
+            "cost_of_sales": {
+              "Americas": -95699,
+              "Europe": -58617,
+              "Greater China": -35141,
+              "Japan": -13779,
+              "Rest of Asia Pacific": -17724,
+              "Total": -220960
+            },
+            "research_and_development": {
+              "Corporate": -34550,
+              "Total": -34550
+            },
+            "selling_and_marketing": {
+              "Americas": -10174,
+              "Europe": -4676,
+              "Greater China": -2319,
+              "Japan": -969,
+              "Rest of Asia Pacific": -1386,
+              "Total": -19524
+            },
+            "general_and_administrative": {
+              "Corporate": -8077,
+              "Total": -8077
+            }
+          },
+          "reconciling_items": [
+            {
+              "label": "Corporate",
+              "amount": -42627,
+              "note": "Holds all R&D ($34,550) and G&A ($8,077); no revenue is allocated to Corporate. Not a reportable segment."
+            }
+          ],
+          "reconciliation_checks": {
+            "revenue_sums": "178,353 + 111,032 + 64,377 + 28,703 + 33,696 = 416,161 ✓",
+            "segment_operating_income_subtotal": "72,480 + 47,739 + 26,917 + 13,955 + 14,586 = 175,677",
+            "to_consolidated": "175,677 - 42,627 (Corporate) = 133,050 ✓",
+            "corporate_composition": "34,550 (R&D) + 8,077 (G&A) = 42,627 ✓"
+          },
+          "prior_year_comparatives": {
+            "fy2024": {
+              "total_net_sales": 391035,
+              "total_operating_income": 123216,
+              "corporate": -38828
+            },
+            "fy2023": {
+              "total_net_sales": 383285,
+              "total_operating_income": 114301,
+              "corporate": -36587
+            }
+          },
+          "traps": [
+            "Apple's segments are GEOGRAPHIC, not product lines. Extractors often report iPhone/Mac/iPad/Wearables/Services (a product revenue disaggregation) as segments — those are not reportable segments.",
+            "Segment operating income does NOT sum to consolidated operating income: the $42,627M Corporate column (all R&D + G&A) must be subtracted.",
+            "Corporate has zero revenue but a large negative operating income — asymmetric across the two builds.",
+            "An MD&A-level geographic net sales table (lines 371-378) prints the same revenue figures interleaved with percent-change columns, which can be mis-parsed as amounts.",
+            "Fiscal year ends September 27, 2025, not December 31."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD millions",
+          "provision_for_income_taxes": 20719,
+          "effective_tax_rate_percent": 15.6,
+          "statutory_federal_rate_percent": 21.0,
+          "statutory_rate_as_printed": "21 %",
+          "income_before_income_taxes": 132729,
+          "income_before_income_taxes_source_line": 542,
+          "income_before_income_taxes_note": "PRINTED DIRECTLY on the consolidated income statement (line 542) as 'Income before provision for income taxes | 132,729'. This happens to match exactly the value derived from the computed-expected-tax line (27,873 / 0.21 = 132,729). Cross-check: 20,719 / 132,729 = 15.61%, consistent with the recorded 15.6% ETR.",
+          "column_order_warning": "Apple's income statement is DESCENDING (2025 | 2024 | 2023): 'Income before provision for income taxes | 132,729 | 123,485 | 113,736'. FY2025 is the FIRST column — the OPPOSITE of Amazon and Alphabet in this same dataset. Do not assume a single convention across filers.",
+          "reconciliation_presentation": "dollars only (no percent column), three years (2025, 2024, 2023)",
+          "rate_reconciliation_fy2025": [
+            {
+              "line": "Computed expected tax",
+              "amount": 27873
+            },
+            {
+              "line": "Earnings of foreign subsidiaries",
+              "amount": -8120
+            },
+            {
+              "line": "Change in valuation allowance",
+              "amount": 2091
+            },
+            {
+              "line": "Research and development credit, net",
+              "amount": -1049
+            },
+            {
+              "line": "Impact of the State Aid Decision",
+              "amount": -486
+            },
+            {
+              "line": "Other",
+              "amount": 410
+            },
+            {
+              "line": "Provision for income taxes",
+              "amount": 20719
+            }
+          ],
+          "rate_reconciliation_source_lines": "892-901",
+          "reconciliation_check": "27,873 - 8,120 + 2,091 - 1,049 - 486 + 410 = 20,719 ✓",
+          "prior_year_comparatives": {
+            "fy2024": {
+              "provision": 29749,
+              "effective_tax_rate_percent": 24.1,
+              "state_aid_decision_impact": 10246
+            },
+            "fy2023": {
+              "provision": 16741,
+              "effective_tax_rate_percent": 14.7
+            }
+          },
+          "unrecognized_tax_benefits": {
+            "unit": "USD billions",
+            "gross_utb": 23.2,
+            "would_impact_effective_tax_rate_if_recognized": 10.6,
+            "as_of": "2025-09-27",
+            "prior_year": {
+              "gross_utb": 22.0,
+              "would_impact_etr": 10.8,
+              "as_of": "2024-09-28"
+            },
+            "verbatim_quote": "As of September 27, 2025, the total amount of gross unrecognized tax benefits was $23.2 billion, of which $10.6 billion, if recognized, would impact the Company's effective tax rate. As of September 28, 2024, the total amount of gross unrecognized tax benefits was $22.0 billion, of which $10.8 billion, if recognized, would have impacted the Company's effective tax rate.",
+            "source_line": 928,
+            "reasonably_possible_decrease_next_12_months": {
+              "value": 6,
+              "unit": "USD billions",
+              "as_printed": "could decrease as much as $6 billion in the next 12 months",
+              "verbatim_quote": "Although the timing of resolution or closure of examinations is not certain, the Company believes it is reasonably possible that its gross unrecognized tax benefits could decrease as much as $6 billion in the next 12 months.",
+              "source_line": 940
+            }
+          },
+          "traps": [
+            "The $6 billion 'reasonably possible' figure belongs to the UTB note, NOT legal contingencies — see legal_contingencies.why_hard.",
+            "The rate reconciliation is in DOLLARS ONLY with no percent column; the 21% statutory rate and 15.6% ETR appear in a different, MD&A-level table (lines 454-458).",
+            "The State Aid Decision swings from +10,246 (FY2024) to -486 (FY2025) — grabbing the wrong year column produces a wildly wrong reconciliation.",
+            "$23.2B gross UTB vs $10.6B ETR-affecting: reporting the gross figure as ETR-affecting is a ~2.2x error.",
+            "The same $23.2B / $10.6B sentence is repeated in the auditor's critical-audit-matter section (line 1141), so a naive first-match grep may land in the audit report rather than the tax note."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "block",
+      "company_name": "Block, Inc.",
+      "pdf_file": "Reports10K/BlockInc10k2025.pdf",
+      "cik": "0001512673",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+      "source": {
+        "accession": "0001628280-26-012254",
+        "filing_date": "2026-02-26",
+        "edgar_entity_name": "Block, Inc.",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1512673/000162828026012254/",
+        "local_text": "build/text/BlockInc10k2025.txt"
+      },
+      "reporting_unit_warning": "Block reports segment and tax figures in THOUSANDS, unlike most peers in this set which report in millions. Mis-scaling by 1000x is the single most likely extraction error for this filing.",
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "No single aggregate legal accrual figure captured in this pass."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": true,
+            "quantified": false,
+            "aggregate_amount": null,
+            "matter": "Federal securities and derivative matters",
+            "note": "Block explicitly states a reasonably possible loss that could be material, but that it cannot estimate the amount or range."
+          },
+          "verbatim_quote": "It is reasonably possible that the Company will incur a loss in connection with these federal securities and derivative matters, and the loss could be material; however, the Company cannot estimate the amount of loss or range of loss at this time.",
+          "verbatim_source_line": 2300,
+          "individual_matters": {
+            "extracted": false,
+            "note": "A separate state-attorneys-general matter was noted during review as carrying a probable loss, but its verbatim language and amount were not captured in this pass and are therefore NOT asserted as ground truth."
+          },
+          "why_hard": "This is one of the few filings in the set with an explicit, unambiguous 'reasonably possible ... could be material ... cannot estimate' construction tied to a named matter category — the correct answer is 'disclosed but not quantifiable', not a number."
+        },
+        "segment_reporting": {
+          "unit": "USD thousands",
+          "reportable_segments": [
+            "Cash App",
+            "Square"
+          ],
+          "segment_count": 2,
+          "profit_measure": "Segment gross profit",
+          "profit_measure_note": "Block's segment profitability measure is GROSS PROFIT, not operating income. There is no segment operating income disclosure.",
+          "revenue": {
+            "Cash App": 15425043,
+            "Square": 8451911,
+            "Corporate and Other": 316729,
+            "Total": 24193683,
+            "row_label_as_printed": "Segment revenue",
+            "source_lines": "2313-2320"
+          },
+          "revenue_disaggregation_fy2025": {
+            "Commerce enablement revenue": {
+              "Cash App": 3912171,
+              "Square": 7425962,
+              "Corporate and Other": 176029,
+              "Total": 11514162
+            },
+            "Financial solutions revenue": {
+              "Cash App": 3165594,
+              "Square": 1011140,
+              "Corporate and Other": 0,
+              "Total": 4176734
+            },
+            "Bitcoin ecosystem revenue": {
+              "Cash App": 8347278,
+              "Square": 14809,
+              "Corporate and Other": 140700,
+              "Total": 8502787
+            }
+          },
+          "cost_of_revenue": {
+            "Cash App": 9089500,
+            "Square": 4516870,
+            "Corporate and Other": 227384,
+            "Total": 13833754
+          },
+          "segment_gross_profit": {
+            "Cash App": 6335543,
+            "Square": 3935041,
+            "Corporate and Other": 89345,
+            "Total": 10359929,
+            "source_line": 2322
+          },
+          "reconciling_items": [
+            {
+              "label": "Corporate and Other",
+              "revenue": 316729,
+              "gross_profit": 89345,
+              "note": "Not a reportable segment — a residual/reconciling column presented alongside the two reportable segments."
+            }
+          ],
+          "reconciliation_checks": {
+            "revenue_sums": "15,425,043 + 8,451,911 + 316,729 = 24,193,683 ✓",
+            "gross_profit_sums": "6,335,543 + 3,935,041 + 89,345 = 10,359,929 ✓",
+            "gross_profit_derivation": "24,193,683 - 13,833,754 = 10,359,929 ✓"
+          },
+          "traps": [
+            "Figures are in THOUSANDS, not millions.",
+            "Segment profit measure is gross profit, not operating income — an extractor looking for 'segment operating income' will find nothing and may wrongly report 'not disclosed'.",
+            "'Corporate and Other' is a reconciling column, not a third reportable segment.",
+            "Bitcoin ecosystem revenue ($8.5B of $24.2B total) is gross bitcoin sales with a near-equal cost of revenue, so revenue-based segment weighting is highly misleading vs gross profit.",
+            "A goodwill-by-segment table (lines 1763-1770) uses the same Cash App / Square / Corporate and Other column headers and can be mistaken for the segment results table."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD thousands",
+          "provision_for_income_taxes": 385701,
+          "effective_tax_rate_percent": 22.8,
+          "statutory_federal_rate_percent": 21.0,
+          "statutory_rate_as_printed_in_table": 21.2,
+          "statutory_rate_print_note": "The FY2025 reconciliation table literally prints '21.2 %' on the 'Tax at federal statutory rate' line. The true US federal statutory rate is 21.0%; the 21.2% is the filing's own computed percentage on that row. Ground truth records BOTH: statutory_federal_rate_percent = 21.0, as-printed = 21.2.",
+          "income_before_income_taxes": 1689911,
+          "income_before_income_taxes_source_line": 2004,
+          "income_before_income_taxes_note": "PRINTED DIRECTLY at line 2004 as 'Income (loss) before income taxes | $ | 1,689,911' (domestic/foreign components table, in thousands). An earlier pass derived 1,691,671 from 385,701 / 0.228, which was 1,760 too high; the printed figure is authoritative. Cross-check: 385,701 / 1,689,911 = 22.82%, consistent with the recorded 22.8% ETR. The statutory line cross-check now reads 357,813 / 1,689,911 = 21.17% ≈ the printed 21.2%.",
+          "statutory_amount_not_reproducible_note": "UNRESOLVED AS-FILED QUIRK, documented rather than 'fixed': the printed statutory amount 357,813 is NOT 21.0% of printed pretax income (21.0% x 1,689,911 = 354,881, a 2,932 difference). Working backwards, 357,813 / 0.21 implies a pretax base of 1,703,871, i.e. 13,960 above the printed 1,689,911; neither 1,703,871 nor 13,960 appears anywhere in the filing text, so no reconciling item can be identified and none is asserted here. What IS verified: the reconciliation column sums exactly to the 385,701 total provision, and 357,813 / 1,689,911 = 21.17%, which rounds to the 21.2% the filing prints on that line. Graders should therefore treat 357,813 and 21.2% as as-filed values and must NOT expect 21.0% x pretax to reproduce them.",
+          "reconciliation_presentation": "dollars and percent, FY2025 column only in this block",
+          "rate_reconciliation_fy2025": [
+            {
+              "line": "Tax at federal statutory rate",
+              "amount": 357813,
+              "percent": 21.2
+            },
+            {
+              "line": "State and local taxes, net of federal benefit",
+              "amount": 72230,
+              "percent": 4.3
+            },
+            {
+              "line": "Foreign tax effects — Ireland: Change in valuation allowance",
+              "amount": -55904,
+              "percent": -3.3
+            },
+            {
+              "line": "Foreign tax effects — Ireland: Other",
+              "amount": 4958,
+              "percent": 0.3
+            },
+            {
+              "line": "Foreign tax effects — Other foreign jurisdictions",
+              "amount": 27402,
+              "percent": 1.6
+            },
+            {
+              "line": "Effect of cross border tax laws: Subpart F inclusion",
+              "amount": 21872,
+              "percent": 1.3
+            },
+            {
+              "line": "Effect of cross border tax laws: Other",
+              "amount": 3819,
+              "percent": 0.2
+            },
+            {
+              "line": "Tax credits: Research and development credits",
+              "amount": -55885,
+              "percent": -3.3
+            },
+            {
+              "line": "Tax credits: Changes in valuation allowance",
+              "amount": -2160,
+              "percent": -0.1
+            },
+            {
+              "line": "Non-taxable or non-deductible items: Share-based compensation",
+              "amount": 13371,
+              "percent": 0.8
+            },
+            {
+              "line": "Non-taxable or non-deductible items: Other",
+              "amount": 18975,
+              "percent": 1.1
+            },
+            {
+              "line": "Changes in unrecognized tax benefits",
+              "amount": -13605,
+              "percent": -0.8
+            },
+            {
+              "line": "Other",
+              "amount": -7185,
+              "percent": -0.5
+            },
+            {
+              "line": "Total",
+              "amount": 385701,
+              "percent": 22.8
+            }
+          ],
+          "rate_reconciliation_source_lines": "2024-2044",
+          "reconciliation_check": "Line items sum exactly to 385,701 ✓",
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "unit_note": "This particular sentence is stated in millions even though the tables are in thousands.",
+            "gross_utb": 626.8,
+            "would_impact_effective_tax_rate_if_recognized": 69.1,
+            "as_of": "2025-12-31",
+            "remainder_treatment": "The remainder would result in a corresponding adjustment to the valuation allowance.",
+            "verbatim_quote": "As of December 31, 2025, the Company had unrecognized tax benefits of $626.8 million, of which $69.1 million would impact the annual effective tax rate if recognized and the remainder of which would result in a corresponding adjustment to the valuation allowance.",
+            "source_line": 2114
+          },
+          "traps": [
+            "The printed 21.2% statutory rate contradicts the 21.0% US federal rate — an extractor that 'corrects' it loses the as-filed value, one that copies it may wrongly report the statutory rate as 21.2%.",
+            "Only $69.1M of the $626.8M UTB would affect the ETR (11%) because most is offset by valuation allowance — reporting $626.8M as the ETR-affecting figure is a 9x error.",
+            "Tax tables are in thousands but the UTB narrative is in millions, within the same note."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "coinbase",
+      "company_name": "Coinbase Global, Inc.",
+      "pdf_file": "Reports10K/Coinbase10k2025.pdf",
+      "cik": "0001679788",
+      "fiscal_year": 2024,
+      "fiscal_year_end": "2024-12-31",
+      "fiscal_year_note": "FILENAME MISMATCH — CRITICAL: the PDF is named 'Coinbase10k2025.pdf' but the filing covers FISCAL YEAR 2024 (ended December 31, 2024), filed February 2025. All ground-truth values here are FY2024. Grading an extractor against FY2025 figures for this document would be incorrect.",
+      "source": {
+        "accession": "0001679788-25-000022",
+        "filing_date": "2025-02-13",
+        "edgar_entity_name": "Coinbase Global, Inc.",
+        "period_of_report": "2024-12-31",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/",
+        "local_text": "build/text/Coinbase10k2025.txt"
+      },
+      "reporting_unit_warning": "Coinbase reports in THOUSANDS.",
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "No aggregate legal accrual figure disclosed."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": true,
+            "quantified": false,
+            "aggregate_amount": null,
+            "note": "Coinbase states its accounting policy (accrue when probable and estimable; disclose when reasonably possible and estimable) and then gives a qualitative 'except as otherwise disclosed ... not have a material adverse effect' conclusion with an 'however, it is possible' caveat. No aggregate reasonably-possible-loss dollar figure is provided."
+          },
+          "verbatim_quote_policy": "In accordance with such guidance, the Company establishes accruals for such matters when potential losses become probable and can be reasonably estimated. If the Company determines that a loss is reasonably possible and the loss or range of loss can be estimated, the Company discloses the possible loss in the Consolidated Financial Statements.",
+          "verbatim_quote_conclusion": "Except as otherwise disclosed, the Company believes the ultimate resolution of existing legal and regulatory investigation matters will not have a material adverse effect on the financial condition, results of operations, or cash flows of the Company. However, in light of the uncertainties inherent in these matters, it is possible that the ultimate resolution of one or more of these matters may have a material adverse effect on the Company's results.",
+          "verbatim_source_lines": "3096 (policy), 3115 (conclusion)",
+          "individual_matters": {
+            "extracted": false,
+            "named_matters_present": [
+              "Securities class actions filed July/August 2021 in N.D. Cal. alleging Securities Act Sections 11, 12(a)(2) and 15 claims tied to the direct-listing registration statement (line 3097)"
+            ],
+            "note": "Matter existence confirmed from source; no per-matter loss amounts asserted."
+          },
+          "why_hard": "The policy paragraph recites the words 'probable', 'reasonably estimated' and 'reasonably possible' without attaching any figure. An extractor that treats boilerplate policy language as a substantive contingency disclosure will report a false positive."
+        },
+        "segment_reporting": {
+          "unit": "USD thousands",
+          "reportable_segments": [
+            "Single reportable segment (consolidated / company as a whole)"
+          ],
+          "segment_count": 1,
+          "segment_disclosure_status": "RESOLVED. Coinbase never ASSERTS its own segment status using the conventional phrasings: it does not say 'we operate as one operating segment' or 'we have a single reportable segment'. Instead its segment note states the CODM 'review[s] and assess[es] the performance of the Company as a whole'. The literal string 'single reportable segments' DOES appear once, but only inside the ASU 2023-07 boilerplate describing the standard's scope ('extends the full disclosure requirements of ASC 280 to companies with single reportable segments') — it is a description of the accounting pronouncement, not Coinbase's own assertion. An earlier pass on this project searched only for the conventional self-assertions and wrongly concluded no segment statement existed; a broader search on 'CODM|chief operating decision' located it (HTML text line 1947; PDF text lines 6013-6015).",
+          "segment_statement_verbatim": "The Company reports its segment information to reflect the manner in which the CODM reviews and assesses performance. The Company's Chief Executive Officer and President and Chief Operating Officer have joint responsibility as the CODM and review and assess the performance of the Company as a whole.",
+          "segment_statement_source_line": 1947,
+          "codm_measures_verbatim": "The primary financial measures used by the CODM to evaluate performance and allocate resources are net income (loss) and operating income (loss).",
+          "codm_measures_source_line": 1948,
+          "segment_assets_note": "The CODM does not evaluate performance or allocate resources based on segment assets, and therefore such information is not presented in the notes to the financial statements (line 1954).",
+          "why_hard": "PHRASING TRAP: Coinbase conveys single-segment status through 'reviews and assesses the performance of the Company as a whole' rather than a conventional self-assertion like Netflix's plain 'We operate as one operating segment'. Worse, the one place the literal phrase 'single reportable segments' DOES occur is the ASU 2023-07 pronouncement description — so a keyword-matching extractor either finds nothing usable, or matches the ASU text and cites the wrong sentence as the company's segment assertion. Additional hazard: in PDF-extracted text the real sentence WRAPS across lines ('...the performance of' / 'the Company as a whole.'), so a single-line regex misses it entirely — this actually happened during verification of this record.",
+          "profit_measure": "Operating income (loss) — consolidated only",
+          "revenue_disaggregation_fy2024": {
+            "transaction_revenue": {
+              "Consumer, net": 3430322,
+              "Institutional, net": 345598,
+              "Other transaction revenue, net": 210193,
+              "Total transaction revenue": 3986113
+            },
+            "subscription_and_services_revenue": {
+              "Stablecoin revenue": 910464,
+              "Blockchain rewards": 705757,
+              "Interest and finance fee income": 265799,
+              "Custodial fee revenue": 141706,
+              "Other subscription and services revenue": 283407,
+              "Total subscription and services revenue": 2307133
+            },
+            "Total net revenue": 6293246,
+            "other_revenue": {
+              "Corporate interest and other income": 270782,
+              "Total other revenue": 270782
+            },
+            "Total revenue": 6564028,
+            "source_lines": "2183-2203"
+          },
+          "consolidated_results_fy2024": {
+            "Total revenue": 6564028,
+            "Total operating expenses": 4256868,
+            "Operating income": 2307160,
+            "source_lines": "1755-1760"
+          },
+          "reconciliation_checks": {
+            "transaction_revenue_sums": "3,430,322 + 345,598 + 210,193 = 3,986,113 ✓",
+            "subscription_revenue_sums": "910,464 + 705,757 + 265,799 + 141,706 + 283,407 = 2,307,133 ✓",
+            "net_revenue_sums": "3,986,113 + 2,307,133 = 6,293,246 ✓",
+            "total_revenue_sums": "6,293,246 + 270,782 = 6,564,028 ✓",
+            "operating_income_derivation": "6,564,028 - 4,256,868 = 2,307,160 ✓"
+          },
+          "traps": [
+            "'Total net revenue' (6,293,246) and 'Total revenue' (6,564,028) are DIFFERENT figures; the $270,782K of corporate interest/other income sits between them. Reporting one for the other is a common error.",
+            "Figures are in THOUSANDS.",
+            "A near-identical MD&A transaction-revenue table (lines 1156-1162) prints the same Consumer/Institutional/Other rows but with $ and % CHANGE columns — mis-parsing yields change amounts instead of balances.",
+            "Revenue categories are NOT segments; there is no per-segment operating income to extract.",
+            "FY2024 filing despite the '2025' filename."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD thousands",
+          "provision_for_income_taxes": 363578,
+          "effective_tax_rate_percent": 12.36,
+          "statutory_federal_rate_percent": 21.0,
+          "statutory_rate_as_printed": "21.00 %",
+          "income_before_income_taxes": 2942644,
+          "income_before_income_taxes_source_line": 1143,
+          "income_before_income_taxes_note": "PRINTED DIRECTLY at line 1143 as 'Income (loss) before income taxes | 2,942,644' (in thousands). An earlier pass derived 2,942,643 from the statutory line (617,955 / 0.21), 1 unit low; the printed figure is authoritative. Cross-check: 363,578 / 2,942,644 = 12.36% ✓ matches the printed ETR exactly.",
+          "reconciliation_presentation": "dollars and percent, FY2024 column (percent to two decimals)",
+          "rate_reconciliation_fy2024": [
+            {
+              "line": "Provision for income taxes at U.S. federal statutory rate",
+              "amount": 617955,
+              "percent": 21.0
+            },
+            {
+              "line": "State and local income taxes, net of federal benefit",
+              "amount": 66325,
+              "percent": 2.25
+            },
+            {
+              "line": "Foreign tax effects",
+              "amount": 18705,
+              "percent": 0.64
+            },
+            {
+              "line": "Effect of changes in tax laws or rates enacted in the current period",
+              "amount": 0,
+              "percent": 0.0
+            },
+            {
+              "line": "Effect of cross-border tax laws: Foreign Derived Intangible Income (FDII)",
+              "amount": -11592,
+              "percent": -0.39
+            },
+            {
+              "line": "Effect of cross-border tax laws: Other",
+              "amount": -1472,
+              "percent": -0.05
+            },
+            {
+              "line": "Tax credits: Research and development (R&D) credits",
+              "amount": -69603,
+              "percent": -2.37
+            },
+            {
+              "line": "Tax credits: Valuation allowance",
+              "amount": -7493,
+              "percent": -0.25
+            },
+            {
+              "line": "Non-taxable or non-deductible items: Equity compensation",
+              "amount": -276645,
+              "percent": -9.4
+            },
+            {
+              "line": "Non-taxable or non-deductible items: Non-deductible compensation",
+              "amount": 24114,
+              "percent": 0.82
+            },
+            {
+              "line": "Non-taxable or non-deductible items: Uncertain tax positions",
+              "amount": 3244,
+              "percent": 0.11
+            },
+            {
+              "line": "Adjustment to prior period provision",
+              "amount": -1110,
+              "percent": -0.04
+            },
+            {
+              "line": "Other adjustments",
+              "amount": 1150,
+              "percent": 0.04
+            },
+            {
+              "line": "Total tax provision and effective tax rate",
+              "amount": 363578,
+              "percent": 12.36
+            }
+          ],
+          "rate_reconciliation_source_lines": "2870-2889",
+          "reconciliation_check": "Line items sum exactly to 363,578 ✓",
+          "largest_single_driver": "Equity compensation, -$276,645K (-9.40 pts) — the dominant reason the ETR is far below statutory.",
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "unit_note": "Stated in millions although the tax tables are in thousands.",
+            "gross_utb": 136.8,
+            "would_impact_effective_tax_rate_if_recognized": 136.8,
+            "etr_affecting_note": "The full $136.8 million is described as amounts 'which would reduce income tax expense and affect the effective tax rate, if recognized' — unlike Block/Dropbox, there is no valuation-allowance carve-out on this figure.",
+            "as_of": "2024-12-31",
+            "prior_year": {
+              "gross_utb": 126.8,
+              "as_of": "2023-12-31"
+            },
+            "verbatim_quote": "As of December 31, 2024 and 2023, the Company had unrecognized tax benefits of $136.8 million and $126.8 million, respectively, which would reduce income tax expense and affect the effective tax rate, if recognized.",
+            "source_line": 2980
+          },
+          "traps": [
+            "Percentages are printed to TWO decimals (21.00%, 12.36%), unlike peers' one-decimal presentation — rounding to 12.4% loses fidelity.",
+            "Tax note tables are in thousands while the UTB sentence is in millions.",
+            "A second reconciliation block (lines 2899+) covers FY2023/FY2022 in PERCENT ONLY; picking that block yields the wrong year and no dollar amounts.",
+            "This is FY2024 data — do not grade against FY2025."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "disney",
+      "company_name": "The Walt Disney Company",
+      "pdf_file": "Reports10K/Disney10k2025.pdf",
+      "cik": "0001744489",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-09-27",
+      "fiscal_year_note": "NON-CALENDAR fiscal year ended September 27, 2025. Prior years ended September 28, 2024 and September 30, 2023.",
+      "source": {
+        "accession": "0001744489-25-000155",
+        "filing_date": "2025-11-13",
+        "edgar_entity_name": "Walt Disney Co",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000155/",
+        "local_text": "build/text/Disney10k2025.txt"
+      },
+      "reporting_unit_warning": "Disney reports in USD millions.",
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "No aggregate legal accrual figure located."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": false,
+            "quantified": false,
+            "aggregate_amount": null,
+            "note": "A whole-document case-insensitive grep for 'reasonably possible' in Disney's 10-K returns EXACTLY ONE hit (line 2771), and it is in the INCOME TAX note about unrecognized tax benefits — not in legal contingencies. Disney therefore provides no quantified reasonably-possible legal loss disclosure."
+          },
+          "grep_evidence": "grep -c -i 'reasonably possible' build/text/Disney10k2025.txt = 1 (line 2771, tax note).",
+          "individual_matters": {
+            "extracted": false,
+            "named_matters_present": [
+              "Private securities class action filed May 12, 2023 in the U.S. District Court for the Central District of California against the Company, former CEO Robert Chapek, former CFO Christine M. McCarthy, and former DMED Chairman Kareem Daniel, on behalf of certain purchasers of Company securities (line 3191)"
+            ],
+            "note": "Matter existence and caption details confirmed from source text. No loss amount, range, or accrual is asserted for this matter — the concluding materiality sentence of Disney's legal note was NOT located in this pass, so no conclusion language is claimed."
+          },
+          "why_hard": "CONFLATION TRAP, same family as Apple: the sole 'reasonably possible' phrase in the entire filing sits in the tax note attached to a $0.4 billion UTB figure. An extractor keying on the phrase will report $0.4B as a legal loss contingency, which is wrong."
+        },
+        "segment_reporting": {
+          "unit": "USD millions",
+          "reportable_segments": [
+            "Entertainment",
+            "Sports",
+            "Experiences"
+          ],
+          "segment_count": 3,
+          "profit_measure": "Segment operating income (loss)",
+          "revenue": {
+            "Entertainment": {
+              "third_parties": 42018,
+              "amounts_eliminated_in_consolidation": 448,
+              "total": 42466
+            },
+            "Sports": {
+              "third_parties": 16251,
+              "amounts_eliminated_in_consolidation": 1421,
+              "total": 17672
+            },
+            "Experiences": {
+              "total": 36156
+            },
+            "Eliminations": -1869,
+            "Total revenues": 94425,
+            "source_lines": "2082-2095"
+          },
+          "operating_income": {
+            "Entertainment": 4674,
+            "Sports": 2882,
+            "Experiences": 9995,
+            "Total segment operating income": 17551,
+            "source_lines": "2096-2100"
+          },
+          "reconciling_items_to_pretax_income": [
+            {
+              "label": "Corporate and unallocated shared expenses",
+              "amount": -1646
+            },
+            {
+              "label": "Equity in the loss of India joint venture",
+              "amount": -202
+            },
+            {
+              "label": "Restructuring and impairment charges",
+              "amount": -819
+            },
+            {
+              "label": "Other expense",
+              "amount": 0
+            },
+            {
+              "label": "Interest expense, net",
+              "amount": -1305
+            },
+            {
+              "label": "TFCF and Hulu acquisition amortization",
+              "amount": -1576
+            },
+            {
+              "label": "Income before income taxes",
+              "amount": 12003
+            }
+          ],
+          "reconciling_items_source_lines": "854-865",
+          "reconciliation_checks": {
+            "revenue_sums": "42,466 + 17,672 + 36,156 + (-1,869) = 94,425 ✓",
+            "entertainment_build": "42,018 + 448 = 42,466 ✓",
+            "sports_build": "16,251 + 1,421 = 17,672 ✓",
+            "eliminations_tie": "448 + 1,421 = 1,869 = the (1,869) Eliminations line ✓",
+            "segment_operating_income_sums": "4,674 + 2,882 + 9,995 = 17,551 ✓",
+            "to_pretax_income": "17,551 - 1,646 - 202 - 819 - 1,305 - 1,576 = 12,003 ✓ (matches income statement line 700)"
+          },
+          "consolidated_income_statement_fy2025": {
+            "Total revenues": 94425,
+            "Income before income taxes": 12003,
+            "Income taxes": 1428,
+            "income_taxes_note": "POSITIVE 1,428 — a net tax BENEFIT, which is why net income (13,431) EXCEEDS pretax income (12,003).",
+            "Net income": 13431,
+            "Net income attributable to noncontrolling interests": -1027,
+            "Net income attributable to Disney": 12404,
+            "source_lines": "684-704"
+          },
+          "traps": [
+            "Segment revenue is presented gross of intersegment eliminations: Entertainment 42,466 and Sports 17,672 INCLUDE 448 and 1,421 of intersegment revenue that is then removed via the (1,869) Eliminations line. Summing the segment totals without the elimination overstates revenue by 1,869.",
+            "Six separate reconciling items sit between segment operating income (17,551) and pretax income (12,003) — omitting any one breaks the tie.",
+            "'Total segment operating income' is NOT consolidated operating income and Disney does not present a consolidated 'operating income' line in the same table.",
+            "Net income exceeds pretax income because income taxes were a net benefit — an extractor assuming tax is always an expense will get the sign wrong.",
+            "Fiscal year ends September 27, 2025."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD millions",
+          "income_before_income_taxes": 12003,
+          "income_taxes": -1428,
+          "income_taxes_sign_note": "The income statement prints 'Income taxes 1,428' as a positive number in a costs-and-expenses-style presentation where it represents a net tax BENEFIT of $1,428M. Recorded here as -1428 (benefit) for sign clarity.",
+          "effective_tax_rate_percent": -11.9,
+          "effective_tax_rate_as_printed": "(11.9 %)",
+          "effective_tax_rate_note": "NEGATIVE effective tax rate — Disney recorded a net tax benefit on positive pretax income. Cross-check: 1,428 / 12,003 = 11.9% ✓.",
+          "statutory_federal_rate_percent": 21.0,
+          "reconciliation_presentation": "PERCENT ONLY (no dollar column), three years (2025, 2024, 2023)",
+          "rate_reconciliation_fy2025_percent": [
+            {
+              "line": "Federal income tax rate",
+              "percent": 21.0
+            },
+            {
+              "line": "State taxes, net of federal benefit",
+              "percent": 2.4
+            },
+            {
+              "line": "Change in Hulu income tax classification",
+              "percent": -27.3
+            },
+            {
+              "line": "Non-tax deductible impairments",
+              "percent": 0.9
+            },
+            {
+              "line": "Foreign derived intangible income",
+              "percent": -2.2
+            },
+            {
+              "line": "Income tax audits and reserves",
+              "percent": -8.4
+            },
+            {
+              "line": "Tax rate differential on foreign income",
+              "percent": 3.4
+            },
+            {
+              "line": "U.S. research and development credits",
+              "percent": -0.9
+            },
+            {
+              "line": "Tax impact of equity awards",
+              "percent": -0.3
+            },
+            {
+              "line": "Valuation allowance",
+              "percent": -1.3
+            },
+            {
+              "line": "Other",
+              "percent": 0.8
+            },
+            {
+              "line": "Effective income tax rate",
+              "percent": -11.9
+            }
+          ],
+          "rate_reconciliation_source_lines": "2740-2753",
+          "reconciliation_check": "21.0 + 2.4 - 27.3 + 0.9 - 2.2 - 8.4 + 3.4 - 0.9 - 0.3 - 1.3 + 0.8 = -11.9 ✓ (sums exactly)",
+          "dominant_driver": "Change in Hulu income tax classification, -27.3 percentage points — single-handedly drives the rate negative.",
+          "prior_year_comparatives": {
+            "fy2024": {
+              "effective_tax_rate_percent": 23.7,
+              "income_before_income_taxes": 7569
+            },
+            "fy2023": {
+              "effective_tax_rate_percent": 28.9
+            }
+          },
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "gross_rollforward_fy2025": {
+              "beginning_balance": 1952,
+              "increases_for_current_year_tax_positions": 105,
+              "increases_for_prior_year_tax_positions": 116,
+              "decreases_in_prior_year_tax_positions": -164,
+              "settlements_with_taxing_authorities": -256,
+              "lapse_in_statute_of_limitations": -620,
+              "ending_balance": 1133,
+              "prior_year_ending_balances": {
+                "fy2024": 1952,
+                "fy2023": 2517
+              },
+              "source_lines": "2758-2766",
+              "rollforward_check": "1,952 + 105 + 116 - 164 - 256 - 620 = 1,133 ✓"
+            },
+            "would_affect_effective_tax_rate_if_recognized": {
+              "value": 0.8,
+              "unit": "USD billions",
+              "as_of": "2025-09-27",
+              "fy2024": 1.4,
+              "fy2023": 1.8,
+              "as_printed": "Balances at September 27, 2025, September 28, 2024 and September 30, 2023 include $0.8 billion, $1.4 billion and $1.8 billion, respectively, that if recognized, would reduce our income tax expense and effective tax rate. These amounts are net of the offsetting benefits from other tax jurisdictions.",
+              "confidence": "All three figures ($0.8B FY2025, $1.4B FY2024, $1.8B FY2023) read directly from the full text of source line 2767 on a later verification pass. An earlier pass truncated this sentence at the read width and left the comparatives unasserted; they are now confirmed.",
+              "net_of_offsetting_benefits_note": "The filing states these amounts are net of offsetting benefits from other tax jurisdictions, so they are NOT simply a subset of the $1,133M gross ending balance computed on the same basis.",
+              "source_line": 2767
+            },
+            "reasonably_possible_decrease_next_12_months": {
+              "value": 0.4,
+              "unit": "USD billions",
+              "verbatim_quote": "In the next twelve months, it is reasonably possible that our unrecognized tax benefits could change due to the resolution of open tax matters, which would reduce our unrecognized tax benefits by $0.4 billion.",
+              "source_line": 2771
+            },
+            "accrued_interest_and_penalties": {
+              "fy2025": 0.3,
+              "fy2024": 0.9,
+              "fy2023": 1.0,
+              "unit": "USD billions",
+              "note": "Excluded from the gross UTB rollforward above.",
+              "source_line": 2769
+            }
+          },
+          "traps": [
+            "The effective tax rate is NEGATIVE (11.9)% — an extractor that strips parentheses reports +11.9%, and one that assumes 'tax expense' reports the wrong sign for the $1,428M benefit.",
+            "The rate reconciliation has NO dollar column, only percentages — unlike most peers in this set.",
+            "The $0.4B 'reasonably possible' UTB decrease is the filing's only 'reasonably possible' phrase and is a legal-contingency false-positive magnet.",
+            "UTB rollforward excludes accrued interest and penalties, which are disclosed separately ($0.3B in FY2025).",
+            "Fiscal year ends September 27, 2025."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "dropbox",
+      "company_name": "Dropbox, Inc.",
+      "pdf_file": "Reports10K/Dropbox10k2025.pdf",
+      "cik": "0001467623",
+      "fiscal_year": 2024,
+      "fiscal_year_end": "2024-12-31",
+      "fiscal_year_note": "FILENAME MISMATCH — CRITICAL: the PDF is named 'Dropbox10k2025.pdf' but the filing covers FISCAL YEAR 2024 (ended December 31, 2024), filed February 2025. All ground-truth values here are FY2024.",
+      "source": {
+        "accession": "0001467623-25-000011",
+        "filing_date": "2025-02-21",
+        "edgar_entity_name": "DROPBOX, INC.",
+        "period_of_report": "2024-12-31",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1467623/000146762325000011/",
+        "local_text": "build/text/Dropbox10k2025.txt"
+      },
+      "reporting_unit_warning": "Dropbox reports in MILLIONS with ONE DECIMAL PLACE (e.g. 2,548.2). Truncating the decimal loses precision that the filing actually provides.",
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "No aggregate legal accrual figure disclosed."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": false,
+            "quantified": false,
+            "aggregate_amount": null,
+            "note": "Dropbox provides its accrual policy (record a liability when probable and estimable) for ordinary-course claims. No 'reasonably possible' loss quantification was located."
+          },
+          "verbatim_quote": "From time-to-time, the Company is a party to a variety of claims, lawsuits, investigations, inquiries, and proceedings which arise in the ordinary course of business, including claims of alleged infringement of intellectual property rights, regulatory matters, and commercial disputes. The Company records a liability when it believes that it is probable that a loss will be incurred and the amount of loss or range of loss can be reasonably estimated.",
+          "verbatim_source_line": 2021,
+          "individual_matters": {
+            "extracted": false,
+            "note": "No individually quantified legal matters extracted."
+          }
+        },
+        "segment_reporting": {
+          "unit": "USD millions",
+          "reportable_segments": [
+            "Single reportable segment (consolidated)"
+          ],
+          "segment_count": 1,
+          "segment_basis": "Single operating and reportable segment; geographic revenue disaggregation only",
+          "segment_statement_verbatim": "The Company's chief operating decision-maker (“CODM”), the Chief Executive Officer, manages the Company's business activities as a single operating and reportable segment at the consolidated level.",
+          "segment_statement_source_lines": "1424, 2248",
+          "profit_measure": "Consolidated net income (CODM uses consolidated measures); no per-segment profit measure exists",
+          "revenue_by_geography_fy2024": {
+            "United States": 1448.5,
+            "International": 1099.7,
+            "Total revenue": 2548.2,
+            "source_lines": "2270-2276"
+          },
+          "prior_year_comparatives": {
+            "fy2023": {
+              "United States": 1419.4,
+              "International": 1082.2,
+              "Total revenue": 2501.6
+            },
+            "fy2022": {
+              "United States": 1264.2,
+              "International": 1060.7,
+              "Total revenue": 2324.9
+            }
+          },
+          "reconciling_items": [],
+          "reconciliation_checks": {
+            "revenue_sums": "1,448.5 + 1,099.7 = 2,548.2 ✓"
+          },
+          "geographic_note": "No single country outside the United States accounted for more than 10% of total revenue.",
+          "traps": [
+            "There is NO segment operating income to extract — a single-segment filer. An extractor must report 'single reportable segment', not fabricate segment profit lines.",
+            "The US/International split is a GEOGRAPHIC disaggregation, not segment reporting.",
+            "A separate long-lived-assets-by-geography table (line 2258: United States $353.1) uses the same 'United States' row label and can be mistaken for revenue.",
+            "Amounts carry one decimal place in millions.",
+            "FY2024 filing despite the '2025' filename."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD millions",
+          "income_before_income_taxes": 509.8,
+          "provision_for_income_taxes": 57.5,
+          "provision_sign_convention": "The reconciliation table uses NEGATIVE-IN-PARENTHESES = TAX EXPENSE. The FY2024 bottom line prints as $(57.5) on a row labeled '(Provision for) benefit from income taxes', which is a PROVISION (expense) of $57.5 million — NOT a tax benefit.",
+          "effective_tax_rate_percent": 11.3,
+          "effective_tax_rate_note": "COMPUTED, not printed. Dropbox's reconciliation table shows DOLLARS ONLY with no percent column and no effective-tax-rate line. 57.5 / 509.8 = 11.28%. Cross-check against the statutory line: 107.1 / 0.21 = 510.0 ≈ 509.8 pretax ✓.",
+          "statutory_federal_rate_percent": 21.0,
+          "reconciliation_presentation": "dollars only (no percent column, no ETR line), three years (2024, 2023, 2022)",
+          "rate_reconciliation_fy2024": [
+            {
+              "line": "Provision for income taxes at federal statutory rate",
+              "amount": -107.1,
+              "meaning": "expense of 107.1"
+            },
+            {
+              "line": "State taxes, net of federal benefit",
+              "amount": -10.5,
+              "meaning": "expense of 10.5"
+            },
+            {
+              "line": "Foreign rate differential",
+              "amount": 2.3,
+              "meaning": "benefit of 2.3"
+            },
+            {
+              "line": "Research and other credits",
+              "amount": 53.2,
+              "meaning": "benefit of 53.2"
+            },
+            {
+              "line": "Non-deductible compensation",
+              "amount": -4.7,
+              "meaning": "expense of 4.7"
+            },
+            {
+              "line": "Permanent differences",
+              "amount": -1.4,
+              "meaning": "expense of 1.4"
+            },
+            {
+              "line": "Change in valuation allowance",
+              "amount": -5.4,
+              "meaning": "expense of 5.4"
+            },
+            {
+              "line": "Stock-based compensation",
+              "amount": 8.8,
+              "meaning": "benefit of 8.8"
+            },
+            {
+              "line": "Changes in Unrecognized Tax Benefits",
+              "amount": 7.3,
+              "meaning": "benefit of 7.3"
+            },
+            {
+              "line": "(Provision for) benefit from income taxes",
+              "amount": -57.5,
+              "meaning": "net PROVISION (expense) of 57.5"
+            }
+          ],
+          "rate_reconciliation_source_lines": "2176-2188",
+          "reconciliation_check": "-107.1 - 10.5 + 2.3 + 53.2 - 4.7 - 1.4 - 5.4 + 8.8 + 7.3 = -57.5 ✓ (sums exactly)",
+          "prior_year_comparatives": {
+            "fy2023": {
+              "provision": 100.8,
+              "as_printed": "(100.8)",
+              "income_before_income_taxes": 554.4
+            },
+            "fy2022": {
+              "benefit": 360.5,
+              "as_printed": "360.5",
+              "note": "FY2022 was a genuine net BENEFIT of $360.5M, driven by a $409.9M valuation-allowance release — the sign genuinely flips between years.",
+              "income_before_income_taxes": 192.7
+            }
+          },
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "gross_utb": 162.7,
+            "would_affect_effective_tax_rate_if_recognized": 114.6,
+            "would_adjust_deferred_tax_assets_with_valuation_allowance_offset": 48.1,
+            "as_of": "2024-12-31",
+            "prior_year_ending_balances": {
+              "fy2023": 149.8,
+              "fy2022": 127.2
+            },
+            "verbatim_quote": "As of December 31, 2024, the balance of unrecognized tax benefits was $162.7 million of which $114.6 million, if recognized, would affect the effective tax rate and $48.1 million would result in adjustment to deferred tax assets with corresponding adjustments to the valuation allowance.",
+            "source_lines": "2223 (narrative), 2234 (rollforward ending balance)",
+            "check": "114.6 + 48.1 = 162.7 ✓"
+          },
+          "traps": [
+            "SIGN TRAP (highest risk in this filing): $(57.5) is a tax EXPENSE, not a benefit. The row label '(Provision for) benefit from income taxes' invites the wrong reading, and FY2022's +360.5 really is a benefit, so the sign is not constant across columns.",
+            "No effective tax rate is printed anywhere in the reconciliation — it must be computed as 57.5 / 509.8 = 11.3%. Reporting 'not disclosed' is defensible only if the derivation is not attempted; reporting 21.0% (statutory) as the ETR is wrong.",
+            "$162.7M gross UTB vs $114.6M ETR-affecting — the $48.1M difference is valuation-allowance offset.",
+            "FY2024 data despite the '2025' filename."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "meta",
+      "company_name": "Meta Platforms, Inc.",
+      "pdf_file": "Reports10K/Meta10k2025.pdf",
+      "cik": "0001326801",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+      "source": {
+        "accession": "0001628280-26-003942",
+        "filing_date": "2026-01-29",
+        "edgar_entity_name": "Meta Platforms, Inc.",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/",
+        "local_text": "build/text/Meta10k2025.txt"
+      },
+      "reporting_unit_warning": "Meta reports in USD millions.",
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "No aggregate legal accrual DOLLAR figure is disclosed anywhere in the filing. Meta does affirmatively confirm accruals EXIST, but only qualitatively: 'we have accrued significant amounts for loss contingencies related to these inquiries and investigations in Europe' (line 1800). Verified by sweeping the full filing text for accrual/range-of-loss language."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": true,
+            "quantified": false,
+            "aggregate_amount": null,
+            "note": "Meta makes a SUBSTANTIVE (not merely policy-level) reasonably-possible disclosure, but never quantifies it. Three distinct layers exist in the filing, which is what makes this record hard: (1) a policy paragraph reciting the ASC 450 vocabulary (line 1434); (2) an outcome-uncertainty paragraph calling estimability 'inherently uncertain' (line 1788); and (3) the real Note 11 assertion at line 1800 that additional accruals could be material individually or in the aggregate. No aggregate dollar figure accompanies any of them.",
+            "verbatim_quote_substantive": "Although we are vigorously defending our regulatory compliance, we have accrued significant amounts for loss contingencies related to these inquiries and investigations in Europe, and we believe there is a reasonable possibility that additional accruals for losses related to these matters could be material individually or in the aggregate.",
+            "verbatim_quote_substantive_source_line": 1800,
+            "materiality_language": "could be material individually or in the aggregate",
+            "boilerplate_trap_note": "A near-identical-sounding sentence appears at line 1100 inside the INDEPENDENT AUDITOR'S REPORT (Critical Audit Matters), not in Note 11: 'When applicable, the Company discloses an estimate of the amount of loss or range of possible loss...'. That is the auditor describing Meta's policy, not a company disclosure, and must not be cited as the reasonably-possible disclosure."
+          },
+          "verbatim_quote_policy": "If we determine that a loss is probable or reasonably possible and the loss or range of loss can be reasonably estimated, we disclose the possible loss in the accompanying notes to the consolidated financial statements to the extent material.",
+          "verbatim_quote_policy_source_line": 1434,
+          "verbatim_quote_uncertainty": "The ultimate outcome of the legal and related matters described in this section, such as whether the likelihood of loss is remote, reasonably possible, or probable, or if and when the reasonably possible range of loss is estimable, is inherently uncertain. Therefore, if one or more of these matters were resolved against us for amounts in excess of management's estimates of loss, our results of operations and financial condition could be materially affected.",
+          "verbatim_quote_uncertainty_source_line": 1788,
+          "individual_matters": {
+            "extracted": false,
+            "named_matter_categories_present": [
+              "Irish Data Protection Commission (IDPC) notifications and GDPR/UK GDPR/ePrivacy inquiries and investigations by European regulators (line 1800)"
+            ],
+            "note": "Category existence confirmed from source; no per-matter loss amounts asserted."
+          },
+          "why_hard": "Meta recites the full 'remote / reasonably possible / probable' ASC 450 vocabulary in BOTH a policy paragraph and an outcome-uncertainty paragraph without ever attaching a number. An extractor scoring on keyword presence will believe a quantified disclosure exists."
+        },
+        "segment_reporting": {
+          "unit": "USD millions",
+          "reportable_segments": [
+            "Family of Apps",
+            "Reality Labs"
+          ],
+          "segment_count": 2,
+          "profit_measure": "Income (loss) from operations",
+          "revenue": {
+            "Family of Apps": 198759,
+            "Reality Labs": 2207,
+            "Total revenue": 200966,
+            "source_lines": "877-885"
+          },
+          "revenue_disaggregation_within_family_of_apps": {
+            "Advertising": 196175,
+            "Other revenue": 2584,
+            "check": "196,175 + 2,584 = 198,759 ✓"
+          },
+          "costs_and_expenses": {
+            "Family of Apps": 96290,
+            "Reality Labs": 21400,
+            "Total": 117690,
+            "source_line": 729
+          },
+          "operating_income": {
+            "Family of Apps": 102469,
+            "Reality Labs": -19193,
+            "Total income from operations": 83276,
+            "source_lines": "944-950"
+          },
+          "operating_margin_percent": {
+            "Family of Apps": 52,
+            "Reality Labs": -870,
+            "Total": 41,
+            "source_line": 731
+          },
+          "reconciling_items": [],
+          "reconciliation_checks": {
+            "revenue_sums": "198,759 + 2,207 = 200,966 ✓",
+            "operating_income_sums": "102,469 + (-19,193) = 83,276 ✓ (no unallocated corporate item)",
+            "costs_sums": "96,290 + 21,400 = 117,690 ✓",
+            "revenue_less_costs": "200,966 - 117,690 = 83,276 ✓"
+          },
+          "prior_year_comparatives": {
+            "fy2024": {
+              "Family of Apps": {
+                "revenue": 162355,
+                "operating_income": 87109
+              },
+              "Reality Labs": {
+                "revenue": 2146,
+                "operating_income": -17729
+              },
+              "total_revenue": 164501,
+              "total_operating_income": 69380
+            },
+            "fy2023": {
+              "Family of Apps": {
+                "revenue": 133006,
+                "operating_income": 62871
+              },
+              "Reality Labs": {
+                "revenue": 1896,
+                "operating_income": -16120
+              },
+              "total_revenue": 134902,
+              "total_operating_income": 46751
+            }
+          },
+          "traps": [
+            "Reality Labs operating income is a LARGE NEGATIVE (-19,193) with an operating margin of (870)% — dropping the sign turns an $83.3B consolidated figure into $121.7B.",
+            "Meta's two segments sum exactly to consolidated with NO unallocated corporate reconciling item.",
+            "Advertising (196,175) is a component OF Family of Apps (198,759), not a segment. Reporting 'Advertising' as a segment double-counts against FoA.",
+            "The FY2025 segment table (lines 723-731) is a three-panel layout (FoA | Reality Labs | Total) each with 2025/2024/%-change sub-columns — heavy column-misalignment risk."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD millions",
+          "provision_for_income_taxes": 25474,
+          "effective_tax_rate_percent": 29.6,
+          "effective_tax_rate_as_printed_in_mdna": 30,
+          "effective_tax_rate_print_note": "The tax-note reconciliation prints the precise ETR of 29.6% (line 1943). A separate MD&A table (line 979) prints a rounded '30 %'. Ground truth is 29.6%; an extractor reporting 30% has taken the MD&A rounding.",
+          "statutory_federal_rate_percent": 21.0,
+          "income_before_income_taxes": 85932,
+          "income_before_income_taxes_source_lines": "850, 1197",
+          "income_before_income_taxes_note": "PRINTED DIRECTLY as 'Income before provision for income taxes | 85,932' at lines 850 and 1197. An earlier pass derived 85,933 from the statutory line (18,046 / 0.21), 1 unit high; the printed figure is authoritative. Cross-check: 25,474 / 85,932 = 29.65% ≈ printed 29.6% ✓.",
+          "reconciliation_presentation": "dollars and percent, FY2025 column",
+          "rate_reconciliation_fy2025": [
+            {
+              "line": "U.S. federal statutory income tax rate",
+              "amount": 18046,
+              "percent": 21.0
+            },
+            {
+              "line": "State and local income taxes, net of federal income tax effect",
+              "amount": -202,
+              "percent": -0.2
+            },
+            {
+              "line": "Foreign tax effects",
+              "amount": 1464,
+              "percent": 1.7
+            },
+            {
+              "line": "Tax credits: Research and development tax credits",
+              "amount": -3912,
+              "percent": -4.6
+            },
+            {
+              "line": "Tax credits: U.S. foreign tax credits",
+              "amount": -1405,
+              "percent": -1.6
+            },
+            {
+              "line": "Valuation allowances",
+              "amount": 11974,
+              "percent": 13.9
+            },
+            {
+              "line": "Changes in unrecognized tax benefits",
+              "amount": 3127,
+              "percent": 3.6
+            },
+            {
+              "line": "Other adjustments: Excess tax benefits from share-based compensation",
+              "amount": -4307,
+              "percent": -5.0
+            },
+            {
+              "line": "Other",
+              "amount": 689,
+              "percent": 0.8
+            },
+            {
+              "line": "Effective tax rate",
+              "amount": 25474,
+              "percent": 29.6
+            }
+          ],
+          "rate_reconciliation_source_lines": "1930-1943",
+          "reconciliation_check": "18,046 - 202 + 1,464 - 3,912 - 1,405 + 11,974 + 3,127 - 4,307 + 689 = 25,474 ✓ (sums exactly)",
+          "dominant_driver": "Valuation allowances, +$11,974M (+13.9 pts) — the reason Meta's ETR is ABOVE the statutory rate, unusual among its peers in this set.",
+          "prior_year_comparatives": {
+            "fy2024": {
+              "provision": 8303,
+              "effective_tax_rate_percent": 12
+            },
+            "fy2023": {
+              "provision": 8330,
+              "effective_tax_rate_percent": 18
+            }
+          },
+          "unrecognized_tax_benefits": {
+            "unit": "USD billions",
+            "gross_utb": 16.45,
+            "tax_benefit_if_realized": 11.25,
+            "tax_benefit_if_realized_note": "Meta phrases this as 'would result in a tax benefit of $11.25 billion within our provision of income taxes', which is the analogue of peers' 'would affect the effective tax rate' figure.",
+            "net_uncertain_tax_positions_on_balance_sheet": 11.23,
+            "net_uncertain_tax_positions_note": "$11.23 billion of NET uncertain tax positions included in long-term income taxes on the consolidated balance sheets — a DIFFERENT figure from both the $16.45B gross UTB and the $11.25B if-realized benefit, despite being numerically close to the latter.",
+            "as_of": "2025-12-31",
+            "predominant_drivers": "Uncertainties with research tax credits and transfer pricing with foreign subsidiaries (licensing of IP, providing services and other transactions).",
+            "verbatim_quote_gross": "If our gross unrecognized tax benefits of $16.45 billion as of December 31, 2025 were realized in a future period, this would result in a tax benefit of $11.25 billion within our provision of income taxes at such time.",
+            "verbatim_quote_net": "As of December 31, 2025, we had net uncertain tax positions of $11.23 billion which was included in long-term income taxes on our consolidated balance sheets.",
+            "source_lines": "988 (net), 2020 (gross/if-realized)"
+          },
+          "traps": [
+            "THREE nearby tax figures are easy to confuse: $16.45B gross UTB, $11.25B tax benefit if realized, and $11.23B net uncertain tax positions on the balance sheet. $11.25B and $11.23B differ by only $0.02B.",
+            "ETR is 29.6% in the tax note but rounded to 30% in MD&A — two different 'correct-looking' answers in one filing.",
+            "Meta's ETR is ABOVE statutory (29.6% vs 21.0%) because of a +13.9 pt valuation allowance, opposite the direction of most peers here.",
+            "'Changes in unrecognized tax benefits' (+3,127) is a rate-reconciliation line, not a UTB balance."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "netflix",
+      "company_name": "Netflix, Inc.",
+      "pdf_file": "Reports10K/Netflix10k2025.pdf",
+      "cik": "0001065280",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+      "source": {
+        "accession": "0001065280-26-000034",
+        "filing_date": "2026-01-23",
+        "edgar_entity_name": "NETFLIX INC",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000034/",
+        "local_text": "build/text/Netflix10k2025.txt"
+      },
+      "reporting_unit_warning": "Netflix reports in THOUSANDS (e.g. total revenue 45,183,036 = $45.18 billion).",
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "No legal accrual figure disclosed."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": false,
+            "quantified": false,
+            "aggregate_amount": null,
+            "phrase_absent": true,
+            "note": "The phrase 'reasonably possible' does NOT appear anywhere in Netflix's 10-K (whole-document case-insensitive grep returned zero hits). Netflix instead makes a materiality statement. Ground truth for Netflix's legal item is this immateriality assertion, NOT a 'reasonably possible' disclosure."
+          },
+          "materiality_assertion": "The Company is involved in litigation matters not listed herein but does not consider the matters to be material either individually or in the aggregate at this time.",
+          "verbatim_quote": "From time to time, in the normal course of its operations, the Company is subject to litigation matters and claims, including claims relating to employee relations, business practices and patent infringement. Litigation can be expensive and disruptive to normal business operations. Moreover, the results of complex legal proceedings are difficult to predict.",
+          "verbatim_source_lines": "1318 (general), 1319 (materiality assertion)",
+          "individual_matters": {
+            "extracted": false,
+            "note": "No individually quantified legal matters. Note: a December 4, 2025 definitive merger agreement with WBD (amended January 19, 2026) is described immediately above the Legal Proceedings heading at line 1316 — it is an M&A disclosure, NOT a loss contingency."
+          },
+          "why_hard": "INVERSE TRAP: an extractor searching for 'reasonably possible' finds nothing and may report 'not disclosed' or hallucinate boilerplate. The correct answer requires recognizing the affirmative immateriality statement as the disclosure. The adjacent WBD merger text is also a distractor for anything scanning for large nearby dollar figures."
+        },
+        "segment_reporting": {
+          "unit": "USD thousands",
+          "reportable_segments": [
+            "Single operating segment (consolidated)"
+          ],
+          "segment_count": 1,
+          "segment_basis": "One operating segment; revenue disaggregated by geographic region",
+          "segment_statement_verbatim": "The Company operates as one operating segment. The Company's chief operating decision maker (“CODM”) is its co-chief executive officers, who review financial information presented on a consolidated basis. The CODM uses consolidated operating margin and net income to assess financial performance.",
+          "segment_statement_source_lines": "103 (Item 1), 1617-1618 (Note 13, Segment and Geographic Information)",
+          "profit_measure": "Consolidated operating margin and net income (CODM measures); no per-region profit measure is disclosed",
+          "revenue_by_region_fy2025": {
+            "United States and Canada (UCAN)": 19957152,
+            "Europe, Middle East, and Africa (EMEA)": 14514646,
+            "Latin America (LATAM)": 5357521,
+            "Asia-Pacific (APAC)": 5353717,
+            "Total Streaming Revenues": 45183036,
+            "source_lines": "387-395 (MD&A), 948-957 (Note 13)"
+          },
+          "prior_year_comparatives": {
+            "fy2024": {
+              "UCAN": 17359369,
+              "EMEA": 12387035,
+              "LATAM": 4839816,
+              "APAC": 4414746,
+              "total": 39000966
+            },
+            "fy2023": {
+              "UCAN": 14873783,
+              "EMEA": 10556487,
+              "LATAM": 4446461,
+              "APAC": 3763727,
+              "total": 33640458
+            }
+          },
+          "reconciling_items": [],
+          "reconciliation_checks": {
+            "revenue_sums": "19,957,152 + 14,514,646 + 5,357,521 + 5,353,717 = 45,183,036 ✓"
+          },
+          "traps": [
+            "Netflix is a SINGLE-segment filer — the four regions (UCAN/EMEA/LATAM/APAC) are a geographic revenue disaggregation, NOT reportable segments, and carry no operating income.",
+            "There is no per-region operating income to extract; an extractor must not fabricate one.",
+            "Figures are in THOUSANDS — 45,183,036 is $45.18 billion, not $45.18 trillion or $45.2 million.",
+            "APAC (5,353,717) and LATAM (5,357,521) are within 0.1% of each other — easy to transpose.",
+            "The same regional table appears twice (MD&A lines 387-395 with $/% change columns, and Note 13 lines 948-957 without) — the MD&A version risks change-column mis-parsing."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD thousands",
+          "provision_for_income_taxes": 1741351,
+          "effective_tax_rate_percent": 13.7,
+          "statutory_federal_rate_percent": 21.0,
+          "income_before_income_taxes": 12722552,
+          "income_before_income_taxes_source_lines": "720, 1464",
+          "income_before_income_taxes_note": "PRINTED DIRECTLY as 'Income before income taxes | 12,722,552' at lines 720 and 1464 (in thousands). An earlier pass derived 12,722,543 from the statutory line (2,671,734 / 0.21), 9 units low; the printed figure is authoritative. Cross-check: 1,741,351 / 12,722,552 = 13.69% ≈ printed 13.7% ✓.",
+          "reconciliation_presentation": "dollars (thousands) and percent, FY2025 column",
+          "rate_reconciliation_fy2025": [
+            {
+              "line": "Tax at U.S. Statutory Rate",
+              "amount": 2671734,
+              "percent": 21.0
+            },
+            {
+              "line": "State and Local Income Taxes",
+              "amount": 191271,
+              "percent": 1.5
+            },
+            {
+              "line": "Foreign Tax Effects — Brazil: Withholding tax on services",
+              "amount": 238233,
+              "percent": 1.9
+            },
+            {
+              "line": "Foreign Tax Effects — Brazil: Others",
+              "amount": -77189,
+              "percent": -0.6
+            },
+            {
+              "line": "Foreign Tax Effects — Other foreign jurisdictions",
+              "amount": 23290,
+              "percent": 0.2
+            },
+            {
+              "line": "Effect of Cross-Border Tax Laws: Foreign-derived intangible income",
+              "amount": -656828,
+              "percent": -5.2
+            },
+            {
+              "line": "Effect of Cross-Border Tax Laws: Foreign tax credit for withholding taxes",
+              "amount": -292148,
+              "percent": -2.3
+            },
+            {
+              "line": "Effect of Cross-Border Tax Laws: Other",
+              "amount": 32815,
+              "percent": 0.3
+            },
+            {
+              "line": "Tax Credits: Research and development tax credits",
+              "amount": -184709,
+              "percent": -1.5
+            },
+            {
+              "line": "Tax Credits: Other",
+              "amount": -9748,
+              "percent": -0.1
+            },
+            {
+              "line": "Changes in Valuation Allowances",
+              "amount": -8615,
+              "percent": -0.1
+            },
+            {
+              "line": "Nontaxable and Nondeductible items: Share-based payment awards",
+              "amount": -393156,
+              "percent": -3.1
+            },
+            {
+              "line": "Nontaxable and Nondeductible items: Others",
+              "amount": 80904,
+              "percent": 0.6
+            },
+            {
+              "line": "Changes in Unrecognized Tax Benefits",
+              "amount": 130400,
+              "percent": 1.0
+            },
+            {
+              "line": "Other Adjustments",
+              "amount": -4903,
+              "percent": 0.1
+            },
+            {
+              "line": "Effective Tax Rate",
+              "amount": 1741351,
+              "percent": 13.7
+            }
+          ],
+          "rate_reconciliation_source_lines": "1486-1510",
+          "reconciliation_check": "Line items sum exactly to 1,741,351 ✓",
+          "largest_single_driver": "Foreign-derived intangible income deduction, -$656,828K (-5.2 pts).",
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "unit_note": "The narrative sentence rounds to millions; the rollforward table is in thousands.",
+            "gross_utb": 566,
+            "gross_utb_exact_thousands": 566363,
+            "would_favorably_impact_effective_tax_rate_if_recognized": 336,
+            "as_of": "2025-12-31",
+            "prior_year": {
+              "gross_utb": 432,
+              "gross_utb_exact_thousands": 432280,
+              "would_impact_etr": 251,
+              "as_of": "2024-12-31"
+            },
+            "fy2023_ending_balance_thousands": 327105,
+            "classified_in_other_non_current_liabilities": {
+              "value": 409,
+              "unit": "USD millions",
+              "source_line": 527
+            },
+            "verbatim_quote": "As of December 31, 2025 and 2024, the total amount of gross unrecognized tax benefits was $566 million and $432 million, respectively, of which $336 million and $251 million, respectively, if recognized, would favorably impact the Company's effective tax rate.",
+            "source_lines": "1572 (narrative), 1583 (rollforward ending balances)"
+          },
+          "traps": [
+            "The rate reconciliation is in THOUSANDS while the UTB narrative is in MILLIONS, within the same note.",
+            "'Other Adjustments' prints -4,903 (a negative dollar amount) against a POSITIVE 0.1% — an internal sign inconsistency in the filing's own table; the dollars are what tie to the total.",
+            "$566M gross UTB vs $336M ETR-affecting vs $409M classified in other non-current liabilities — three different figures for the same UTB balance.",
+            "'Changes in Unrecognized Tax Benefits' (+130,400) is a rate-reconciliation line, not a UTB balance."
+          ]
+        }
+      }
+    },
+    {
+      "company_id": "schwab",
+      "company_name": "The Charles Schwab Corporation",
+      "pdf_file": "Reports10K/Schwab10k2025.pdf",
+      "cik": "0000316709",
+      "fiscal_year": 2025,
+      "fiscal_year_end": "2025-12-31",
+      "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+      "source": {
+        "accession": "0000316709-26-000009",
+        "filing_date": "2026-02-25",
+        "edgar_entity_name": "SCHWAB CHARLES CORP",
+        "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/316709/000031670926000009/",
+        "local_text": "build/text/Schwab10k2025.txt"
+      },
+      "reporting_unit_warning": "Schwab reports in USD millions. As a financial institution its segment revenue line is 'Total net revenues' (net of interest expense) and its segment profit measure is PRETAX income, not operating income — structurally different from the non-financial filers in this set.",
+      "metrics": {
+        "legal_contingencies": {
+          "accrued_amount": {
+            "value": null,
+            "note": "No aggregate legal accrual figure located in this pass."
+          },
+          "reasonably_possible_loss_in_excess_of_accrual": {
+            "disclosed": true,
+            "quantified": false,
+            "aggregate_amount": null,
+            "structure": "TWO-TIER disclosure",
+            "note": "Schwab uses a two-tier construction: (1) matters WITH a reasonable possibility of material loss are individually described, but Schwab states it is 'unable to provide a reasonable estimate of any potential liability given the stage of proceedings'; (2) for ALL OTHER pending matters it affirmatively concludes it does NOT appear reasonably possible that the outcome would be material. No aggregate dollar figure is given for either tier."
+          },
+          "verbatim_quote": "Schwab believes it has strong defenses in all significant matters currently pending and is contesting liability and any damages claimed. Nevertheless, some of these matters may result in adverse judgments or awards, including penalties, injunctions or other relief, and the Company may also determine to settle a matter because of the uncertainty and risks of litigation. Described below are any matters in which there is a reasonable possibility that a material loss could be incurred or where the matter may otherwise be of significant interest to stockholders. Unless otherwise noted, the Company is unable to provide a reasonable estimate of any potential liability given the stage of proceedings in the matter. With respect to all other pending matters, based on current information and consultation with counsel, it does not appear reasonably possible that the outcome of any such matter would be material to the financial condition, operating results, or cash flows of the Company.",
+          "verbatim_source_line": 2352,
+          "individual_matters": {
+            "extracted": false,
+            "named_matters_present": [
+              "Corrente Antitrust Litigation — CSC sued June 6, 2022 in the U.S. District Court for the Eastern District of Texas on behalf of a putative class of customers who purchased or sold securities through CS&Co or TD Ameritrade, Inc. from October 26, 2020 to the present, alleging the Ameritrade acquisition violated Section 7 of the Clayton Act (line 2353)"
+            ],
+            "note": "Matter existence and caption confirmed from source. No loss amount is asserted — Schwab explicitly states it cannot reasonably estimate potential liability."
+          },
+          "why_hard": "This is the most nuanced legal disclosure in the set: BOTH 'a reasonable possibility that a material loss could be incurred' (affirmative, for described matters) AND 'it does not appear reasonably possible' (negative, for all others) appear in the SAME sentence block. Extracting only one half inverts the meaning. The correct answer is 'reasonably possible material loss disclosed for described matters, not estimable; all other matters concluded not reasonably possible/not material'."
+        },
+        "segment_reporting": {
+          "unit": "USD millions",
+          "reportable_segments": [
+            "Investor Services",
+            "Advisor Services"
+          ],
+          "segment_count": 2,
+          "profit_measure": "Income before taxes on income (PRETAX income)",
+          "profit_measure_note": "Schwab's segment profit measure is PRETAX INCOME, not operating income. There is no segment 'operating income' line.",
+          "revenue": {
+            "Investor Services": 18999,
+            "Advisor Services": 4922,
+            "Total": 23921,
+            "row_label_as_printed": "Total net revenues",
+            "source_line": 867
+          },
+          "revenue_components_fy2025": {
+            "Net interest revenue": {
+              "Investor Services": 9328,
+              "Advisor Services": 2422,
+              "Total": 11750
+            },
+            "Asset management and administration fees": {
+              "Investor Services": 4756,
+              "Advisor Services": 1750,
+              "Total": 6506
+            },
+            "Trading revenue": {
+              "Investor Services": 3525,
+              "Advisor Services": 396,
+              "Total": 3921
+            },
+            "Bank deposit account fees": {
+              "Investor Services": 766,
+              "Advisor Services": 211,
+              "Total": 977
+            },
+            "Other": {
+              "Investor Services": 624,
+              "Advisor Services": 143,
+              "Total": 767
+            },
+            "source_lines": "862-866"
+          },
+          "expenses_excluding_interest": {
+            "Investor Services": 9678,
+            "Advisor Services": 2784,
+            "Total": 12462,
+            "source_line": 878
+          },
+          "segment_pretax_income": {
+            "Investor Services": 9321,
+            "Advisor Services": 2138,
+            "Total": 11459,
+            "row_label_as_printed": "Income before taxes on income",
+            "source_line": 879
+          },
+          "reconciling_items": [],
+          "reconciliation_checks": {
+            "revenue_sums": "18,999 + 4,922 = 23,921 ✓",
+            "expense_sums": "9,678 + 2,784 = 12,462 ✓",
+            "pretax_sums": "9,321 + 2,138 = 11,459 ✓ (no unallocated/corporate reconciling item)",
+            "investor_services_derivation": "18,999 - 9,678 = 9,321 ✓",
+            "advisor_services_derivation": "4,922 - 2,784 = 2,138 ✓",
+            "revenue_component_columns": "IS: 9,328 + 4,756 + 3,525 + 766 + 624 = 18,999 ✓; AS: 2,422 + 1,750 + 396 + 211 + 143 = 4,922 ✓"
+          },
+          "prior_year_comparatives": {
+            "fy2024": {
+              "Investor Services": {
+                "revenue": 15558,
+                "pretax": 6320
+              },
+              "Advisor Services": {
+                "revenue": 4048,
+                "pretax": 1372
+              },
+              "total_revenue": 19606,
+              "total_pretax": 7692
+            },
+            "fy2023": {
+              "Investor Services": {
+                "revenue": 14650,
+                "pretax": 5211
+              },
+              "Advisor Services": {
+                "revenue": 4187,
+                "pretax": 1167
+              },
+              "total_revenue": 18837
+            }
+          },
+          "traps": [
+            "Segment profit is PRETAX INCOME, not operating income — an extractor looking for 'segment operating income' will find nothing and may wrongly report 'not disclosed'. (An earlier automated pass on this project did exactly that, marking Schwab's segment data 'not found'.)",
+            "Revenue is 'Total NET revenues' (net of interest expense) — not comparable to gross revenue of non-financial filers.",
+            "The segment table's column layout is unusual and high-risk: each segment panel leads with a 'Percent Change 2025-2024' column BEFORE the 2025/2024/2023 amount columns, so the first number on each row is a PERCENTAGE, not a dollar amount.",
+            "Segments sum exactly to totals with no unallocated corporate item."
+          ]
+        },
+        "income_taxes": {
+          "unit": "USD millions",
+          "income_before_income_taxes": 11459,
+          "provision_for_income_taxes": 2607,
+          "effective_tax_rate_percent": 22.8,
+          "statutory_federal_rate_percent": 21.0,
+          "income_before_income_taxes_cross_check": "Statutory line 2,406 / 0.21 = 11,457 ≈ 11,459 pretax from the segment table (filing rounding) ✓; 2,607 / 11,459 = 22.75% ≈ printed 22.8% ✓",
+          "reconciliation_presentation": "dollars AND percent, three years (2025, 2024, 2023)",
+          "rate_reconciliation_fy2025": [
+            {
+              "line": "Federal statutory income tax rate",
+              "amount": 2406,
+              "percent": 21.0
+            },
+            {
+              "line": "State income taxes, net of federal tax benefit",
+              "amount": 305,
+              "percent": 2.7
+            },
+            {
+              "line": "Tax credits: Research and development credits",
+              "amount": -30,
+              "percent": -0.3
+            },
+            {
+              "line": "Tax credits: Other",
+              "amount": -86,
+              "percent": -0.8
+            },
+            {
+              "line": "Nontaxable or nondeductible items",
+              "amount": 9,
+              "percent": 0.1
+            },
+            {
+              "line": "Changes in unrecognized tax benefits",
+              "amount": 7,
+              "percent": 0.1
+            },
+            {
+              "line": "Other adjustments",
+              "amount": -4,
+              "percent": 0.0
+            },
+            {
+              "line": "Effective income tax rate",
+              "amount": 2607,
+              "percent": 22.8
+            }
+          ],
+          "rate_reconciliation_source_lines": "2845-2856",
+          "reconciliation_check": "2,406 + 305 - 30 - 86 + 9 + 7 - 4 = 2,607 ✓ (sums exactly)",
+          "prior_year_comparatives": {
+            "fy2024": {
+              "provision": 1750,
+              "effective_tax_rate_percent": 22.8,
+              "statutory_amount": 1615
+            },
+            "fy2023": {
+              "provision": 1311,
+              "effective_tax_rate_percent": 20.6,
+              "statutory_amount": 1339
+            }
+          },
+          "unrecognized_tax_benefits": {
+            "unit": "USD millions",
+            "gross_utb": 458,
+            "would_affect_annual_effective_tax_rate_if_recognized": 386,
+            "as_of": "2025-12-31",
+            "prior_year": {
+              "gross_utb": 373,
+              "would_affect_etr": 314,
+              "as_of": "2024-12-31"
+            },
+            "verbatim_quote": "Unrecognized tax benefits totaled $458 million and $373 million as of December 31, 2025 and 2024, respectively, $386 million and $314 million of which if recognized, would affect the annual effective tax rate.",
+            "source_line": 2870
+          },
+          "traps": [
+            "FY2025 and FY2024 ETRs are BOTH 22.8% — column misalignment produces a coincidentally 'correct-looking' answer, so a right number does not prove the right column was read.",
+            "Schwab's ETR is ABOVE statutory (22.8% vs 21.0%), driven by state income taxes.",
+            "The UTB sentence packs four figures in one line (458 / 373 gross, 386 / 314 if-recognized) — easy to pair the wrong year with the wrong measure.",
+            "'Other adjustments' prints an em-dash for FY2025 percent (rendered here as 0.0) while carrying a -4 dollar amount."
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,143 +1,60 @@
 {
   "company_id": "apple",
   "company_name": "Apple Inc.",
-  "pdf_file": "Reports10K/Apple10k2025.pdf",
-  "cik": "0000320193",
   "fiscal_year": 2025,
   "fiscal_year_end": "2025-09-27",
-  "fiscal_year_note": "NON-CALENDAR fiscal year: 52/53-week year ended September 27, 2025. Prior year ended September 28, 2024. Comparisons against calendar-year peers are not period-aligned.",
-  "source": {
-    "accession": "0000320193-25-000079",
-    "filing_date": "2025-10-31",
-    "edgar_entity_name": "Apple Inc.",
-    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/",
-    "local_text": "build/text/Apple10k2025.txt"
-  },
-  "metrics": {
-    "legal_contingencies": {
-      "accrued_amount": {
-        "value": null,
-        "note": "Apple does not quantify its legal accrual in the contingencies note."
-      },
-      "reasonably_possible_loss_in_excess_of_accrual": {
-        "disclosed": true,
-        "quantified": false,
-        "aggregate_amount": null,
-        "direction": "NEGATIVE assertion",
-        "note": "Apple affirmatively states there was NOT at least a reasonable possibility of a material loss, or a material loss greater than a recorded accrual. The correct extracted answer is 'no reasonably possible material loss asserted' \u2014 not a dollar amount and not 'not disclosed'."
-      },
-      "verbatim_quote": "The Company is subject to various legal proceedings and claims that have arisen in the ordinary course of business and that have not been fully resolved. The outcome of litigation is inherently uncertain. In the opinion of management, there was not at least a reasonable possibility the Company may have incurred a material loss, or a material loss greater than a recorded accrual, concerning loss contingencies for asserted legal and other claims.",
-      "verbatim_source_line": 1068,
-      "individual_matters": {
-        "extracted": false,
-        "note": "The EU State Aid Decision is discussed in the TAX note (see income_taxes), not as a legal loss contingency."
-      },
-      "why_hard": "CONFLATION TRAP: the only occurrences of 'reasonably possible' with a dollar figure in Apple's filing are in the INCOME TAX note ($6 billion possible UTB decrease, line 940), not the legal contingencies note. An extractor keying on 'reasonably possible' + nearest dollar amount will wrongly report $6 billion as a legal loss contingency."
-    },
-    "segment_reporting": {
+  "fiscal_year_note": "Non-calendar fiscal year ending the last Saturday of September.",
+  "source": {"local_text": "build/text/Apple10k2025.txt"},
+  "reporting_unit": "USD millions (tax tables); USD billions (prose)",
+  "fields": {
+    "utb_gross_ending_balance": {
+      "value": 23242,
       "unit": "USD millions",
-      "reportable_segments": ["Americas", "Europe", "Greater China", "Japan", "Rest of Asia Pacific"],
-      "segment_count": 5,
-      "segment_basis": "Geographic",
-      "profit_measure": "Operating income/(loss)",
-      "revenue": {
-        "Americas": 178353,
-        "Europe": 111032,
-        "Greater China": 64377,
-        "Japan": 28703,
-        "Rest of Asia Pacific": 33696,
-        "Corporate": 0,
-        "Total net sales": 416161,
-        "source_lines": "1079-1087"
-      },
-      "operating_income": {
-        "Americas": 72480,
-        "Europe": 47739,
-        "Greater China": 26917,
-        "Japan": 13955,
-        "Rest of Asia Pacific": 14586,
-        "Corporate": -42627,
-        "Total": 133050,
-        "source_line": 1087
-      },
-      "segment_expense_detail_fy2025": {
-        "cost_of_sales": {"Americas": -95699, "Europe": -58617, "Greater China": -35141, "Japan": -13779, "Rest of Asia Pacific": -17724, "Total": -220960},
-        "research_and_development": {"Corporate": -34550, "Total": -34550},
-        "selling_and_marketing": {"Americas": -10174, "Europe": -4676, "Greater China": -2319, "Japan": -969, "Rest of Asia Pacific": -1386, "Total": -19524},
-        "general_and_administrative": {"Corporate": -8077, "Total": -8077}
-      },
-      "reconciling_items": [
-        {
-          "label": "Corporate",
-          "amount": -42627,
-          "note": "Holds all R&D ($34,550) and G&A ($8,077); no revenue is allocated to Corporate. Not a reportable segment."
-        }
-      ],
-      "reconciliation_checks": {
-        "revenue_sums": "178,353 + 111,032 + 64,377 + 28,703 + 33,696 = 416,161 \u2713",
-        "segment_operating_income_subtotal": "72,480 + 47,739 + 26,917 + 13,955 + 14,586 = 175,677",
-        "to_consolidated": "175,677 - 42,627 (Corporate) = 133,050 \u2713",
-        "corporate_composition": "34,550 (R&D) + 8,077 (G&A) = 42,627 \u2713"
-      },
-      "prior_year_comparatives": {
-        "fy2024": {"total_net_sales": 391035, "total_operating_income": 123216, "corporate": -38828},
-        "fy2023": {"total_net_sales": 383285, "total_operating_income": 114301, "corporate": -36587}
-      },
-      "traps": [
-        "Apple's segments are GEOGRAPHIC, not product lines. Extractors often report iPhone/Mac/iPad/Wearables/Services (a product revenue disaggregation) as segments \u2014 those are not reportable segments.",
-        "Segment operating income does NOT sum to consolidated operating income: the $42,627M Corporate column (all R&D + G&A) must be subtracted.",
-        "Corporate has zero revenue but a large negative operating income \u2014 asymmetric across the two builds.",
-        "An MD&A-level geographic net sales table (lines 371-378) prints the same revenue figures interleaved with percent-change columns, which can be mis-parsed as amounts.",
-        "Fiscal year ends September 27, 2025, not December 31."
+      "value_usd": 23242000000,
+      "as_printed": "Ending balances | $ | 23,242 | $ | 22,038 | $ | 19,454 |",
+      "row_label": "Ending balances",
+      "source_line": 938,
+      "column_header": "| 2025 | 2024 | 2023",
+      "column_header_source_line": 931,
+      "column_order": "DESCENDING",
+      "column_index_of_fy": 1,
+      "column_count": 3,
+      "why_hard": "The row label 'Ending balances' is generic and NOT unique in the filing - the identical label appears in the Consolidated Statements of Shareholders' Equity. A search for 'Ending balances' hits the equity statement first (it is ~300 lines earlier).",
+      "decoys": [
+        "L631 'Ending balances | 93,568 | 83,276 | 73,812' is COMMON STOCK AND ADDITIONAL PAID-IN CAPITAL in the Shareholders' Equity statement - same row label, completely different statement. This is the highest-risk decoy of any field in the dataset.",
+        "L638 'Ending balances | (14,264) | (19,154) | (214)' is accumulated deficit; L642 'Ending balances | (5,571) ...' is AOCI.",
+        "22,038 is the FY2024 UTB ending balance (and the FY2025 beginning balance).",
+        "L928 prose gives $23.2 billion (rounded) plus a $10.6 billion if-recognized figure."
       ]
     },
-    "income_taxes": {
+    "dta_valuation_allowance": {
+      "value": -10966,
       "unit": "USD millions",
-      "provision_for_income_taxes": 20719,
-      "effective_tax_rate_percent": 15.6,
-      "statutory_federal_rate_percent": 21.0,
-      "statutory_rate_as_printed": "21 %",
-      "income_before_income_taxes_implied": 132729,
-      "income_before_income_taxes_note": "Implied from the computed-expected-tax line (27,873 / 0.21 = 132,729). The reconciliation table does not print pretax income; the 15.6% ETR on 20,719 implies ~132,814, the small difference being the filing's own rounding.",
-      "reconciliation_presentation": "dollars only (no percent column), three years (2025, 2024, 2023)",
-      "rate_reconciliation_fy2025": [
-        {"line": "Computed expected tax", "amount": 27873},
-        {"line": "Earnings of foreign subsidiaries", "amount": -8120},
-        {"line": "Change in valuation allowance", "amount": 2091},
-        {"line": "Research and development credit, net", "amount": -1049},
-        {"line": "Impact of the State Aid Decision", "amount": -486},
-        {"line": "Other", "amount": 410},
-        {"line": "Provision for income taxes", "amount": 20719}
-      ],
-      "rate_reconciliation_source_lines": "892-901",
-      "reconciliation_check": "27,873 - 8,120 + 2,091 - 1,049 - 486 + 410 = 20,719 \u2713",
-      "prior_year_comparatives": {
-        "fy2024": {"provision": 29749, "effective_tax_rate_percent": 24.1, "state_aid_decision_impact": 10246},
-        "fy2023": {"provision": 16741, "effective_tax_rate_percent": 14.7}
-      },
-      "unrecognized_tax_benefits": {
-        "unit": "USD billions",
-        "gross_utb": 23.2,
-        "would_impact_effective_tax_rate_if_recognized": 10.6,
-        "as_of": "2025-09-27",
-        "prior_year": {"gross_utb": 22.0, "would_impact_etr": 10.8, "as_of": "2024-09-28"},
-        "verbatim_quote": "As of September 27, 2025, the total amount of gross unrecognized tax benefits was $23.2 billion, of which $10.6 billion, if recognized, would impact the Company's effective tax rate. As of September 28, 2024, the total amount of gross unrecognized tax benefits was $22.0 billion, of which $10.8 billion, if recognized, would have impacted the Company's effective tax rate.",
-        "source_line": 928,
-        "reasonably_possible_decrease_next_12_months": {
-          "value": 6,
-          "unit": "USD billions",
-          "as_printed": "could decrease as much as $6 billion in the next 12 months",
-          "verbatim_quote": "Although the timing of resolution or closure of examinations is not certain, the Company believes it is reasonably possible that its gross unrecognized tax benefits could decrease as much as $6 billion in the next 12 months.",
-          "source_line": 940
-        }
-      },
-      "traps": [
-        "The $6 billion 'reasonably possible' figure belongs to the UTB note, NOT legal contingencies \u2014 see legal_contingencies.why_hard.",
-        "The rate reconciliation is in DOLLARS ONLY with no percent column; the 21% statutory rate and 15.6% ETR appear in a different, MD&A-level table (lines 454-458).",
-        "The State Aid Decision swings from +10,246 (FY2024) to -486 (FY2025) \u2014 grabbing the wrong year column produces a wildly wrong reconciliation.",
-        "$23.2B gross UTB vs $10.6B ETR-affecting: reporting the gross figure as ETR-affecting is a ~2.2x error.",
-        "The same $23.2B / $10.6B sentence is repeated in the auditor's critical-audit-matter section (line 1141), so a naive first-match grep may land in the audit report rather than the tax note."
+      "value_usd": -10966000000,
+      "as_printed": "Less: Valuation allowance | (10,966) | (8,866) |",
+      "row_label": "Less: Valuation allowance",
+      "source_line": 915,
+      "column_header": "| 2025 | 2024",
+      "column_header_source_line": 906,
+      "column_order": "DESCENDING",
+      "column_index_of_fy": 1,
+      "column_count": 2,
+      "sign_convention": "negative in parentheses (contra-asset)",
+      "decoys": [
+        "L896 'Change in valuation allowance | 2,091' is a RATE-RECONCILIATION line (the year's movement), not the balance. It is printed ~19 lines BEFORE the real balance row.",
+        "(8,866) is the FY2024 balance."
       ]
+    },
+    "unrecognized_rsu_comp_cost": {
+      "value": 21.8,
+      "unit": "USD billions",
+      "value_usd": 21800000000,
+      "as_printed": "As of September 27, 2025, the total unrecognized compensation cost related to outstanding RSUs was $21.8 billion, which the Company expects to recognize over a weighted-average period of 2.5 years.",
+      "source_line": 1053,
+      "value_printed_token": "$21.8 billion",
+      "scope": "RSU-only",
+      "rsu_only_separable": true,
+      "decoys": ["'2.5 years' in the same sentence."]
     }
   }
 }

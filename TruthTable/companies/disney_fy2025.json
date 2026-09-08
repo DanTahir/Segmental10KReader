@@ -1,170 +1,63 @@
 {
   "company_id": "disney",
   "company_name": "The Walt Disney Company",
-  "pdf_file": "Reports10K/Disney10k2025.pdf",
-  "cik": "0001744489",
   "fiscal_year": 2025,
   "fiscal_year_end": "2025-09-27",
-  "fiscal_year_note": "NON-CALENDAR fiscal year ended September 27, 2025. Prior years ended September 28, 2024 and September 30, 2023.",
-  "source": {
-    "accession": "0001744489-25-000155",
-    "filing_date": "2025-11-13",
-    "edgar_entity_name": "Walt Disney Co",
-    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1744489/000174448925000155/",
-    "local_text": "build/text/Disney10k2025.txt"
-  },
-  "reporting_unit_warning": "Disney reports in USD millions.",
-  "metrics": {
-    "legal_contingencies": {
-      "accrued_amount": {
-        "value": null,
-        "note": "No aggregate legal accrual figure located."
-      },
-      "reasonably_possible_loss_in_excess_of_accrual": {
-        "disclosed": false,
-        "quantified": false,
-        "aggregate_amount": null,
-        "note": "A whole-document case-insensitive grep for 'reasonably possible' in Disney's 10-K returns EXACTLY ONE hit (line 2771), and it is in the INCOME TAX note about unrecognized tax benefits — not in legal contingencies. Disney therefore provides no quantified reasonably-possible legal loss disclosure."
-      },
-      "grep_evidence": "grep -c -i 'reasonably possible' build/text/Disney10k2025.txt = 1 (line 2771, tax note).",
-      "individual_matters": {
-        "extracted": false,
-        "named_matters_present": ["Private securities class action filed May 12, 2023 in the U.S. District Court for the Central District of California against the Company, former CEO Robert Chapek, former CFO Christine M. McCarthy, and former DMED Chairman Kareem Daniel, on behalf of certain purchasers of Company securities (line 3191)"],
-        "note": "Matter existence and caption details confirmed from source text. No loss amount, range, or accrual is asserted for this matter — the concluding materiality sentence of Disney's legal note was NOT located in this pass, so no conclusion language is claimed."
-      },
-      "why_hard": "CONFLATION TRAP, same family as Apple: the sole 'reasonably possible' phrase in the entire filing sits in the tax note attached to a $0.4 billion UTB figure. An extractor keying on the phrase will report $0.4B as a legal loss contingency, which is wrong."
-    },
-    "segment_reporting": {
+  "fiscal_year_note": "Non-calendar fiscal year ending the Saturday closest to September 30.",
+  "source": {"local_text": "build/text/Disney10k2025.txt"},
+  "reporting_unit": "USD millions",
+  "fields": {
+    "utb_gross_ending_balance": {
+      "value": 1133,
       "unit": "USD millions",
-      "reportable_segments": ["Entertainment", "Sports", "Experiences"],
-      "segment_count": 3,
-      "profit_measure": "Segment operating income (loss)",
-      "revenue": {
-        "Entertainment": {"third_parties": 42018, "amounts_eliminated_in_consolidation": 448, "total": 42466},
-        "Sports": {"third_parties": 16251, "amounts_eliminated_in_consolidation": 1421, "total": 17672},
-        "Experiences": {"total": 36156},
-        "Eliminations": -1869,
-        "Total revenues": 94425,
-        "source_lines": "2082-2095"
-      },
-      "operating_income": {
-        "Entertainment": 4674,
-        "Sports": 2882,
-        "Experiences": 9995,
-        "Total segment operating income": 17551,
-        "source_lines": "2096-2100"
-      },
-      "reconciling_items_to_pretax_income": [
-        {"label": "Corporate and unallocated shared expenses", "amount": -1646},
-        {"label": "Equity in the loss of India joint venture", "amount": -202},
-        {"label": "Restructuring and impairment charges", "amount": -819},
-        {"label": "Other expense", "amount": 0},
-        {"label": "Interest expense, net", "amount": -1305},
-        {"label": "TFCF and Hulu acquisition amortization", "amount": -1576},
-        {"label": "Income before income taxes", "amount": 12003}
-      ],
-      "reconciling_items_source_lines": "854-865",
-      "reconciliation_checks": {
-        "revenue_sums": "42,466 + 17,672 + 36,156 + (-1,869) = 94,425 ✓",
-        "entertainment_build": "42,018 + 448 = 42,466 ✓",
-        "sports_build": "16,251 + 1,421 = 17,672 ✓",
-        "eliminations_tie": "448 + 1,421 = 1,869 = the (1,869) Eliminations line ✓",
-        "segment_operating_income_sums": "4,674 + 2,882 + 9,995 = 17,551 ✓",
-        "to_pretax_income": "17,551 - 1,646 - 202 - 819 - 1,305 - 1,576 = 12,003 ✓ (matches income statement line 700)"
-      },
-      "consolidated_income_statement_fy2025": {
-        "Total revenues": 94425,
-        "Income before income taxes": 12003,
-        "Income taxes": 1428,
-        "income_taxes_note": "POSITIVE 1,428 — a net tax BENEFIT, which is why net income (13,431) EXCEEDS pretax income (12,003).",
-        "Net income": 13431,
-        "Net income attributable to noncontrolling interests": -1027,
-        "Net income attributable to Disney": 12404,
-        "source_lines": "684-704"
-      },
-      "traps": [
-        "Segment revenue is presented gross of intersegment eliminations: Entertainment 42,466 and Sports 17,672 INCLUDE 448 and 1,421 of intersegment revenue that is then removed via the (1,869) Eliminations line. Summing the segment totals without the elimination overstates revenue by 1,869.",
-        "Six separate reconciling items sit between segment operating income (17,551) and pretax income (12,003) — omitting any one breaks the tie.",
-        "'Total segment operating income' is NOT consolidated operating income and Disney does not present a consolidated 'operating income' line in the same table.",
-        "Net income exceeds pretax income because income taxes were a net benefit — an extractor assuming tax is always an expense will get the sign wrong.",
-        "Fiscal year ends September 27, 2025."
+      "value_usd": 1133000000,
+      "as_printed": "Balance at the end of the year | $ | 1,133 | $ | 1,952 | $ | 2,517 |",
+      "row_label": "Balance at the end of the year",
+      "source_line": 2766,
+      "column_header": "| 2025 | 2024 | 2023",
+      "column_header_source_line": 2759,
+      "column_order": "DESCENDING",
+      "column_index_of_fy": 1,
+      "column_count": 3,
+      "scope_note": "Table is explicitly 'gross unrecognized tax benefits, EXCLUDING the related accrual for interest and penalties' (L2757).",
+      "decoys": [
+        "1,952 is FY2024 (and the FY2025 beginning balance); the balance FELL sharply in FY2025 (-42%), so a stale prior-year read looks plausible.",
+        "L2767 states $0.8B / $1.4B / $1.8B would reduce income tax expense if recognized - a different measure, net of offsetting benefits.",
+        "L2769 gives accrued interest and penalties of $0.3B / $0.9B / $1.0B - explicitly EXCLUDED from this balance.",
+        "L2771 gives a $0.4 billion reasonably-possible 12-month decrease."
       ]
     },
-    "income_taxes": {
+    "dta_valuation_allowance": {
+      "value": 2931,
       "unit": "USD millions",
-      "income_before_income_taxes": 12003,
-      "income_taxes": -1428,
-      "income_taxes_sign_note": "The income statement prints 'Income taxes 1,428' as a positive number in a costs-and-expenses-style presentation where it represents a net tax BENEFIT of $1,428M. Recorded here as -1428 (benefit) for sign clarity.",
-      "effective_tax_rate_percent": -11.9,
-      "effective_tax_rate_as_printed": "(11.9 %)",
-      "effective_tax_rate_note": "NEGATIVE effective tax rate — Disney recorded a net tax benefit on positive pretax income. Cross-check: 1,428 / 12,003 = 11.9% ✓.",
-      "statutory_federal_rate_percent": 21.0,
-      "reconciliation_presentation": "PERCENT ONLY (no dollar column), three years (2025, 2024, 2023)",
-      "rate_reconciliation_fy2025_percent": [
-        {"line": "Federal income tax rate", "percent": 21.0},
-        {"line": "State taxes, net of federal benefit", "percent": 2.4},
-        {"line": "Change in Hulu income tax classification", "percent": -27.3},
-        {"line": "Non-tax deductible impairments", "percent": 0.9},
-        {"line": "Foreign derived intangible income", "percent": -2.2},
-        {"line": "Income tax audits and reserves", "percent": -8.4},
-        {"line": "Tax rate differential on foreign income", "percent": 3.4},
-        {"line": "U.S. research and development credits", "percent": -0.9},
-        {"line": "Tax impact of equity awards", "percent": -0.3},
-        {"line": "Valuation allowance", "percent": -1.3},
-        {"line": "Other", "percent": 0.8},
-        {"line": "Effective income tax rate", "percent": -11.9}
-      ],
-      "rate_reconciliation_source_lines": "2740-2753",
-      "reconciliation_check": "21.0 + 2.4 - 27.3 + 0.9 - 2.2 - 8.4 + 3.4 - 0.9 - 0.3 - 1.3 + 0.8 = -11.9 ✓ (sums exactly)",
-      "dominant_driver": "Change in Hulu income tax classification, -27.3 percentage points — single-handedly drives the rate negative.",
-      "prior_year_comparatives": {
-        "fy2024": {"effective_tax_rate_percent": 23.7, "income_before_income_taxes": 7569},
-        "fy2023": {"effective_tax_rate_percent": 28.9}
-      },
-      "unrecognized_tax_benefits": {
-        "unit": "USD millions",
-        "gross_rollforward_fy2025": {
-          "beginning_balance": 1952,
-          "increases_for_current_year_tax_positions": 105,
-          "increases_for_prior_year_tax_positions": 116,
-          "decreases_in_prior_year_tax_positions": -164,
-          "settlements_with_taxing_authorities": -256,
-          "lapse_in_statute_of_limitations": -620,
-          "ending_balance": 1133,
-          "prior_year_ending_balances": {"fy2024": 1952, "fy2023": 2517},
-          "source_lines": "2758-2766",
-          "rollforward_check": "1,952 + 105 + 116 - 164 - 256 - 620 = 1,133 ✓"
-        },
-        "would_affect_effective_tax_rate_if_recognized": {
-          "value": 0.8,
-          "unit": "USD billions",
-          "as_of": "2025-09-27",
-          "as_printed": "Balances at September 27, 2025, September 28, 2024 and September 30, 2023 include $0.8 billion, $1.4 [billion] ...",
-          "confidence": "FY2025 figure ($0.8B) read directly from source line 2767; the FY2024/FY2023 comparatives in that same sentence were truncated at the read width and are therefore NOT asserted here.",
-          "source_line": 2767
-        },
-        "reasonably_possible_decrease_next_12_months": {
-          "value": 0.4,
-          "unit": "USD billions",
-          "verbatim_quote": "In the next twelve months, it is reasonably possible that our unrecognized tax benefits could change due to the resolution of open tax matters, which would reduce our unrecognized tax benefits by $0.4 billion.",
-          "source_line": 2771
-        },
-        "accrued_interest_and_penalties": {
-          "fy2025": 0.3,
-          "fy2024": 0.9,
-          "fy2023": 1.0,
-          "unit": "USD billions",
-          "note": "Excluded from the gross UTB rollforward above.",
-          "source_line": 2769
-        }
-      },
-      "traps": [
-        "The effective tax rate is NEGATIVE (11.9)% — an extractor that strips parentheses reports +11.9%, and one that assumes 'tax expense' reports the wrong sign for the $1,428M benefit.",
-        "The rate reconciliation has NO dollar column, only percentages — unlike most peers in this set.",
-        "The $0.4B 'reasonably possible' UTB decrease is the filing's only 'reasonably possible' phrase and is a legal-contingency false-positive magnet.",
-        "UTB rollforward excludes accrued interest and penalties, which are disclosed separately ($0.3B in FY2025).",
-        "Fiscal year ends September 27, 2025."
+      "value_usd": 2931000000,
+      "as_printed": "Valuation allowance | 2,931 | 2,991 |",
+      "row_label": "Valuation allowance",
+      "source_line": 2715,
+      "column_header": "Components of Deferred Tax (Assets) and Liabilities | September 27, 2025 | September 28, 2024",
+      "column_header_source_line": 2699,
+      "column_order": "DESCENDING",
+      "column_index_of_fy": 1,
+      "column_count": 2,
+      "sign_convention": "POSITIVE as printed - Disney's table is titled 'Deferred Tax (ASSETS) and Liabilities', i.e. assets are shown as negatives and the valuation allowance is therefore a POSITIVE addition.",
+      "sign_warning": "Disney is the ONLY filer of the ten printing this figure as a positive number. Nine print it in parentheses. A pipeline that normalizes signs will either flip Disney's or wrongly flip the other nine.",
+      "decoys": [
+        "L2751 'Valuation allowance | (1.3) | (0.6) | (1.8)' is a RATE-RECONCILIATION line in PERCENT (and negative), printed 36 lines after the balance. Same row label, different table, different unit, different sign.",
+        "2,991 is the FY2024 balance.",
+        "L2714 'Net deferred tax (asset) liability before valuation allowance(2) | (136) | 2,631' sits directly above the target row."
       ]
+    },
+    "unrecognized_rsu_comp_cost": {
+      "value": 1845,
+      "unit": "USD millions",
+      "value_usd": 1845000000,
+      "as_printed": "As of September 27, 2025, unrecognized compensation cost related to unvested stock options and RSUs was $79 million and $1,845 million, respectively. That cost is expected to be recognized over a weighted-average period of 1.1 years for stock options and 1.1 years for RSUs.",
+      "source_line": 3120,
+      "value_printed_token": "$1,845 million",
+      "scope": "RSU-only",
+      "rsu_only_separable": true,
+      "why_hard": "Disney uses a 'X and Y, respectively' construction: two award types named in one clause, two dollar amounts in the next. The RSU figure is the SECOND number and is only bound to RSUs by the word 'respectively'. A naive extractor takes $79 million (the first number, and the one closer to the phrase 'unrecognized compensation cost').",
+      "decoys": ["$79 million is the STOCK OPTION figure, printed first.", "'1.1 years' appears twice in the following sentence."]
     }
   }
 }

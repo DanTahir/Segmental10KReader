@@ -1,141 +1,57 @@
 {
   "company_id": "alphabet",
   "company_name": "Alphabet Inc.",
-  "pdf_file": "Reports10K/Alphabet10K2025.pdf",
-  "cik": "0001652044",
   "fiscal_year": 2025,
   "fiscal_year_end": "2025-12-31",
-  "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
-  "source": {
-    "accession": "0001652044-26-000018",
-    "filing_date": "2026-02-05",
-    "edgar_entity_name": "Alphabet Inc.",
-    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/",
-    "local_text": "build/text/Alphabet10K2025.txt"
-  },
-  "metrics": {
-    "legal_contingencies": {
-      "accrued_amount": {
-        "value": 15.6,
-        "unit": "USD billions",
-        "as_printed": "$15.6 billion",
-        "label_as_printed": "short-term accrued legal and regulatory fines and settlements",
-        "as_of": "2025-12-31",
-        "source_line": 884
-      },
-      "composition_note": "Primarily European Commission (EC) fines, in addition to accruals related to other legal matters and regulatory fines and settlements.",
-      "reasonably_possible_loss_in_excess_of_accrual": {
-        "disclosed": false,
-        "quantified": false,
-        "aggregate_amount": null,
-        "note": "No aggregate reasonably-possible-loss-in-excess-of-accrual dollar figure located for Alphabet. The accrued $15.6B is a recorded liability, NOT a reasonably possible loss estimate."
-      },
-      "verbatim_quote": "As of December 31, 2025, we had short-term accrued legal and regulatory fines and settlements of $15.6 billion. This amount primarily included EC fines, in addition to accruals related to other legal matters and regulatory fines and settlements.",
-      "individual_matters": {
-        "extracted": false,
-        "note": "Per-matter amounts (individual EC fine amounts, specific settlements) were not extracted in this pass; only the aggregate accrual is asserted as ground truth."
-      }
-    },
-    "segment_reporting": {
+  "source": {"local_text": "build/text/Alphabet10K2025.txt"},
+  "reporting_unit": "USD millions (tax notes); USD billions (equity-comp prose)",
+  "fields": {
+    "utb_gross_ending_balance": {
+      "value": 11512,
       "unit": "USD millions",
-      "reportable_segments": ["Google Services", "Google Cloud", "Other Bets"],
-      "segment_count": 3,
-      "profit_measure": "Operating income (loss)",
-      "revenue": {
-        "Google Services": 342721,
-        "Google Cloud": 58705,
-        "Other Bets": 1537,
-        "Hedging gains (losses)": -127,
-        "Total revenues": 402836,
-        "source_lines": "664-676"
-      },
-      "revenue_disaggregation_within_google_services": {
-        "Google Search & other": 224532,
-        "YouTube ads": 40367,
-        "Google Network": 29792,
-        "Google advertising (subtotal)": 294691,
-        "Google subscriptions, platforms, and devices": 48030
-      },
-      "operating_income": {
-        "Google Services": 139404,
-        "Google Cloud": 13910,
-        "Other Bets": -7515,
-        "Alphabet-level activities": -16760,
-        "Total income from operations": 129039,
-        "source_lines": "771-779"
-      },
-      "reconciling_items": [
-        {
-          "label": "Alphabet-level activities",
-          "amount": -16760,
-          "note": "Unallocated corporate costs; includes AI-focused shared R&D, corporate initiatives, charges/fines. Presented as a separate line, not a reportable segment."
-        },
-        {
-          "label": "Hedging gains (losses)",
-          "amount": -127,
-          "note": "Appears in the revenue build only, not the operating income build."
-        }
-      ],
-      "reconciliation_checks": {
-        "revenue_sums": "342721 + 58705 + 1537 + (-127) = 402836 ✓",
-        "operating_income_sums": "139404 + 13910 + (-7515) + (-16760) = 129039 ✓"
-      },
-      "traps": [
-        "Hedging gains/losses is a revenue-build line with no operating-income counterpart — easy to double count or mis-map.",
-        "Alphabet-level activities is a negative reconciling item, not a segment; including it in 'segments' inflates segment_count to 4.",
-        "Google Services total (342,721) is a subtotal above finer revenue categories in the same table; grabbing both double counts revenue."
+      "value_usd": 11512000000,
+      "as_printed": "Ending gross unrecognized tax benefits | $ | 9,438 | $ | 12,619 | $ | 11,512 |",
+      "row_label": "Ending gross unrecognized tax benefits",
+      "source_line": 2244,
+      "column_header": "| 2023 | 2024 | 2025",
+      "column_header_source_line": 2238,
+      "column_order": "ASCENDING",
+      "column_index_of_fy": 3,
+      "column_count": 3,
+      "decoys": [
+        "12,619 is the FY2024 ending balance and sits in the MIDDLE column; taking the first or middle number yields a wrong year.",
+        "7,055 (L2239) is the FY2023 beginning balance.",
+        "L2246 prose repeats all three years ALSO ascending ('$9.4 billion, $12.6 billion, and $11.5 billion as of December 31, 2023, 2024, and 2025'), and adds if-recognized figures $7.4B/$10.0B/$9.7B."
       ]
     },
-    "income_taxes": {
+    "dta_valuation_allowance": {
+      "value": -13942,
       "unit": "USD millions",
-      "income_before_income_taxes": 158826,
-      "provision_for_income_taxes": 26656,
-      "effective_tax_rate_percent": 16.8,
-      "statutory_federal_rate_percent": 21.0,
-      "reconciliation_presentation": "dollars and percent, three years (2023, 2024, 2025)",
-      "rate_reconciliation_fy2025": [
-        {"line": "US federal statutory rate", "amount": 33353, "percent": 21.0},
-        {"line": "State and local income taxes, net of federal income tax effect", "amount": 1606, "percent": 1.0},
-        {"line": "Foreign tax effects — Brazil: Withholding taxes", "amount": 1384, "percent": 0.9},
-        {"line": "Foreign tax effects — Brazil: Other", "amount": 23, "percent": 0.0},
-        {"line": "Foreign tax effects — Other foreign jurisdictions", "amount": 396, "percent": 0.2},
-        {"line": "Effect of change in tax laws or rates enacted in the current period", "amount": 0, "percent": 0.0},
-        {"line": "Effect of cross-border tax laws: Foreign-derived intangible income deduction", "amount": -3931, "percent": -2.5},
-        {"line": "Effect of cross-border tax laws: Other", "amount": 295, "percent": 0.2},
-        {"line": "Tax credits: Federal research credit", "amount": -2088, "percent": -1.3},
-        {"line": "Tax credits: Foreign tax credits", "amount": -1684, "percent": -1.1},
-        {"line": "Tax credits: Other", "amount": -98, "percent": -0.1},
-        {"line": "Changes in valuation allowances", "amount": 1170, "percent": 0.7},
-        {"line": "Nontaxable or nondeductible items: Stock-based compensation expense", "amount": -2601, "percent": -1.6},
-        {"line": "Other", "amount": 955, "percent": 0.6},
-        {"line": "Changes in unrecognized tax benefits", "amount": -1123, "percent": -0.7},
-        {"line": "Other adjustments", "amount": -1002, "percent": -0.6},
-        {"line": "Total", "amount": 26656, "percent": 16.8}
-      ],
-      "rate_reconciliation_source_lines": "2157-2181",
-      "reconciliation_check": "Line items sum to 26,655 vs printed total 26,656 (1 unit rounding difference in the filing's own table).",
-      "unrecognized_tax_benefits": {
-        "unit": "USD millions",
-        "gross_rollforward": {
-          "beginning_balance_fy2025": 12619,
-          "ending_balance_fy2025": 11512,
-          "prior_year_ending_balances": {"fy2023": 9438, "fy2024": 12619},
-          "source_lines": "2239-2244"
-        },
-        "gross_utb_by_year_as_printed": "$9.4 billion, $12.6 billion, and $11.5 billion as of December 31, 2023, 2024, and 2025",
-        "long_term_income_taxes_payable": {
-          "value": 9.5,
-          "unit": "USD billions",
-          "as_printed": "$9.5 billion",
-          "note": "Primarily related to unrecognized tax benefits; timing/amount of payment cannot be estimated. This is NOT the 'would affect ETR' figure.",
-          "source_line": 890
-        }
-      },
-      "traps": [
-        "Long-term income taxes payable of $9.5B (line 890) is a balance-sheet classification figure and is frequently mistaken for the 'UTB that would affect the effective tax rate'.",
-        "Reconciliation is presented in BOTH dollars and percent across three year-columns; column mis-alignment silently yields FY2023/FY2024 values.",
-        "'Changes in unrecognized tax benefits' is a rate-reconciliation line and is distinct from the UTB rollforward table."
+      "value_usd": -13942000000,
+      "as_printed": "Valuation allowance | (11,493) | (13,942) |",
+      "row_label": "Valuation allowance",
+      "source_line": 2204,
+      "column_header": "| 2024 | 2025",
+      "column_header_source_line": 2194,
+      "column_order": "ASCENDING",
+      "column_index_of_fy": 2,
+      "column_count": 2,
+      "sign_convention": "negative in parentheses (contra-asset)",
+      "decoys": [
+        "(11,493) is the FY2024 figure and is printed FIRST. This is the single most likely error on this field: Alphabet's DTA table is ascending while most filers are descending.",
+        "Total deferred tax assets 48,026 (L2203) and net-of-allowance 34,084 (L2205) bracket the target row."
       ]
+    },
+    "unrecognized_rsu_comp_cost": {
+      "value": 42.9,
+      "unit": "USD billions",
+      "value_usd": 42900000000,
+      "as_printed": "As of December 31, 2025, there was $42.9 billion of unrecognized compensation cost related to unvested RSUs. This amount is expected to be recognized over a weighted-average period of 2.6 years.",
+      "source_line": 2128,
+      "value_printed_token": "$42.9 billion",
+      "scope": "RSU-only",
+      "rsu_only_separable": true,
+      "decoys": ["2.6 (years) appears in the same sentence and is not a dollar amount."]
     }
   }
 }

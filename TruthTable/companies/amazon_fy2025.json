@@ -1,126 +1,59 @@
 {
   "company_id": "amazon",
   "company_name": "Amazon.com, Inc.",
-  "pdf_file": "Reports10K/Amazon10K2025.pdf",
-  "cik": "0001018724",
   "fiscal_year": 2025,
   "fiscal_year_end": "2025-12-31",
-  "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
-  "source": {
-    "accession": "0001018724-26-000004",
-    "filing_date": "2026-02-06",
-    "edgar_entity_name": "AMAZON COM INC",
-    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
-    "local_text": "build/text/Amazon10K2025.txt"
-  },
-  "metrics": {
-    "legal_contingencies": {
-      "accrued_amount": {
-        "value": null,
-        "note": "Amazon does not disclose a single aggregate legal accrual figure in this filing's contingencies discussion."
-      },
-      "reasonably_possible_loss_in_excess_of_accrual": {
-        "disclosed": true,
-        "quantified": false,
-        "aggregate_amount": null,
-        "note": "Amazon states it discloses reasonably possible losses and that for matters without an estimate it cannot determine an amount or range; no aggregate dollar figure is given."
-      },
-      "verbatim_quote": "The outcomes of our legal proceedings and other contingencies are inherently unpredictable, subject to significant uncertainties, and could be material to our operating results and cash flows for a particular period. We evaluate, on a regular basis, developments in our legal proceedings and other contingencies that could affect the amount of liability, including amounts in excess of any previous accruals and reasonably possible losses disclosed, and make adjustments and changes to our accruals and disclosures as appropriate.",
-      "verbatim_source_line": 1335,
-      "individual_matters": {
-        "extracted": false,
-        "note": "Per-matter amounts were not extracted in this pass; only the qualitative disclosure posture is asserted as ground truth."
-      }
-    },
-    "segment_reporting": {
-      "unit": "USD millions",
-      "reportable_segments": ["North America", "International", "AWS"],
-      "segment_count": 3,
-      "profit_measure": "Operating income (loss)",
-      "revenue": {
-        "North America": 426305,
-        "International": 161894,
-        "AWS": 128725,
-        "Consolidated": 716924,
-        "revenue_label_as_printed": "Net sales",
-        "source_lines": "1549-1572"
-      },
-      "operating_income": {
-        "North America": 29619,
-        "International": 4750,
-        "AWS": 45606,
-        "Consolidated": 79975,
-        "source_lines": "1549-1572"
-      },
-      "reconciling_items": [
-        {"label": "Total non-operating income", "amount": 17336},
-        {"label": "Provision for income taxes", "amount": -19087},
-        {"label": "Equity-method investment activity, net of tax", "amount": -554},
-        {"label": "Net income", "amount": 77670}
-      ],
-      "reconciliation_checks": {
-        "revenue_sums": "426305 + 161894 + 128725 = 716924 ✓",
-        "operating_income_sums": "29619 + 4750 + 45606 = 79975 ✓ (no unallocated corporate line)",
-        "to_net_income": "79975 + 17336 - 19087 - 554 = 77670 ✓"
-      },
-      "traps": [
-        "Amazon's segments sum exactly to consolidated operating income with NO unallocated/corporate reconciling item — an extractor expecting one may invent a zero or mis-assign.",
-        "A separate FX table (lines 609-615) also prints 'Net sales 716,924' and 'Operating income 79,975' with exchange-rate-effect columns; grabbing the 'At Prior Year Rates' column yields 712,515 / 79,617 instead.",
-        "Product/service split (296,266 / 420,658) is a revenue disaggregation, not segment revenue."
+  "source": {"local_text": "build/text/Amazon10K2025.txt"},
+  "reporting_unit": "USD millions (tax tables); USD billions (prose)",
+  "fields": {
+    "utb_gross_ending_balance": {
+      "value": 6.6,
+      "unit": "USD billions",
+      "value_usd": 6600000000,
+      "as_printed": "(1)As of December 31, 2025, we had approximately $6.6 billion of income tax contingencies of which $5.0 billion, if fully recognized, would decrease our effective tax rate.",
+      "row_label": null,
+      "source_line": 1531,
+      "value_printed_token": "$6.6 billion",
+      "column_header": null,
+      "column_order": "N/A (prose, not a table)",
+      "terminology_note": "Amazon NEVER uses the phrase 'unrecognized tax benefits' for this balance. It calls them 'income tax contingencies'.",
+      "no_rollforward_table": true,
+      "why_hard": "Amazon is the only filer of the ten with NO UTB rollforward table at all. The balance exists only in prose, in a footnote to a contractual-obligations table, under non-standard terminology. Keyword search for 'unrecognized tax benefits' + 'ending balance' returns nothing usable.",
+      "decoys": [
+        "$5.0 billion in the same sentence is the if-recognized portion, not the balance.",
+        "L694 (auditor's report, Critical Audit Matters) also states '$6.6 billion for various tax contingencies' - correct number, but sourced from the auditor's report rather than the tax note.",
+        "L1313 mentions the same $6.6 billion as an EXCLUSION from the contractual obligations table."
       ]
     },
-    "income_taxes": {
+    "dta_valuation_allowance": {
+      "value": -5560,
       "unit": "USD millions",
-      "provision_for_income_taxes": 19087,
-      "effective_tax_rate_percent": 19.6,
-      "statutory_federal_rate_percent": 21.0,
-      "income_before_income_taxes_implied": 97309,
-      "income_before_income_taxes_note": "Implied from the statutory line (20,435 / 0.21); the rate reconciliation table itself does not print pretax income.",
-      "reconciliation_presentation": "dollars and percent, three years (2023, 2024, 2025)",
-      "rate_reconciliation_fy2025": [
-        {"line": "Income taxes computed at the federal statutory rate", "amount": 20435, "percent": 21.0},
-        {"line": "Federal tax credits: Research and development tax credits", "amount": -2403, "percent": -2.5},
-        {"line": "Federal tax credits: Foreign tax credits", "amount": -642, "percent": -0.7},
-        {"line": "Federal tax credits: Other credits", "amount": -139, "percent": -0.1},
-        {"line": "Effect of cross-border tax laws: Foreign income deduction", "amount": -522, "percent": -0.5},
-        {"line": "Effect of cross-border tax laws: Other", "amount": -271, "percent": -0.3},
-        {"line": "Nontaxable and nondeductible items: Stock-based compensation", "amount": -2029, "percent": -2.1},
-        {"line": "Nontaxable and nondeductible items: Other", "amount": 372, "percent": 0.4},
-        {"line": "Other", "amount": 486, "percent": 0.5},
-        {"line": "State and local income taxes, net of federal effect", "amount": 2455, "percent": 2.5},
-        {"line": "Foreign tax effects", "amount": 1517, "percent": 1.6},
-        {"line": "Worldwide changes in prior period unrecognized tax benefits", "amount": -172, "percent": -0.2},
-        {"line": "Total", "amount": 19087, "percent": 19.6}
-      ],
-      "rate_reconciliation_source_lines": "1456-1475",
-      "reconciliation_check": "Line items sum exactly to 19,087 ✓",
-      "unrecognized_tax_benefits": {
-        "unit": "USD millions",
-        "terminology_note": "Amazon labels these 'income tax contingencies' rather than 'unrecognized tax benefits'.",
-        "gross_rollforward_fy2025": {
-          "beginning_balance": 6485,
-          "gross_increases_to_tax_positions_in_prior_periods": 310,
-          "gross_decreases_to_tax_positions_in_prior_periods": -1180,
-          "gross_increases_to_current_period_tax_positions": 1292,
-          "settlements_with_tax_authorities": -312,
-          "lapse_of_statute_of_limitations": -29,
-          "ending_balance": 6566,
-          "prior_year_ending_balances": {"fy2023": 5228, "fy2024": 6485},
-          "source_lines": "1519-1527",
-          "rollforward_check": "6485 + 310 - 1180 + 1292 - 312 - 29 = 6566 ✓"
-        },
-        "contractual_obligations_exclusion": {
-          "value": 6.6,
-          "unit": "USD billions",
-          "as_printed": "approximately $6.6 billion of income tax contingencies for which we cannot make a reasonably reliable estimate of the period of settlement",
-          "source_line": 1313
-        }
-      },
-      "traps": [
-        "Amazon's 'income tax contingencies' wording defeats keyword search for 'unrecognized tax benefits'.",
-        "The rollforward ending balance is 6,566 while the narrative rounds to '$6.6 billion' — both are correct but at different precision.",
-        "'Worldwide changes in prior period unrecognized tax benefits' (-172) is a rate-reconciliation line, not a rollforward line."
+      "value_usd": -5560000000,
+      "as_printed": "Less valuation allowances (2) | (4,893) | (5,560) |",
+      "row_label": "Less valuation allowances (2)",
+      "source_line": 1501,
+      "column_header": "| 2024 | 2025",
+      "column_header_source_line": 1489,
+      "column_order": "ASCENDING",
+      "column_index_of_fy": 2,
+      "column_count": 2,
+      "sign_convention": "negative in parentheses (contra-asset)",
+      "decoys": [
+        "(4,893) is FY2024 and is printed FIRST - Amazon's DTA table is ascending.",
+        "Row label is 'Less valuation allowances' (plural, with a footnote marker), not 'Valuation allowance'."
       ]
+    },
+    "unrecognized_rsu_comp_cost": {
+      "value": 16.9,
+      "unit": "USD billions",
+      "value_usd": 16900000000,
+      "as_printed": "As of December 31, 2025, there was $16.9 billion of net unrecognized compensation cost related to unvested stock-based compensation arrangements.",
+      "source_line": 1387,
+      "value_printed_token": "$16.9 billion",
+      "scope": "all stock-based compensation arrangements (NOT RSU-specific)",
+      "rsu_only_separable": false,
+      "scope_note": "Amazon does not break this out by award type, so an RSU-only figure is NOT available. The value is recorded as printed; graders must not expect an RSU-only number here. Amazon also qualifies it as 'net' unrecognized cost.",
+      "decoys": ["'1.0 year' remaining weighted-average recognition period appears in the same sentence."]
     }
   }
 }

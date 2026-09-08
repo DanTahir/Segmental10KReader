@@ -1,0 +1,147 @@
+{
+  "company_id": "meta",
+  "company_name": "Meta Platforms, Inc.",
+  "pdf_file": "Reports10K/Meta10k2025.pdf",
+  "cik": "0001326801",
+  "fiscal_year": 2025,
+  "fiscal_year_end": "2025-12-31",
+  "fiscal_year_note": "Calendar fiscal year. PDF filename year matches actual fiscal year.",
+  "source": {
+    "accession": "0001628280-26-003942",
+    "filing_date": "2026-01-29",
+    "edgar_entity_name": "Meta Platforms, Inc.",
+    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/",
+    "local_text": "build/text/Meta10k2025.txt"
+  },
+  "reporting_unit_warning": "Meta reports in USD millions.",
+  "metrics": {
+    "legal_contingencies": {
+      "accrued_amount": {
+        "value": null,
+        "note": "No aggregate legal accrual DOLLAR figure is disclosed anywhere in the filing. Meta does affirmatively confirm accruals EXIST, but only qualitatively: 'we have accrued significant amounts for loss contingencies related to these inquiries and investigations in Europe' (line 1800). Verified by sweeping the full filing text for accrual/range-of-loss language."
+      },
+      "reasonably_possible_loss_in_excess_of_accrual": {
+        "disclosed": true,
+        "quantified": false,
+        "aggregate_amount": null,
+        "note": "Meta makes a SUBSTANTIVE (not merely policy-level) reasonably-possible disclosure, but never quantifies it. Three distinct layers exist in the filing, which is what makes this record hard: (1) a policy paragraph reciting the ASC 450 vocabulary (line 1434); (2) an outcome-uncertainty paragraph calling estimability 'inherently uncertain' (line 1788); and (3) the real Note 11 assertion at line 1800 that additional accruals could be material individually or in the aggregate. No aggregate dollar figure accompanies any of them.",
+        "verbatim_quote_substantive": "Although we are vigorously defending our regulatory compliance, we have accrued significant amounts for loss contingencies related to these inquiries and investigations in Europe, and we believe there is a reasonable possibility that additional accruals for losses related to these matters could be material individually or in the aggregate.",
+        "verbatim_quote_substantive_source_line": 1800,
+        "materiality_language": "could be material individually or in the aggregate",
+        "boilerplate_trap_note": "A near-identical-sounding sentence appears at line 1100 inside the INDEPENDENT AUDITOR'S REPORT (Critical Audit Matters), not in Note 11: 'When applicable, the Company discloses an estimate of the amount of loss or range of possible loss...'. That is the auditor describing Meta's policy, not a company disclosure, and must not be cited as the reasonably-possible disclosure."
+      },
+      "verbatim_quote_policy": "If we determine that a loss is probable or reasonably possible and the loss or range of loss can be reasonably estimated, we disclose the possible loss in the accompanying notes to the consolidated financial statements to the extent material.",
+      "verbatim_quote_policy_source_line": 1434,
+      "verbatim_quote_uncertainty": "The ultimate outcome of the legal and related matters described in this section, such as whether the likelihood of loss is remote, reasonably possible, or probable, or if and when the reasonably possible range of loss is estimable, is inherently uncertain. Therefore, if one or more of these matters were resolved against us for amounts in excess of management's estimates of loss, our results of operations and financial condition could be materially affected.",
+      "verbatim_quote_uncertainty_source_line": 1788,
+      "individual_matters": {
+        "extracted": false,
+        "named_matter_categories_present": ["Irish Data Protection Commission (IDPC) notifications and GDPR/UK GDPR/ePrivacy inquiries and investigations by European regulators (line 1800)"],
+        "note": "Category existence confirmed from source; no per-matter loss amounts asserted."
+      },
+      "why_hard": "Meta recites the full 'remote / reasonably possible / probable' ASC 450 vocabulary in BOTH a policy paragraph and an outcome-uncertainty paragraph without ever attaching a number. An extractor scoring on keyword presence will believe a quantified disclosure exists."
+    },
+    "segment_reporting": {
+      "unit": "USD millions",
+      "reportable_segments": ["Family of Apps", "Reality Labs"],
+      "segment_count": 2,
+      "profit_measure": "Income (loss) from operations",
+      "revenue": {
+        "Family of Apps": 198759,
+        "Reality Labs": 2207,
+        "Total revenue": 200966,
+        "source_lines": "877-885"
+      },
+      "revenue_disaggregation_within_family_of_apps": {
+        "Advertising": 196175,
+        "Other revenue": 2584,
+        "check": "196,175 + 2,584 = 198,759 ✓"
+      },
+      "costs_and_expenses": {
+        "Family of Apps": 96290,
+        "Reality Labs": 21400,
+        "Total": 117690,
+        "source_line": 729
+      },
+      "operating_income": {
+        "Family of Apps": 102469,
+        "Reality Labs": -19193,
+        "Total income from operations": 83276,
+        "source_lines": "944-950"
+      },
+      "operating_margin_percent": {
+        "Family of Apps": 52,
+        "Reality Labs": -870,
+        "Total": 41,
+        "source_line": 731
+      },
+      "reconciling_items": [],
+      "reconciliation_checks": {
+        "revenue_sums": "198,759 + 2,207 = 200,966 ✓",
+        "operating_income_sums": "102,469 + (-19,193) = 83,276 ✓ (no unallocated corporate item)",
+        "costs_sums": "96,290 + 21,400 = 117,690 ✓",
+        "revenue_less_costs": "200,966 - 117,690 = 83,276 ✓"
+      },
+      "prior_year_comparatives": {
+        "fy2024": {"Family of Apps": {"revenue": 162355, "operating_income": 87109}, "Reality Labs": {"revenue": 2146, "operating_income": -17729}, "total_revenue": 164501, "total_operating_income": 69380},
+        "fy2023": {"Family of Apps": {"revenue": 133006, "operating_income": 62871}, "Reality Labs": {"revenue": 1896, "operating_income": -16120}, "total_revenue": 134902, "total_operating_income": 46751}
+      },
+      "traps": [
+        "Reality Labs operating income is a LARGE NEGATIVE (-19,193) with an operating margin of (870)% — dropping the sign turns an $83.3B consolidated figure into $121.7B.",
+        "Meta's two segments sum exactly to consolidated with NO unallocated corporate reconciling item.",
+        "Advertising (196,175) is a component OF Family of Apps (198,759), not a segment. Reporting 'Advertising' as a segment double-counts against FoA.",
+        "The FY2025 segment table (lines 723-731) is a three-panel layout (FoA | Reality Labs | Total) each with 2025/2024/%-change sub-columns — heavy column-misalignment risk."
+      ]
+    },
+    "income_taxes": {
+      "unit": "USD millions",
+      "provision_for_income_taxes": 25474,
+      "effective_tax_rate_percent": 29.6,
+      "effective_tax_rate_as_printed_in_mdna": 30,
+      "effective_tax_rate_print_note": "The tax-note reconciliation prints the precise ETR of 29.6% (line 1943). A separate MD&A table (line 979) prints a rounded '30 %'. Ground truth is 29.6%; an extractor reporting 30% has taken the MD&A rounding.",
+      "statutory_federal_rate_percent": 21.0,
+      "income_before_income_taxes": 85932,
+      "income_before_income_taxes_source_lines": "850, 1197",
+      "income_before_income_taxes_note": "PRINTED DIRECTLY as 'Income before provision for income taxes | 85,932' at lines 850 and 1197. An earlier pass derived 85,933 from the statutory line (18,046 / 0.21), 1 unit high; the printed figure is authoritative. Cross-check: 25,474 / 85,932 = 29.65% ≈ printed 29.6% ✓.",
+      "reconciliation_presentation": "dollars and percent, FY2025 column",
+      "rate_reconciliation_fy2025": [
+        {"line": "U.S. federal statutory income tax rate", "amount": 18046, "percent": 21.0},
+        {"line": "State and local income taxes, net of federal income tax effect", "amount": -202, "percent": -0.2},
+        {"line": "Foreign tax effects", "amount": 1464, "percent": 1.7},
+        {"line": "Tax credits: Research and development tax credits", "amount": -3912, "percent": -4.6},
+        {"line": "Tax credits: U.S. foreign tax credits", "amount": -1405, "percent": -1.6},
+        {"line": "Valuation allowances", "amount": 11974, "percent": 13.9},
+        {"line": "Changes in unrecognized tax benefits", "amount": 3127, "percent": 3.6},
+        {"line": "Other adjustments: Excess tax benefits from share-based compensation", "amount": -4307, "percent": -5.0},
+        {"line": "Other", "amount": 689, "percent": 0.8},
+        {"line": "Effective tax rate", "amount": 25474, "percent": 29.6}
+      ],
+      "rate_reconciliation_source_lines": "1930-1943",
+      "reconciliation_check": "18,046 - 202 + 1,464 - 3,912 - 1,405 + 11,974 + 3,127 - 4,307 + 689 = 25,474 ✓ (sums exactly)",
+      "dominant_driver": "Valuation allowances, +$11,974M (+13.9 pts) — the reason Meta's ETR is ABOVE the statutory rate, unusual among its peers in this set.",
+      "prior_year_comparatives": {
+        "fy2024": {"provision": 8303, "effective_tax_rate_percent": 12},
+        "fy2023": {"provision": 8330, "effective_tax_rate_percent": 18}
+      },
+      "unrecognized_tax_benefits": {
+        "unit": "USD billions",
+        "gross_utb": 16.45,
+        "tax_benefit_if_realized": 11.25,
+        "tax_benefit_if_realized_note": "Meta phrases this as 'would result in a tax benefit of $11.25 billion within our provision of income taxes', which is the analogue of peers' 'would affect the effective tax rate' figure.",
+        "net_uncertain_tax_positions_on_balance_sheet": 11.23,
+        "net_uncertain_tax_positions_note": "$11.23 billion of NET uncertain tax positions included in long-term income taxes on the consolidated balance sheets — a DIFFERENT figure from both the $16.45B gross UTB and the $11.25B if-realized benefit, despite being numerically close to the latter.",
+        "as_of": "2025-12-31",
+        "predominant_drivers": "Uncertainties with research tax credits and transfer pricing with foreign subsidiaries (licensing of IP, providing services and other transactions).",
+        "verbatim_quote_gross": "If our gross unrecognized tax benefits of $16.45 billion as of December 31, 2025 were realized in a future period, this would result in a tax benefit of $11.25 billion within our provision of income taxes at such time.",
+        "verbatim_quote_net": "As of December 31, 2025, we had net uncertain tax positions of $11.23 billion which was included in long-term income taxes on our consolidated balance sheets.",
+        "source_lines": "988 (net), 2020 (gross/if-realized)"
+      },
+      "traps": [
+        "THREE nearby tax figures are easy to confuse: $16.45B gross UTB, $11.25B tax benefit if realized, and $11.23B net uncertain tax positions on the balance sheet. $11.25B and $11.23B differ by only $0.02B.",
+        "ETR is 29.6% in the tax note but rounded to 30% in MD&A — two different 'correct-looking' answers in one filing.",
+        "Meta's ETR is ABOVE statutory (29.6% vs 21.0%) because of a +13.9 pt valuation allowance, opposite the direction of most peers here.",
+        "'Changes in unrecognized tax benefits' (+3,127) is a rate-reconciliation line, not a UTB balance."
+      ]
+    }
+  }
+}

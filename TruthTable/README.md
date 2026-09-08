@@ -1,188 +1,231 @@
-# Segmental10KReader — Ground Truth Table
+# Ground Truth: Three Hard-to-Locate Scalar Fields Across Ten 10-K Filings
 
-Hand-verified ground truth for **three hard-to-extract 10-K disclosures** across **10 companies**,
-built to grade an AI extraction pipeline against the companies' actual SEC filings.
+A hand-verified answer key for grading an AI 10-K extraction pipeline.
 
-## Contents
+Ten filers x three fields = **30 target values**. Every value is a single number
+**printed directly in the filing**. Nothing here is computed, summed, averaged,
+or otherwise derived by us — if a pipeline returns the number, it either found
+the right line or it didn't.
 
-| Path | What it is |
-|---|---|
-| `companies/*.json` | One hand-verified record per company. **These are the source of truth.** |
-| `truth_table.json` | Machine-generated merge of all 10 records + a cross-company `index`. Do not edit by hand. |
-| `../scripts/build_truth_table.py` | Validates and merges `companies/*.json` → `truth_table.json`. |
+## Why these three fields
 
-Rebuild the combined file after editing any company record:
+The fields were not chosen for convenience. They were selected by probing the
+filings for values that are (a) present in all ten, (b) buried deep in the
+notes rather than on the face of the financial statements, and (c) surrounded by
+**plausible wrong answers**. Each one sits in a different failure mode:
+
+| | Field | Where it hides | Core difficulty |
+|---|---|---|---|
+| **A** | `utb_gross_ending_balance` — gross unrecognized tax benefits, ending balance | last row of the UTB rollforward, deep in the income-tax note | row labels are generic and non-unique; one filer has no table at all |
+| **B** | `dta_valuation_allowance` — deferred tax asset valuation allowance, balance | one row of the deferred-tax-asset table | a *rate-reconciliation* line with a near-identical label appears **earlier** in 7 of 10 filings |
+| **C** | `unrecognized_rsu_comp_cost` — unrecognized/unamortized RSU compensation cost | one prose sentence in the equity-compensation note | prose, not a table; multiple award types per sentence; non-standard wording |
+
+## The answer key
+
+Values exactly as printed. Note the unit column — it changes **within** filings,
+not just between them.
+
+| Company | FY | A: UTB ending | B: valuation allowance | C: unrecog. RSU cost | C scope |
+|---|---|---|---|---|---|
+| Alphabet | 2025 | $11,512 M | $(13,942) M | $42.9 B | RSU-only |
+| Amazon | 2025 | $6.6 B *(prose)* | $(5,560) M | $16.9 B | all SBC |
+| Apple | 2025 | $23,242 M | $(10,966) M | $21.8 B | RSU-only |
+| Block | 2025 | $626,755 K | $(557,063) K | $2.1 B | options + RSA |
+| Coinbase | 2024 | $190,944 K | $(124,202) K | $307.2 M | RSU-only |
+| Disney | 2025 | $1,133 M | **$2,931 M** *(positive)* | $1,845 M | RSU-only |
+| Dropbox | 2024 | $162.7 M | $(122.8) M | $589.5 M | options + RSA + RSU |
+| Meta | 2025 | $16,450 M | $(15,895) M | $54.81 B | RSU-only |
+| Netflix | 2025 | $566,363 K | $(617,575) K | $47 M | RSU + PSU |
+| Schwab | 2025 | $458 M | $(27) M | $328 M | options + RSU |
+
+Two filers are **FY2024**, not FY2025 — see the filename trap below.
+
+## Field C scope: read this before grading
+
+Field C was scoped as **RSU-only where the filer separates it**. Only **5 of 10**
+do. The rest disclose a single combined figure across award types, so no RSU-only
+number exists to extract:
+
+- **Separable (RSU-only recorded):** Alphabet, Apple, Coinbase, Disney, Meta
+- **Not separable (combined figure recorded as printed):** Amazon, Block, Dropbox, Netflix, Schwab
+
+Every record carries `rsu_only_separable` (boolean) and `scope` (free text). We
+did **not** force a split that the filing doesn't make, and we did not drop the
+five non-separable filers. **Grade field C against `scope`**, not against a
+uniform "RSU-only" expectation — otherwise five companies are unfairly scored.
+
+## Decoys and traps
+
+Every decoy below was observed in the actual filing text and is recorded in the
+per-company JSON with its own line citation.
+
+### Wrong-column / wrong-year
+
+- **Alphabet and Amazon print their deferred-tax tables in ASCENDING year order**
+  (`| 2024 | 2025`) while the other eight are descending. Reading "the first
+  number" gives the **prior year**. This trap caught us mid-build: both of these
+  field-B values were initially recorded a year off.
+- Alphabet's field A is also ascending across three columns, so the current year
+  is the **third** number and the FY2024 figure sits in the middle.
+- Every rollforward repeats the prior-year ending balance as the current-year
+  beginning balance, so the wrong answer appears twice and looks corroborated.
+
+### Same row label, different table
+
+- **Apple field A** — the row label `Ending balances` is **not unique**. The
+  identical label appears in the *Consolidated Statements of Shareholders'
+  Equity* about 300 lines earlier (`Ending balances | 93,568 | 83,276 | 73,812`,
+  common stock and APIC). A naive first-match search lands there. The real UTB
+  row is L938.
+- **Coinbase field A** — `Balance, end of period` labels **three** different
+  rollforwards in one filing. One of the decoys is the valuation-allowance
+  rollforward, whose value (124,202) is this same record's **field B**.
+- **Schwab field A** — `Balance at end of period` also labels the
+  allowance-for-credit-losses rollforward ~2,100 lines earlier, whose figures are
+  ~1,500x larger.
+
+### The valuation-allowance rate-reconciliation decoy (field B, 7 of 10 filers)
+
+A line mentioning "valuation allowance" appears in the **effective tax rate
+reconciliation** — the year's *movement* or a *percentage* — and is printed
+**before** the real balance-sheet figure. First keyword hit is wrong:
+
+- Coinbase L2882 `(7,493)` vs. real balance L2940 `(124,202)`
+- Meta L1938 `11,974` (paired with `13.9`, a percent) vs. real L1991 `(15,895)` — the most convincing decoy in the set
+- Block has **three** such lines before the balance row
+- Disney L2751 `(1.3) | (0.6) | (1.8)` — percentages, negative, same label as the positive balance
+- Also present in Apple, Dropbox
+
+### Sign convention
+
+**Disney is the only filer printing field B as a positive number** (`2,931`).
+Its table is titled *Deferred Tax (Assets) and Liabilities* — assets are shown
+negative, so the allowance is a positive addition. The other nine print it in
+parentheses. Any pipeline that normalizes signs globally will get either Disney
+or the other nine wrong.
+
+### Terminology
+
+- **Amazon has no UTB rollforward table at all.** The balance exists only in
+  prose, in a *footnote to a contractual-obligations table*, and Amazon never
+  writes "unrecognized tax benefits" — it says **"income tax contingencies"**.
+- **Dropbox says "unamortized", never "unrecognized"** for field C. Searching
+  the standard phrase returns **zero** hits in that filing.
+- **Meta's field A row label uses a non-breaking hyphen (U+2011)**, so a regex
+  with an ASCII `-` matches nothing.
+- Meta says "share-based expense"; everyone else says "stock-based cost".
+
+### "If-recognized" amounts (field A)
+
+Every filer discloses a *portion that would affect the effective tax rate if
+recognized*, in the same breath as the gross balance. It is always smaller and
+always wrong for this field. **This trap caught us during construction**:
+Coinbase's field A was initially recorded as $136.8 M, which is the if-recognized
+portion — the true gross ending balance is **$190,944 K**.
+
+### Multi-figure sentences (field C)
+
+- **Disney**: `"...stock options and RSUs was $79 million and $1,845 million,
+  respectively"` — the RSU figure is the **second** number, bound only by the word
+  "respectively". The naive pick is $79 M.
+- **Coinbase** prints three near-identical sentences ($25.6 M options,
+  $307.2 M RSUs, $8.5 M restricted stock). The RSU one is **not** first.
+- **Dropbox** has a `$0` decoy 12 lines away: "no unamortized stock-based
+  compensation expense related to the Co-Founder Grant" — the award explicitly
+  *excluded* from the real figure.
+
+### Unit and magnitude traps
+
+- **Units change within a single filing.** Block's tax tables are in thousands
+  while its equity-comp prose is in billions. Same for Coinbase and Netflix.
+  A one-unit-per-filer assumption is off by 1000x on one field.
+- **Netflix field A** appears both as `566,363` (thousands, in the table) and
+  `$566 million` (prose, ~1,050 lines earlier).
+- **Smallest values are real**: Schwab's field B is `$(27) M` — two digits in a
+  table of four-digit rows. Netflix's field C is `$47 M`, ~1/1000th of Meta's.
+  A plausibility filter will reject the correct answer.
+
+### Filename trap
+
+`Coinbase10k2025.pdf` and `Dropbox10k2025.pdf` are the **FY2024** 10-Ks. Trusting
+the filename shifts the target column by a year. The `fiscal_year` in each record
+is derived from the table headers, not the filename.
+
+## Files
+
+```
+TruthTable/
+  companies/<company>_fy<year>.json   10 records, the source of truth
+  truth_table.json                    generated: all 10 + a flat index
+  README.md                           this file
+scripts/
+  dump_field_evidence.py              prints each field's source row WITH its
+                                      table header, so year order is never guessed
+  build_truth_table.py                validates records, merges to truth_table.json
+  audit_truth_table.py                re-verifies all 30 values against filing text
+  test_auditor.py                     mutation-tests the auditor itself
+```
+
+`TruthTableOld/` holds the entire previous (superseded) three-metric deliverable,
+preserved unchanged.
+
+## Verification
+
+Run in this order:
 
 ```bash
-python scripts/build_truth_table.py
+python scripts/build_truth_table.py   # -> Parsed 10/10 files, 0 failures
+python scripts/audit_truth_table.py   # -> PASS: all 237 checks green
+python scripts/test_auditor.py        # -> killed 22/22, survived 0
 ```
 
-## The three metrics
+The auditor does **not** trust the JSON. For all 30 values it re-opens the cited
+filing text and checks: the cited line really contains the recorded text
+(`LINE`); the value is a number on that line (`VALUE`); it sits at the recorded
+column index (`COLUMN`); the header line matches and its year order and target
+year agree with the record (`HEADER`); the value differs from the other
+year-columns so an off-by-one can't pass silently (`DISTINCT`); prose values are
+pinned to an exact printed token like `$1,845 million` (`PROSE`); `value_usd`
+equals value x unit (`UNITS`); and every `L####` decoy citation really contains
+the number it claims (`CITATION`).
 
-1. **`legal_contingencies`** — loss contingency disclosure: amounts accrued, and whether a
-   *reasonably possible* loss in excess of accrual is disclosed and/or quantified.
-2. **`segment_reporting`** — segment revenue and segment profit, plus the reconciliation from
-   segment profit to consolidated pretax income.
-3. **`income_taxes`** — the effective tax rate reconciliation and the unrecognized tax benefit
-   (UTB) balance / rollforward.
+**A green auditor run means nothing unless the auditor can go red**, so
+`test_auditor.py` corrupts records one at a time — each mutation modelled on a
+mistake actually made or nearly made here (Alphabet's ascending-column misread,
+Coinbase's if-recognized swap, Apple's equity-statement row, Disney's sign flip,
+Netflix's unit swap) — and asserts the auditor rejects each with the expected
+check code. It also verifies the unmutated records still pass as a control.
 
-These were chosen because each is narrative-heavy, inconsistently labeled across filers, and
-full of near-miss numbers — exactly where naive extraction fails.
+**Mutation testing found a real hole.** The Disney field-C mutation
+(1845 -> 79, the stock-option figure) initially **survived**: prose fields have no
+column index, so `VALUE` only asked "is 79 *a* number on this line?" — and it is.
+Any figure in a multi-amount sentence would have passed. Fixed by adding the
+`value_printed_token` anchor and the `PROSE` check. This is why the mutation test
+exists.
 
-## Methodology
+### Errors caught during construction
 
-1. **Filing resolution** — each PDF was matched to its real filing via the EDGAR submissions API,
-   confirming CIK, accession number, entity name, and `period_of_report` against the PDF cover page
-   (`scripts/fetch_filings.py` → `build/manifest.json`).
-2. **Text conversion** — official filing HTML → text, with tables flattened to pipe-delimited rows
-   bounded by `<<<TABLE>>>` markers so row labels stay attached to their figures
-   (`scripts/html_to_text.py` → `build/text/*.txt`).
-3. **Manual extraction** — every figure was read off the source text with `scripts/print_table.py`
-   (which prints a table with its column headers intact) or targeted `grep`. Line numbers are
-   recorded in each record so any value can be re-checked at its source.
-4. **Arithmetic verification** — every segment table, reconciliation, and rollforward was summed and
-   tied to an independently-stated total. The check is stored *inline* in each record
-   (`reconciliation_checks`, `reconciliation_check`, `rollforward_check`) as a human-readable string,
-   e.g. Disney's `"17,551 - 1,646 - 202 - 819 - 1,305 - 1,576 = 12,003 ✓"`.
+Recorded honestly, since they show which traps actually bite:
 
-### Verification stance
+| Field | First recorded | Corrected to | Cause |
+|---|---|---|---|
+| Coinbase A | $136.8 M | $190,944 K | grabbed the if-recognized portion |
+| Alphabet B | $(11,493) M | $(13,942) M | read the FY2024 column (ascending table) |
+| Amazon B | $(4,893) M | $(5,560) M | same ascending-column trap |
+| Apple A | L939 | L938 | off-by-one citation (L939 is `<<<END TABLE>>>`) |
 
-An earlier attempt used parallel automated agents to extract these figures. Their output was
-**discarded in full** because it could not be traced to source text, and several values were wrong
-(e.g. Schwab's segment data was reported "not found" because the agent searched for *operating
-income* when Schwab reports segment *pretax income*). Every number in this dataset was re-derived
-from the filing text and cross-checked arithmetically.
+The first three were caught by dumping table **headers** alongside data rows; the
+fourth by the auditor's `LINE` check.
 
-Where something could not be confirmed, it is recorded as `null` / `"extracted": false` with a note
-explaining what is missing, **never guessed**. Examples: Alphabet's per-matter EU fine breakdown,
-Disney's truncated FY2024/FY2023 UTB comparatives.
+## Known limitations
 
-## Record schema
-
-```jsonc
-{
-  "company_id": "disney",
-  "company_name": "The Walt Disney Company",
-  "pdf_file": "Reports10K/Disney10k2025.pdf",
-  "cik": "0001744489",
-  "fiscal_year": 2025,
-  "fiscal_year_end": "2025-09-27",
-  "fiscal_year_note": "...",          // flags filename/fiscal-year mismatches
-  "source": {                          // full provenance back to EDGAR
-    "accession": "...", "filing_date": "...", "edgar_entity_name": "...",
-    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/...",
-    "local_text": "build/text/Disney10k2025.txt"
-  },
-  "reporting_unit_warning": "...",     // millions vs thousands, and any structural caveat
-  "metrics": {
-    "legal_contingencies": { /* accrued_amount, reasonably_possible_loss_*, verbatim_quote, why_hard */ },
-    "segment_reporting":   { /* unit, reportable_segments, profit_measure, revenue, operating_income,
-                                reconciling_items_*, reconciliation_checks, traps */ },
-    "income_taxes":        { /* effective_tax_rate_percent, rate_reconciliation_*,
-                                unrecognized_tax_benefits, reconciliation_check, traps */ }
-  }
-}
-```
-
-Field conventions:
-
-- **`source_line` / `source_lines`** — 1-based line numbers into the record's `local_text` file.
-- **`verbatim_quote`** — exact filing text. Use for string-match grading.
-- **`traps` / `why_hard`** — the specific failure mode an extractor is expected to hit. These are the
-  most useful part of the dataset for diagnosing *why* a pipeline got something wrong.
-- **Signs** — losses and benefits are stored as negative numbers even where the filing prints them in
-  parentheses or in a costs-positive presentation. `*_sign_note` explains any such normalization.
-
-## Cross-company index
-
-Generated into `truth_table.json` as `index`:
-
-| Company | FY | Unit | Segs | ETR % | RP loss disclosed / quantified |
-|---|---|---|---|---|---|
-| alphabet | 2025 | millions | 3 | 16.8 | no / no |
-| amazon | 2025 | millions | 3 | 19.6 | yes / no |
-| apple | 2025 | millions | 5 | 15.6 | yes / no |
-| block | 2025 | **thousands** | 2 | 22.8 | yes / no |
-| coinbase | **2024** | **thousands** | 1 | 12.36 | yes / no |
-| disney | 2025 | millions | 3 | **−11.9** | no / no |
-| dropbox | **2024** | millions | 1 | 11.3 | no / no |
-| meta | 2025 | millions | 2 | 29.6 | yes / no |
-| netflix | 2025 | **thousands** | 1 | 13.7 | no / no |
-| schwab | 2025 | millions | 2 | 22.8 | yes / no |
-
-**No company in this set quantifies an aggregate reasonably-possible legal loss in excess of
-accrual.** A pipeline that returns a dollar figure for that field is wrong for all 10 — most often
-because it grabbed a *tax* figure (see Apple/Disney below).
-
-## Known traps
-
-**Fiscal year / identity**
-
-- `Coinbase10k2025.pdf` and `Dropbox10k2025.pdf` are actually **FY2024** filings despite the "2025"
-  filename. Records are named `coinbase_fy2024.json` / `dropbox_fy2024.json`.
-- Apple and Disney have **non-calendar** fiscal years, both ending **September 27, 2025**.
-
-**Units**
-
-- Block, Coinbase, and Netflix report in **thousands**; the other seven in **millions**.
-- Netflix mixes units *within a single note*: rate reconciliation in thousands, UTB narrative in
-  millions.
-
-**Legal contingencies**
-
-- **Apple / Disney — the conflation trap.** Each filing's only `"reasonably possible"` occurrences are
-  in the **tax** note (Apple: UTB could decrease "as much as $6 billion"; Disney: $0.4 billion). Both
-  are UTB figures, *not* legal contingencies. Disney's whole-document count for the phrase is exactly 1.
-- **Netflix — the inverse trap.** The phrase `"reasonably possible"` appears **zero** times. The real
-  disclosure is an affirmative immateriality statement. A nearby WBD merger agreement is a distractor.
-- **Apple** states a **negative** assertion (no reasonable possibility of material loss) — the opposite
-  meaning to a positive disclosure using nearly identical vocabulary.
-- **Schwab — two-tier, self-contradicting-looking.** One sentence block contains *both* "a reasonable
-  possibility that a material loss could be incurred" (for described matters) *and* "it does not appear
-  reasonably possible" (for all others). Extracting half of it inverts the meaning.
-- **Alphabet** is the only filer with a large stated legal accrual (**$15.6B**).
-
-**Segments**
-
-- **Block's** segment profit measure is **gross profit**, not operating income.
-- **Schwab's** is **pretax income**, and its revenue line is **net** revenues (net of interest expense).
-  Its segment table also puts a *percent-change* column **before** the dollar columns.
-- **Coinbase — phrasing trap.** Conveys single-segment status as the CODM reviewing the company
-  **"as a whole"**, never *self-asserting* "one operating segment" / "single reportable segment".
-  The literal phrase `single reportable segments` does occur once, but only inside the **ASU 2023-07
-  boilerplate** describing the standard's scope — so keyword search either finds nothing or cites the
-  accounting-pronouncement sentence as the company's assertion. (Contrast Netflix, which says it
-  plainly.) In PDF text the real sentence also **wraps across lines**, defeating single-line regexes.
-- **Netflix** is single-segment: UCAN/EMEA/LATAM/APAC are a **geographic revenue disaggregation** with
-  no operating income. Do not treat them as segments. LATAM and APAC differ by <0.1% — easy to transpose.
-- **Meta** — "Advertising" ($196,175M) is a **component of** Family of Apps ($198,759M), not a segment.
-  Reality Labs operating income is **−$19,193M**; dropping the sign turns $83.3B into $121.7B.
-- **Disney** presents segment revenue **gross** of intersegment eliminations, then removes $1,869M —
-  summing segment totals without it overstates revenue. Six reconciling items sit between segment
-  operating income and pretax income.
-
-**Income taxes**
-
-- **Disney's ETR is negative (−11.9%)** — a $1,428M net tax *benefit* on positive pretax income, so net
-  income *exceeds* pretax income. Its reconciliation has **no dollar column**, only percentages.
-- **Block's** statutory-rate line literally prints **21.2%** (the true U.S. statutory rate is 21.0%).
-- **Dropbox** uses negative-in-parens = *expense*: `$(57.5)M` is a provision, not a benefit. Its ETR
-  (11.3%) is **never printed** and must be computed.
-- **Coinbase's** real ETR is **12.36%**, with percentages printed to two decimals.
-- **Meta's** MD&A rounds the ETR to **30%** while the tax note prints **29.6%** — two "correct-looking"
-  answers in one filing. The table value is authoritative here.
-- **Schwab's** FY2025 and FY2024 ETRs are **both 22.8%**, so a right answer does not prove the right
-  column was read.
-- **Amazon** calls its UTBs **"income tax contingencies"**, not "unrecognized tax benefits".
-- `"Changes in unrecognized tax benefits"` is a **rate-reconciliation line**, not a UTB balance —
-  distinct from the gross UTB, the if-recognized amount, and any balance-sheet classification. Meta has
-  three near-identical UTB figures: $16.45B gross, $11.25B if realized, $11.23B net on balance sheet.
-
-## Grading notes
-
-- Compare against `companies/*.json` (or `truth_table.json` → `companies[]`); `index` is a convenience
-  summary only.
-- Treat `null` / `"extracted": false` as **"not gradeable"**, not as "the answer is zero/absent".
-- For unit errors, check `reporting_unit_warning` before scoring a magnitude mismatch — a 1000× miss is
-  usually a thousands/millions bug, worth distinguishing from a misread figure.
-- `traps` entries make good targeted regression tests: each names a concrete, reproducible failure mode.
+- **Line citations point into `build/text/*.txt`**, the flattened EDGAR HTML, not
+  PDF pages. Re-running the text extraction could shift line numbers; the
+  auditor's `LINE` check will flag it immediately if so.
+- Two filings are FY2024 while eight are FY2025 — fiscal years are **not**
+  uniform across the set by design, since the source PDFs aren't.
+- The auditor verifies that a value is *the printed number at the cited
+  location*. It cannot verify that the cited location is *the right concept* —
+  that judgment is human, which is what the `why_hard`, `scope`, and `decoys`
+  notes document. A mutation that changes both the value and its prose anchor
+  consistently would survive; catching that requires reading the filing.

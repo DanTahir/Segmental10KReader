@@ -1,113 +1,63 @@
 {
   "company_id": "dropbox",
   "company_name": "Dropbox, Inc.",
-  "pdf_file": "Reports10K/Dropbox10k2025.pdf",
-  "cik": "0001467623",
   "fiscal_year": 2024,
   "fiscal_year_end": "2024-12-31",
-  "fiscal_year_note": "FILENAME MISMATCH — CRITICAL: the PDF is named 'Dropbox10k2025.pdf' but the filing covers FISCAL YEAR 2024 (ended December 31, 2024), filed February 2025. All ground-truth values here are FY2024.",
-  "source": {
-    "accession": "0001467623-25-000011",
-    "filing_date": "2025-02-21",
-    "edgar_entity_name": "DROPBOX, INC.",
-    "period_of_report": "2024-12-31",
-    "edgar_filing_dir": "https://www.sec.gov/Archives/edgar/data/1467623/000146762325000011/",
-    "local_text": "build/text/Dropbox10k2025.txt"
-  },
-  "reporting_unit_warning": "Dropbox reports in MILLIONS with ONE DECIMAL PLACE (e.g. 2,548.2). Truncating the decimal loses precision that the filing actually provides.",
-  "metrics": {
-    "legal_contingencies": {
-      "accrued_amount": {
-        "value": null,
-        "note": "No aggregate legal accrual figure disclosed."
-      },
-      "reasonably_possible_loss_in_excess_of_accrual": {
-        "disclosed": false,
-        "quantified": false,
-        "aggregate_amount": null,
-        "note": "Dropbox provides its accrual policy (record a liability when probable and estimable) for ordinary-course claims. No 'reasonably possible' loss quantification was located."
-      },
-      "verbatim_quote": "From time-to-time, the Company is a party to a variety of claims, lawsuits, investigations, inquiries, and proceedings which arise in the ordinary course of business, including claims of alleged infringement of intellectual property rights, regulatory matters, and commercial disputes. The Company records a liability when it believes that it is probable that a loss will be incurred and the amount of loss or range of loss can be reasonably estimated.",
-      "verbatim_source_line": 2021,
-      "individual_matters": {
-        "extracted": false,
-        "note": "No individually quantified legal matters extracted."
-      }
-    },
-    "segment_reporting": {
+  "fiscal_year_note": "FILENAME TRAP: the source PDF is named '...2025' but this is the FY2024 10-K (latest column is 2024).",
+  "source": {"local_text": "build/text/Dropbox10k2025.txt"},
+  "reporting_unit": "USD millions",
+  "fields": {
+    "utb_gross_ending_balance": {
+      "value": 162.7,
       "unit": "USD millions",
-      "reportable_segments": ["Single reportable segment (consolidated)"],
-      "segment_count": 1,
-      "segment_basis": "Single operating and reportable segment; geographic revenue disaggregation only",
-      "segment_statement_verbatim": "The Company's chief operating decision-maker (“CODM”), the Chief Executive Officer, manages the Company's business activities as a single operating and reportable segment at the consolidated level.",
-      "segment_statement_source_lines": "1424, 2248",
-      "profit_measure": "Consolidated net income (CODM uses consolidated measures); no per-segment profit measure exists",
-      "revenue_by_geography_fy2024": {
-        "United States": 1448.5,
-        "International": 1099.7,
-        "Total revenue": 2548.2,
-        "source_lines": "2270-2276"
-      },
-      "prior_year_comparatives": {
-        "fy2023": {"United States": 1419.4, "International": 1082.2, "Total revenue": 2501.6},
-        "fy2022": {"United States": 1264.2, "International": 1060.7, "Total revenue": 2324.9}
-      },
-      "reconciling_items": [],
-      "reconciliation_checks": {
-        "revenue_sums": "1,448.5 + 1,099.7 = 2,548.2 ✓"
-      },
-      "geographic_note": "No single country outside the United States accounted for more than 10% of total revenue.",
-      "traps": [
-        "There is NO segment operating income to extract — a single-segment filer. An extractor must report 'single reportable segment', not fabricate segment profit lines.",
-        "The US/International split is a GEOGRAPHIC disaggregation, not segment reporting.",
-        "A separate long-lived-assets-by-geography table (line 2258: United States $353.1) uses the same 'United States' row label and can be mistaken for revenue.",
-        "Amounts carry one decimal place in millions.",
-        "FY2024 filing despite the '2025' filename."
+      "value_usd": 162700000,
+      "as_printed": "Balance of gross unrecognized tax benefits at the end of the fiscal year | $ | 162.7 | $ | 149.8 | $ | 127.2 |",
+      "row_label": "Balance of gross unrecognized tax benefits at the end of the fiscal year",
+      "source_line": 2234,
+      "column_header": "| 2024 | 2023 | 2022",
+      "column_header_source_line": 2227,
+      "column_order": "DESCENDING",
+      "column_index_of_fy": 1,
+      "column_count": 3,
+      "decoys": [
+        "149.8 is FY2023 (and the FY2024 beginning balance).",
+        "L2223 prose gives the same $162.7M but immediately splits it into $114.6M if-recognized and $48.1M valuation-allowance-offset - three numbers in one sentence, only the first being the balance.",
+        "L2220 gives research credit carryforwards of $192.9M / $180.0M and their UTB portions $102.9M / $49.7M - the phrase 'unrecognized tax benefit' appears here too, attached to entirely different figures.",
+        "L2187 'Changes in Unrecognized Tax Benefits | 7.3 | (1.9) | (5.8)' is a rate-reconciliation line."
       ]
     },
-    "income_taxes": {
+    "dta_valuation_allowance": {
+      "value": -122.8,
       "unit": "USD millions",
-      "income_before_income_taxes": 509.8,
-      "provision_for_income_taxes": 57.5,
-      "provision_sign_convention": "The reconciliation table uses NEGATIVE-IN-PARENTHESES = TAX EXPENSE. The FY2024 bottom line prints as $(57.5) on a row labeled '(Provision for) benefit from income taxes', which is a PROVISION (expense) of $57.5 million — NOT a tax benefit.",
-      "effective_tax_rate_percent": 11.3,
-      "effective_tax_rate_note": "COMPUTED, not printed. Dropbox's reconciliation table shows DOLLARS ONLY with no percent column and no effective-tax-rate line. 57.5 / 509.8 = 11.28%. Cross-check against the statutory line: 107.1 / 0.21 = 510.0 ≈ 509.8 pretax ✓.",
-      "statutory_federal_rate_percent": 21.0,
-      "reconciliation_presentation": "dollars only (no percent column, no ETR line), three years (2024, 2023, 2022)",
-      "rate_reconciliation_fy2024": [
-        {"line": "Provision for income taxes at federal statutory rate", "amount": -107.1, "meaning": "expense of 107.1"},
-        {"line": "State taxes, net of federal benefit", "amount": -10.5, "meaning": "expense of 10.5"},
-        {"line": "Foreign rate differential", "amount": 2.3, "meaning": "benefit of 2.3"},
-        {"line": "Research and other credits", "amount": 53.2, "meaning": "benefit of 53.2"},
-        {"line": "Non-deductible compensation", "amount": -4.7, "meaning": "expense of 4.7"},
-        {"line": "Permanent differences", "amount": -1.4, "meaning": "expense of 1.4"},
-        {"line": "Change in valuation allowance", "amount": -5.4, "meaning": "expense of 5.4"},
-        {"line": "Stock-based compensation", "amount": 8.8, "meaning": "benefit of 8.8"},
-        {"line": "Changes in Unrecognized Tax Benefits", "amount": 7.3, "meaning": "benefit of 7.3"},
-        {"line": "(Provision for) benefit from income taxes", "amount": -57.5, "meaning": "net PROVISION (expense) of 57.5"}
-      ],
-      "rate_reconciliation_source_lines": "2176-2188",
-      "reconciliation_check": "-107.1 - 10.5 + 2.3 + 53.2 - 4.7 - 1.4 - 5.4 + 8.8 + 7.3 = -57.5 ✓ (sums exactly)",
-      "prior_year_comparatives": {
-        "fy2023": {"provision": 100.8, "as_printed": "(100.8)", "income_before_income_taxes": 554.4},
-        "fy2022": {"benefit": 360.5, "as_printed": "360.5", "note": "FY2022 was a genuine net BENEFIT of $360.5M, driven by a $409.9M valuation-allowance release — the sign genuinely flips between years.", "income_before_income_taxes": 192.7}
-      },
-      "unrecognized_tax_benefits": {
-        "unit": "USD millions",
-        "gross_utb": 162.7,
-        "would_affect_effective_tax_rate_if_recognized": 114.6,
-        "would_adjust_deferred_tax_assets_with_valuation_allowance_offset": 48.1,
-        "as_of": "2024-12-31",
-        "prior_year_ending_balances": {"fy2023": 149.8, "fy2022": 127.2},
-        "verbatim_quote": "As of December 31, 2024, the balance of unrecognized tax benefits was $162.7 million of which $114.6 million, if recognized, would affect the effective tax rate and $48.1 million would result in adjustment to deferred tax assets with corresponding adjustments to the valuation allowance.",
-        "source_lines": "2223 (narrative), 2234 (rollforward ending balance)",
-        "check": "114.6 + 48.1 = 162.7 ✓"
-      },
-      "traps": [
-        "SIGN TRAP (highest risk in this filing): $(57.5) is a tax EXPENSE, not a benefit. The row label '(Provision for) benefit from income taxes' invites the wrong reading, and FY2022's +360.5 really is a benefit, so the sign is not constant across columns.",
-        "No effective tax rate is printed anywhere in the reconciliation — it must be computed as 57.5 / 509.8 = 11.3%. Reporting 'not disclosed' is defensible only if the derivation is not attempted; reporting 21.0% (statutory) as the ETR is wrong.",
-        "$162.7M gross UTB vs $114.6M ETR-affecting — the $48.1M difference is valuation-allowance offset.",
-        "FY2024 data despite the '2025' filename."
+      "value_usd": -122800000,
+      "as_printed": "Valuation allowance | (122.8) | (116.3) |",
+      "row_label": "Valuation allowance",
+      "source_line": 2204,
+      "column_header": "| 2024 | 2023",
+      "column_header_source_line": 2193,
+      "column_order": "DESCENDING",
+      "column_index_of_fy": 1,
+      "column_count": 2,
+      "sign_convention": "negative in parentheses (contra-asset)",
+      "decoys": [
+        "L2185 'Change in valuation allowance | (5.4) | (2.4) | 409.9' is a rate-reconciliation line 19 lines earlier, and its FY2022 column (409.9) is far larger than the actual balance.",
+        "(116.3) is the FY2023 balance."
+      ]
+    },
+    "unrecognized_rsu_comp_cost": {
+      "value": 589.5,
+      "unit": "USD millions",
+      "value_usd": 589500000,
+      "as_printed": "As of December 31, 2024, unamortized stock-based compensation related to unvested stock options, restricted stock awards (excluding the Co-Founder Grant), and RSUs was $589.5 million.",
+      "source_line": 2085,
+      "value_printed_token": "$589.5 million",
+      "scope": "stock options + restricted stock awards + RSUs, combined; EXCLUDES the Co-Founder Grant",
+      "rsu_only_separable": false,
+      "terminology_note": "Dropbox says 'UNAMORTIZED', never 'unrecognized', for this figure. Searching the standard phrase 'unrecognized stock-based compensation' returns ZERO hits in this filing.",
+      "why_hard": "Non-standard terminology plus an explicit parenthetical exclusion inside the label, plus a $0 decoy 12 lines later.",
+      "decoys": [
+        "L2097 'As of December 31, 2024, there was no unamortized stock-based compensation expense related to the Co-Founder Grant' - a ZERO for the specifically-excluded award, phrased almost identically.",
+        "L2097 also contains $2.4M and $9.4M of RECOGNIZED (not unrecognized) Co-Founder Grant expense."
       ]
     }
   }

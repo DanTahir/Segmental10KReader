@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { formatValue } from "@/lib/compare";
 import ValueChart from "./ValueChart";
+import EvidenceThumb from "./EvidenceThumb";
 import {
   FIELD_IDS,
   FIELD_LABELS,
@@ -264,6 +265,7 @@ export default function Dashboard() {
                         <th>Extracted</th>
                         <th>Expected</th>
                         <th>Verdict</th>
+                        <th>Page image</th>
                         <th>PDF citation</th>
                         <th>How it was found</th>
                       </tr>
@@ -289,7 +291,7 @@ function FieldRows({ rows }: { rows: Comparison[] }) {
   return (
     <>
       <tr className="co-head">
-        <td colSpan={6}>
+        <td colSpan={7}>
           {head.companyName}
           <span className="fy">FY{head.fiscalYear}</span>
           <span className="pdf">{head.pdfFile}</span>
@@ -316,6 +318,12 @@ function FieldRows({ rows }: { rows: Comparison[] }) {
           </td>
           <td>
             <span className={`pill ${r.verdict}`}>{r.verdict}</span>
+          </td>
+          <td>
+            <EvidenceThumb
+              ev={r.extracted.evidence}
+              label={`${r.companyName} — ${FIELD_LABELS[r.fieldId as FieldId]}`}
+            />
           </td>
           <td className="cite">
             {r.extracted.page !== null ? (

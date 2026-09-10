@@ -23,6 +23,39 @@ export const FIELD_SHORT: Record<FieldId, string> = {
 
 export type Unit = "USD thousands" | "USD millions" | "USD billions";
 
+/** A box on a rendered page, as fractions of page width/height (0..1). */
+export interface EvidenceRect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/**
+ * A rendered image of the page a value was read from, plus where on it the
+ * figure sits.
+ *
+ * Rects are fractions rather than pixels so one record drives both the
+ * thumbnail and the full-size view. `value`/`row`/`matchedText` are null when
+ * the page rendered but the figure could not be tied to a specific word --
+ * the image is still worth showing, so that is a partial result, not a failure.
+ */
+export interface Evidence {
+  /** Filename under data/evidence, served via /api/evidence. */
+  image: string;
+  page: number;
+  widthPx: number;
+  heightPx: number;
+  /** Tight box around the figure itself. */
+  value: EvidenceRect | null;
+  /** Looser box around the whole line/row it was read from. */
+  row: EvidenceRect | null;
+  /** The word text that was matched, for display. */
+  matchedText: string | null;
+  /** How trustworthy the value->word join is. */
+  confidence: "high" | "medium" | "low" | "none";
+}
+
 /** What the extractor found in a PDF, with its own citation. */
 export interface Extracted {
   value: number | null;
@@ -37,6 +70,14 @@ export interface Extracted {
   /** Which heuristic produced this. */
   method: string;
   error?: string;
+  /**
+   * Rendered page image and highlight boxes.
+   *
+   * Optional on purpose: runs recorded before this existed have no such field,
+   * and machines without poppler cannot produce one. Readers must treat
+   * absent, null and present-but-unlocated as three normal cases.
+   */
+  evidence?: Evidence | null;
 }
 
 /** The sanitized answer key entry. */

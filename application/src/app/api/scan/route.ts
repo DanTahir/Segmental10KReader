@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { loadAnswerKey, pdfPathFor } from "@/lib/truth";
 import { EXTRACTOR_VERSION, extractAll } from "@/lib/extract";
+import { attachEvidence } from "@/lib/evidence";
 import { compareOne } from "@/lib/compare";
 import { nextRunId, saveRun, summarize } from "@/lib/runs";
 import { FIELD_IDS, type Comparison, type RunRecord } from "@/lib/types";
@@ -20,6 +21,9 @@ export async function POST() {
     for (const company of key.companies) {
       const pdfPath = pdfPathFor(company.pdf_file);
       const found = extractAll(pdfPath);
+      // After extraction, never during it: evidence is a rendering of what the
+      // extractor already decided, and must not be able to influence it.
+      attachEvidence(pdfPath, found);
       for (const fieldId of FIELD_IDS) {
         results.push(
           compareOne(

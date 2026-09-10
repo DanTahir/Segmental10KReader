@@ -246,6 +246,91 @@ table.results tr.co-head .pdf {
   .cverdict { display: none; }
 }
 
+/* --------------------------------------------------------------- evidence */
+.ev-none { color: var(--muted); }
+
+/* A fixed viewport onto a larger, absolutely-positioned page image: the crop
+   is what makes a table row legible at thumbnail size. */
+.ev-thumb {
+  position: relative; display: block; padding: 0;
+  width: 150px; height: 84px; overflow: hidden;
+  cursor: zoom-in; font: inherit;
+  background: #0d1420;
+  border: 1px solid var(--border); border-radius: 8px;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+.ev-thumb:hover { border-color: var(--accent); transform: translateY(-1px); }
+.ev-page { position: absolute; display: block; }
+.ev-page img { display: block; width: 100%; height: 100%; }
+
+/* Highlights are positioned in % so the same rects work at any render size. */
+.ev-hl { position: absolute; border-radius: 2px; pointer-events: none; }
+.ev-hl.row {
+  background: rgba(91,140,255,0.16);
+  border: 1px solid rgba(91,140,255,0.55);
+}
+.ev-hl.val {
+  background: rgba(255,200,87,0.28);
+  border: 1.5px solid var(--warn);
+  box-shadow: 0 0 0 2px rgba(255,200,87,0.18);
+}
+.ev-badge {
+  position: absolute; right: 3px; bottom: 3px;
+  padding: 0 4px; border-radius: 4px;
+  background: rgba(11,15,23,0.85); border: 1px solid var(--border);
+  color: var(--muted); font-size: 9.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.ev-modal {
+  position: fixed; inset: 0; z-index: 50; padding: 24px;
+  background: rgba(4,7,12,0.82);
+  display: flex; align-items: center; justify-content: center;
+}
+.ev-modal-inner {
+  display: flex; flex-direction: column;
+  max-width: 96vw; max-height: 94vh; overflow: auto;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+}
+.ev-modal-head {
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.ev-title { font-weight: 650; font-size: 13px; }
+.ev-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ev-meta .loc {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #a9c2ff;
+  background: rgba(91,140,255,0.10); border: 1px solid rgba(91,140,255,0.22);
+  padding: 1px 7px; border-radius: 6px; font-size: 11px;
+}
+.ev-conf {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 2px 8px; border-radius: 999px; font-weight: 650;
+}
+.ev-conf.high { background: rgba(61,220,151,0.14); color: var(--ok); border: 1px solid rgba(61,220,151,0.32); }
+.ev-conf.medium { background: rgba(255,200,87,0.13); color: var(--warn); border: 1px solid rgba(255,200,87,0.32); }
+.ev-conf.low, .ev-conf.none { background: rgba(255,107,107,0.12); color: var(--bad); border: 1px solid rgba(255,107,107,0.3); }
+
+.ev-modal-body { padding: 14px 16px; display: flex; justify-content: center; }
+/* Shrink-wraps the image so the % highlight boxes resolve against the picture
+   itself rather than against the panel. */
+.ev-modal-page { position: relative; display: inline-block; }
+.ev-modal-page img {
+  display: block; width: auto; height: auto;
+  max-width: min(880px, 86vw); max-height: 74vh;
+  border-radius: 6px;
+}
+.ev-legend {
+  padding: 0 16px 14px; display: flex; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+}
+.ev-legend .lg { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.ev-legend .sw { width: 18px; height: 10px; border-radius: 3px; display: inline-block; }
+.ev-legend .sw.val { background: rgba(255,200,87,0.28); border: 1.5px solid var(--warn); }
+.ev-legend .sw.row { background: rgba(91,140,255,0.16); border: 1px solid rgba(91,140,255,0.55); }
+.ev-warn { padding: 0 16px 14px; color: var(--warn); font-size: 12px; max-width: 620px; }
+
 .err {
   background: rgba(255,107,107,0.10); border: 1px solid rgba(255,107,107,0.35);
   color: #ffb3b3; padding: 11px 14px; border-radius: 10px; margin-bottom: 16px;

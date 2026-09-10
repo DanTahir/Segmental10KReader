@@ -92,8 +92,10 @@ export default function EvidenceThumb({
     );
   }
 
-  // The images are regenerable and not committed, so a run's JSON can outlive
-  // its PNGs. Degrade to the same dash rather than a broken image icon.
+  // Page images are committed, but a run's JSON can still outlive them: a run
+  // recorded on a host with poppler and then pulled somewhere the PNG was
+  // pruned, or any run predating this feature. Degrade to the same dash rather
+  // than a broken image icon.
   if (failed) {
     return (
       <span className="ev-none" title="Page image is no longer on disk">

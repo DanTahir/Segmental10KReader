@@ -20,12 +20,19 @@ next-env.d.ts
 # sanitized answer key, the pdftotext cache and the run history all travel with
 # the repo, so a fresh clone can grade a run without regenerating anything.
 #
-# The one exception is data/evidence/: rendered page PNGs and per-page bbox
-# dumps. They are large, binary, and fully regenerable from the PDFs that are
-# committed, so they are rebuilt on whichever host runs a scan rather than
-# shipped. A run's JSON can therefore outlive its images, and the UI treats a
-# missing image the same as a run that never had one.
-/data/evidence/
+# data/evidence/ holds two kinds of generated file, and they are treated
+# differently on purpose:
+#
+#   *.png        rendered page images. Committed, so a fresh clone displays the
+#                evidence for the committed runs without needing poppler
+#                installed -- rendering is the one step a clone cannot redo on
+#                a host that has no pdftoppm.
+#
+#   *.bbox.xhtml per-page word-geometry dumps. Ignored: they are consulted only
+#                while capturing evidence, never to display it, so shipping them
+#                would add weight the UI never reads. They are also a pure
+#                cache -- deleting one just means the next scan re-derives it.
+/data/evidence/*.bbox.xhtml
 
 # ------------------------------------------------------------------- env files
 .env
